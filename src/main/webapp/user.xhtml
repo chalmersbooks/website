@@ -4,16 +4,8 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:define name="content">
-
         <b:container>
-            <b:jumbotron>
-                <h1>ChalmersBooks</h1>
-                <h2>#{indexer.soon}</h2>
-                <p>This website is a part of Webapplication course and will be released asap.</p>
-                <p><a class="btn btn-primary btn-lg" href="https://github.com/chalmersbooks">Learn more</a></p>
-            </b:jumbotron>
-            <b:navLink value="go to user page" href="user.xhtml" />
+            <h:commandLink value="add user" action="#{indexer.addUser}" />
         </b:container>
-
     </ui:define>
 </ui:composition>
