@@ -5,7 +5,9 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:define name="content">
         <b:container>
-            <h:commandLink value="add user" action="#{indexer.addUser}" />
+            <b:form>
+                <b:commandLink value="add user" action="#{indexer.addUser}"/>
+            </b:form>
         </b:container>
     </ui:define>
 </ui:composition>

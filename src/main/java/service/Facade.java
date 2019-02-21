@@ -3,6 +3,7 @@ package service;
 import lombok.extern.java.Log;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Log
 public abstract class Facade<T> {
@@ -16,18 +17,17 @@ public abstract class Facade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        System.out.println("This works");
-        log.info("THIS ALSO WORKS");
         EntityManager em = getEntityManager();
         if (em == null) {
-            log.info("Why da fuck is this null?");
+            log.info("EntityManager is null inside Facade");
         }
         getEntityManager().persist(entity);
-
     }
 
-    public T findAll() {
-        return null;
+    public List<T> findAll() {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityClass));
+        return getEntityManager().createQuery(cq).getResultList();
     }
 
 
