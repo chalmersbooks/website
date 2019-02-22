@@ -16,13 +16,18 @@ public class Ad {
     @OneToOne
     private Book book;
     @OneToMany
-    private List<CourseCode> courseCode;
+    private List<CourseCode> courseCodes;
     private int price;
     private LocalDateTime date;
     private String imageURL;
     @ManyToOne
     private User user;
 
+    public void addCourseCode(CourseCode code) {
+        if (!courseCodes.contains(code)) {
+            courseCodes.add(code);
+        }
+    }
 
 
 }
