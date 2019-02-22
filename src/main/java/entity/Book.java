@@ -2,9 +2,7 @@ package entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -13,7 +11,7 @@ public class Book {
 
     @Id
     private long isbn;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Author> authors;
     private String name;
     private int edition;

@@ -13,11 +13,12 @@ import service.AdFacade;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 
 @Log
 @Named("ad")
 @ViewScoped
-public class AdBackingBean {
+public class AdBackingBean implements Serializable {
 
     @EJB
     private AdFacade facade;

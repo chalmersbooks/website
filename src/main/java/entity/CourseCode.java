@@ -2,6 +2,7 @@ package entity;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -13,7 +14,7 @@ public class CourseCode {
 
     @Id
     private String courseCode;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Book> books;
 
 }

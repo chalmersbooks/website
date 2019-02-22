@@ -10,17 +10,21 @@ import java.util.List;
 @Entity
 public class Ad {
 
+/*
+    TODO: Vi vill inte ha Cascade.ALL för om vi tar bort en add tas allt annat bort också...
+ */
+
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Book book;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CourseCode> courseCodes;
     private int price;
     private LocalDateTime date;
     private String imageURL;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     public void addCourseCode(CourseCode code) {
