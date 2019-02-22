@@ -1,6 +1,6 @@
 package service;
 
-import core.User;
+import entity.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -1,7 +1,6 @@
 package control;
 
-import core.User;
-import lombok.Getter;
+import entity.User;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import service.UserFacade;
