@@ -1,7 +1,6 @@
 package control;
 
 import core.AdBuilder;
-import core.BookBuilder;
 import entity.Ad;
 import entity.Book;
 import entity.CourseCode;
@@ -14,6 +13,7 @@ import service.CourseCodeFacade;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,21 +26,14 @@ public class AdBackingBean implements Serializable {
 
     @EJB
     private AdFacade adFacade;
-    @EJB
-    private CourseCodeFacade courseCodeFacade;
+    @Inject
+    private CourseCodeBackingBean ccBean;
+    @Inject
+    private BookBackingBean bookBean;
 
     @Getter
     @Setter
     private String courseCode;
-    @Getter
-    @Setter
-    private String bookName;
-    @Getter
-    @Setter
-    private String authorName;
-    @Getter
-    @Setter
-    private long isbn;
     @Getter
     @Setter
     private int price;
@@ -53,8 +46,8 @@ public class AdBackingBean implements Serializable {
 
         Ad ad = new AdBuilder()
                 .setPrice(price)
-                .setCourseCodes(fetchCourseCodes())
                 .setBook(fetchBook())
+                .setCourseCodes(fetchCourseCodes())
                 .setUser(fetchUser())
                 .build();
 
@@ -63,35 +56,23 @@ public class AdBackingBean implements Serializable {
     }
 
     private List<CourseCode> fetchCourseCodes() {
-        // TODO: Move this code to a CourseCodeBackingBean?
-        List<CourseCode> courseCodes = courseCodeFacade.findByIsbn(isbn);
-        // TODO: if course code not exists in the list. add it to list and database for future us
-        // TODO: CourseCodes list will be empty in the earlier stages. Adding mock object at this point
+        // TODO: Also collect all the coursecodes that is set for the book.
+        // CourseCode cc = ccBean.getCourseCode(courseCode);
 
         CourseCode cc = new CourseCode();
-        cc.setBooks(new ArrayList<>());
-        cc.setCourseCode(this.courseCode);
+        cc.setCourseCode(courseCode);
 
+        List<CourseCode> courseCodes = new ArrayList<>();
         courseCodes.add(cc);
 
         return courseCodes;
     }
 
     private Book fetchBook() {
-
-        // TODO: check if this book already exists.
-        // TODO: Move to bookbackingbean?
-
-        Book book = new BookBuilder()
-                .setAuthor(authorName)
-                .setISBN(isbn)
-                .setName(bookName)
-                .build();
-        return book;
-
+        return bookBean.getCurrentBook();
     }
 
     private User fetchUser() {
-        return null;
+        return new User();
     }
 }

@@ -1,6 +1,5 @@
 package entity;
 
-import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,21 +10,19 @@ import java.util.List;
 @Entity
 public class Ad {
 
-/*
-    TODO: Vi vill inte ha Cascade.ALL för om vi tar bort en add tas allt annat bort också...
- */
-
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Book book;
-    @OneToMany(cascade = CascadeType.ALL)
+    // TODO: This is temporary. Fix courseCode later
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<CourseCode> courseCodes;
     private int price;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String imageURL;
+    // TODO: User here is temporary. Cascade should not be as this. Only for testing purposes.
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 

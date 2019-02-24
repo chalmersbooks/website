@@ -5,13 +5,11 @@ import entity.CourseCode;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
-public class CourseCodeFacade extends Facade<CourseCodeFacade> implements Serializable {
+public class CourseCodeFacade extends Facade<CourseCode> {
 
     @PersistenceContext(unitName = "database")
     private EntityManager em;
@@ -21,7 +19,7 @@ public class CourseCodeFacade extends Facade<CourseCodeFacade> implements Serial
     }
 
     public CourseCodeFacade() {
-        super(CourseCodeFacade.class);
+        super(CourseCode.class);
     }
 
     // TODO: Broken for now... see CourseCode class

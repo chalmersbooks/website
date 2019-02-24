@@ -21,11 +21,11 @@
                 <p>Course Code</p>
                 <b:inputText value="#{ad.courseCode}" placeholder="DAT076" />
                 <p>Book Name</p>
-                <b:inputText value="#{ad.bookName}" placeholder="How to make a website 101" />
+                <b:inputText value="#{book.bookName}" placeholder="How to make a website 101" />
                 <p>Author</p>
-                <b:inputText value="#{ad.authorName}" placeholder="Group 13" />
+                <b:inputText value="#{book.authorNames}" placeholder="Group 13" />
                 <p>ISBN</p>
-                <b:inputText value="#{ad.isbn}" placeholder="xxxxxxxxxxxxx" />
+                <b:inputText value="#{book.isbn}" placeholder="xxxxxxxxxxxxx" />
                 <p>Price</p>
                 <b:inputText value="#{ad.price}" placeholder="123" />
                 <b:commandLink value="add ad" action="#{ad.createAd}">

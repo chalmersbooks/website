@@ -14,7 +14,7 @@ public class CourseCode {
 
     @Id
     private String courseCode;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Book> books;
 
 }

@@ -1,9 +1,6 @@
 package core;
 
-import entity.Author;
 import entity.Book;
-
-import java.util.ArrayList;
 
 public class BookBuilder {
 
@@ -11,7 +8,6 @@ public class BookBuilder {
 
     public BookBuilder() {
         book = new Book();
-        book.setAuthors(new ArrayList<>());
     }
 
     public BookBuilder setName(String name) {
@@ -24,10 +20,8 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder setAuthor(String name) {
-        Author author = new Author();
-        author.setName(name);
-        book.addAuthor(author);
+    public BookBuilder setAuthor(String authors) {
+        book.setAuthors(authors);
         return this;
     }
 
