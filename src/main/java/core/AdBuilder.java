@@ -5,16 +5,21 @@ import entity.Book;
 import entity.CourseCode;
 import entity.User;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class AdBuilder {
 
     private Ad ad;
 
     public AdBuilder() {
         ad = new Ad();
+        ad.setCourseCodes(new ArrayList<>());
     }
 
-    public AdBuilder setCourseCode(CourseCode courseCode) {
-        ad.addCourseCode(courseCode);
+    public AdBuilder setCourseCodes(List<CourseCode> courseCode) {
+        ad.setCourseCodes(courseCode);
         return this;
     }
 
@@ -34,6 +39,7 @@ public class AdBuilder {
     }
 
     public Ad build() {
+        ad.setDate(new Date());
         return ad;
     }
 }

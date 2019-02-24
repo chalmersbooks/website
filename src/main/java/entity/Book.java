@@ -16,4 +16,8 @@ public class Book {
     private String name;
     private int edition;
 
+    public void addAuthor(Author author) {
+        authors.add(author);
+    }
+
 }

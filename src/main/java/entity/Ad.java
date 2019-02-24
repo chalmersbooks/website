@@ -1,9 +1,10 @@
 package entity;
 
+import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -22,7 +23,8 @@ public class Ad {
     @OneToMany(cascade = CascadeType.ALL)
     private List<CourseCode> courseCodes;
     private int price;
-    private LocalDateTime date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
     private String imageURL;
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
