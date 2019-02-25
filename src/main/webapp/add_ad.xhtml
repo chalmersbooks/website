@@ -2,36 +2,65 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions">
     <ui:define name="content">
         <b:container>
 
             <h:form id="ads">
                 <b:dataTable value="#{ad.ads}"
                              var="currentAd">
-                    <b:dataTableColumn value="#{currentAd.id}" />
-                    <b:dataTableColumn value="#{currentAd.book.name}" />
-                    <b:dataTableColumn value="#{currentAd.price}" />
-                    <b:dataTableColumn value="#{currentAd.date}"  order="asc"/>
+                    <b:dataTableColumn value="#{currentAd.id}"/>
+                    <b:dataTableColumn value="#{currentAd.book.name}"/>
+                    <b:dataTableColumn value="#{currentAd.price}"/>
+                    <b:dataTableColumn value="#{currentAd.date}" order="asc"/>
                 </b:dataTable>
             </h:form>
 
 
             <b:form>
                 <p>Course Code</p>
-                <b:inputText value="#{ad.courseCode}" placeholder="DAT076" />
+                <b:inputText value="#{ad.courseCode}" placeholder="DAT076"/>
                 <p>Book Name</p>
-                <b:inputText value="#{book.bookName}" placeholder="How to make a website 101" />
+                <b:inputText value="#{book.bookName}" placeholder="How to make a website 101"/>
                 <p>Author</p>
-                <b:inputText value="#{book.authorNames}" placeholder="Group 13" />
+                <b:inputText value="#{book.authorNames}" placeholder="Group 13"/>
                 <p>ISBN</p>
-                <b:inputText value="#{book.isbn}" placeholder="xxxxxxxxxxxxx" />
+                <b:inputText value="#{book.isbn}" placeholder="xxxxxxxxxxxxx"/>
                 <p>Price</p>
-                <b:inputText value="#{ad.price}" placeholder="123" />
+                <b:inputText value="#{ad.price}" placeholder="123"/>
                 <b:commandLink value="add ad" action="#{ad.createAd}">
                     <f:ajax render="ads" execute="@form"/>
                 </b:commandLink>
             </b:form>
+
+            <br/>
+
+            <form>
+                <p>Add CourseCode</p>
+                <b:inputText value="#{ad.courseCode}" placeholder="DAT076"/>
+                <b:commandButton value="Search" action="#{ad.getBooks}">
+                    <f:ajax update="switchPanel" execute="@form" />
+                </b:commandButton>
+            </form>
+            <p:outputPanel id="swithPanel">
+                <pe:switch id="switch" value="#{ad.getState}">
+                    <pe:defaultCase>
+                        <!--create add-->
+                    </pe:defaultCase>
+                    <pe:case value="found">
+                        <!--Choose book-->
+
+
+
+
+                    </pe:case>
+                </pe:switch>
+
+
+            </p:outputPanel>
+
         </b:container>
     </ui:define>
 </ui:composition>

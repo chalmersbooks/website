@@ -1,5 +1,6 @@
 package service;
 
+import entity.Book;
 import entity.CourseCode;
 
 import javax.ejb.Stateless;
@@ -41,6 +42,35 @@ public class CourseCodeFacade extends Facade<CourseCode> {
             return null;
         }
 
+    }
+
+    public List<CourseCode> findByBook(String isbn) {
+
+        // TODO: Make this from a query instead? Future work
+
+        List<CourseCode> searched = new ArrayList<>();
+        List<CourseCode> courseCodes = findAll();
+        for (CourseCode cc : courseCodes) {
+            if (containsBook(cc, isbn)) {
+                searched.add(cc);
+            }
+        }
+
+        return searched;
+
+        /*return em.createNamedQuery("CourseCode.findByBook", CourseCode.class)
+                .setParameter("isbn", isbn)
+                .getResultList();*/
+
+    }
+
+    private boolean containsBook(CourseCode cc, String isbn) {
+        for (Book book : cc.getBooks()) {
+            if (book.getIsbn().equals(isbn)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

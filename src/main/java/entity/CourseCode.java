@@ -11,7 +11,10 @@ import java.util.List;
 //@NamedQuery(name = "CourseCode.findByIsbn", query = "SELECT cc FROM CourseCode cc where cc.books = :books")
 @Data
 @Entity
-@NamedQuery(name = "CourseCode.findById", query = "SELECT cc FROM CourseCode cc where cc.courseCode = :courseCode")
+@NamedQueries({
+        @NamedQuery(name = "CourseCode.findById", query = "SELECT cc FROM CourseCode cc WHERE cc.courseCode = :courseCode"),
+        @NamedQuery(name = "CourseCode.findByBook", query = "SELECT cc FROM CourseCode cc GROUP BY cc.books WHERE ")
+})
 public class CourseCode {
 
     @Id
