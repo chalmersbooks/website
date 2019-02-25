@@ -15,7 +15,7 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder setISBN(long isbn) {
+    public BookBuilder setISBN(String isbn) {
         book.setIsbn(isbn);
         return this;
     }

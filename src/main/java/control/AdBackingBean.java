@@ -59,8 +59,10 @@ public class AdBackingBean implements Serializable {
         // TODO: Also collect all the coursecodes that is set for the book.
         // CourseCode cc = ccBean.getCourseCode(courseCode);
 
-        CourseCode cc = new CourseCode();
-        cc.setCourseCode(courseCode);
+        CourseCode cc = ccBean.getCourseCode(
+                courseCode,
+                bookBean.getCurrentBook()
+        );
 
         List<CourseCode> courseCodes = new ArrayList<>();
         courseCodes.add(cc);

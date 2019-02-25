@@ -27,16 +27,14 @@ public class BookBackingBean implements Serializable {
     private String authorNames;
     @Getter
     @Setter
-    private long isbn;
+    private String isbn;
 
     private Book currentBook;
 
     public Book getCurrentBook() {
         currentBook = bookFacade.findById(isbn);
         if (!isCurrentBookValid()) {
-            log.info("Book \"" + bookName + "\" was not found. Creating...");
             currentBook = createBook();
-            log.info("Book with name \"" + bookName + "\" created complete!");
             bookFacade.create(currentBook);
         }
 
@@ -50,8 +48,9 @@ public class BookBackingBean implements Serializable {
         /* TODO
             check that isbn is valid and authors and name is set.
          */
+        return currentBook != null;
 
-        return false; // change this when implemented
+        //return false; // change this when implemented
     }
 
     private Book createBook() {

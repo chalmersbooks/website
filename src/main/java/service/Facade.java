@@ -34,9 +34,9 @@ public abstract class Facade<T> {
     }
 
     // TODO: This method does not work!!!! FIX IT ASAP
-    public T findById(Object id) {
+    /*public T findById(Object id) {
         return getEntityManager().find(entityClass, id);
-    }
+    }*/
 
 
 }

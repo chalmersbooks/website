@@ -15,8 +15,7 @@ public class Ad {
     private long id;
     @ManyToOne
     private Book book;
-    // TODO: This is temporary. Fix courseCode later
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<CourseCode> courseCodes;
     private int price;
     @Temporal(TemporalType.TIMESTAMP)
