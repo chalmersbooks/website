@@ -22,7 +22,9 @@ public abstract class Facade<T> {
         if (em == null) {
             log.info("EntityManager is null inside Facade");
         }
+        log.info("Adding {" + entity.toString() + "} to database!");
         getEntityManager().persist(entity);
+        log.info("Data added to database successful!");
     }
 
     public List<T> findAll() {
@@ -30,6 +32,11 @@ public abstract class Facade<T> {
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();
     }
+
+    // TODO: This method does not work!!!! FIX IT ASAP
+    /*public T findById(Object id) {
+        return getEntityManager().find(entityClass, id);
+    }*/
 
 
 }
