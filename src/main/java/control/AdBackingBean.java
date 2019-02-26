@@ -77,4 +77,17 @@ public class AdBackingBean implements Serializable {
     private User fetchUser() {
         return new User();
     }
+
+    public void getCourseCodesFromBook() {
+
+        String customISBN = "1234";
+        List<CourseCode> courseCodes = ccBean.getCourseCodesFromBook(customISBN);
+
+        for (CourseCode c : courseCodes) {
+
+            log.info(c.getCourseCode());
+
+        }
+
+    }
 }

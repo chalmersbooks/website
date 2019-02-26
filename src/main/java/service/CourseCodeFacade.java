@@ -25,13 +25,6 @@ public class CourseCodeFacade extends Facade<CourseCode> {
         super(CourseCode.class);
     }
 
-    // TODO: Broken for now... see CourseCode class
-    public List<CourseCode> findByIsbn(long isbn) {
-        //TypedQuery<CourseCode> query = em.createNamedQuery("CourseCode.findByIsbn", CourseCode.class);
-        //return query.getResultList();
-        return new ArrayList<>();
-    }
-
     // TODO: Can this look better?
     public CourseCode findById(String courseCode) {
         try {
@@ -41,26 +34,12 @@ public class CourseCodeFacade extends Facade<CourseCode> {
         } catch (NoResultException nre) {
             return null;
         }
-
     }
 
     public List<CourseCode> findByBook(String isbn) {
-
-        // TODO: Make this from a query instead? Future work
-
-        List<CourseCode> searched = new ArrayList<>();
-        List<CourseCode> courseCodes = findAll();
-        for (CourseCode cc : courseCodes) {
-            if (containsBook(cc, isbn)) {
-                searched.add(cc);
-            }
-        }
-
-        return searched;
-
-        /*return em.createNamedQuery("CourseCode.findByBook", CourseCode.class)
+        return em.createNamedQuery("CourseCode.findByBook", CourseCode.class)
                 .setParameter("isbn", isbn)
-                .getResultList();*/
+                .getResultList();
 
     }
 

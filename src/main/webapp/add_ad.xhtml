@@ -33,33 +33,11 @@
                 <b:commandLink value="add ad" action="#{ad.createAd}">
                     <f:ajax render="ads" execute="@form"/>
                 </b:commandLink>
+                <br/>
+                <b:commandLink value="check values" action="#{ad.getCourseCodesFromBook}"/>
             </b:form>
 
             <br/>
-
-            <form>
-                <p>Add CourseCode</p>
-                <b:inputText value="#{ad.courseCode}" placeholder="DAT076"/>
-                <b:commandButton value="Search" action="#{ad.getBooks}">
-                    <f:ajax update="switchPanel" execute="@form" />
-                </b:commandButton>
-            </form>
-            <p:outputPanel id="swithPanel">
-                <pe:switch id="switch" value="#{ad.getState}">
-                    <pe:defaultCase>
-                        <!--create add-->
-                    </pe:defaultCase>
-                    <pe:case value="found">
-                        <!--Choose book-->
-
-
-
-
-                    </pe:case>
-                </pe:switch>
-
-
-            </p:outputPanel>
 
         </b:container>
     </ui:define>

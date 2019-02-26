@@ -57,4 +57,8 @@ public class CourseCodeBackingBean implements Serializable {
         return true;
     }
 
+    public List<CourseCode> getCourseCodesFromBook(String isbn) {
+        return ccFacade.findByBook(isbn);
+    }
+
 }
