@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:outputStylesheet name="css/style.css"/>
+
+    <div id="ads">
+        <h:form>
+
+            <p:dataScroller id="ads-scroller" value="#{dataScroller.books}" var="book" chunkSize="10">
+
+                <f:facet id="hejsan" name="header">
+                    <p:commandButton
+                            value="DATUM"
+                            icon="fa fa-fw fa-sort-numeric-asc"
+                            action="#{dataScroller.sort}"
+                            update="ads-scroller"/>
+                </f:facet>
+
+                <f:facet name="loader">
+                    <p:commandButton type="button" value="More" icon="pi pi-chevron-circle-down"/>
+                </f:facet>
+
+                <h:panelGrid columns="2" columnClasses="logo,detail">
+                    <p:graphicImage name="images/book.png"/>
+
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Id:"/>
+                            <h:outputText value="#{book.id}" style="font-weight: bold"/>
+
+                            <h:outputText value="Name:"/>
+                            <h:outputText value="#{book.name}" style="font-weight: bold"/>
+
+                            <h:outputText value="Price:"/>
+                            <h:outputText value="#{book.price}" style="font-weight: bold"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+
+            </p:dataScroller>
+
+        </h:form>
+
+    </div>
+</h:body>
+
+</html>

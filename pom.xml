@@ -4,6 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
+
     <groupId>com.chalmersbooks</groupId>
     <artifactId>chalmersbooks</artifactId>
     <version>1.0</version>
@@ -74,6 +76,12 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.7.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -111,5 +119,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
     </build>
 </project>
