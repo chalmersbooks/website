@@ -1,0 +1,44 @@
+<ui:composition template="template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+    <ui:define name="content">
+        <b:container>
+
+            <h:form id="ads">
+                <b:dataTable value="#{ad.ads}"
+                             var="currentAd">
+                    <b:dataTableColumn value="#{currentAd.id}"/>
+                    <b:dataTableColumn value="#{currentAd.book.name}"/>
+                    <b:dataTableColumn value="#{currentAd.price}"/>
+                    <b:dataTableColumn value="#{currentAd.date}" order="asc"/>
+                </b:dataTable>
+            </h:form>
+
+
+            <b:form>
+                <p>Course Code</p>
+                <b:inputText value="#{ad.courseCode}" placeholder="DAT076"/>
+                <p>Book Name</p>
+                <b:inputText value="#{book.bookName}" placeholder="How to make a website 101"/>
+                <p>Author</p>
+                <b:inputText value="#{book.authorNames}" placeholder="Group 13"/>
+                <p>ISBN</p>
+                <b:inputText value="#{book.isbn}" placeholder="xxxxxxxxxxxxx"/>
+                <p>Price</p>
+                <b:inputText value="#{ad.price}" placeholder="123"/>
+                <b:commandLink value="add ad" action="#{ad.createAd}">
+                    <f:ajax render="ads" execute="@form"/>
+                </b:commandLink>
+                <br/>
+                <b:commandLink value="check values" action="#{ad.getCourseCodesFromBook}"/>
+            </b:form>
+
+            <br/>
+
+        </b:container>
+    </ui:define>
+</ui:composition>
