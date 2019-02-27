@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -13,7 +14,10 @@
     <div id="ads">
         <h:form>
 
-            <p:dataScroller id="ads-scroller" value="#{dataScroller.books}" var="book" chunkSize="10">
+            <b:commandLink value="go back" href="index.xhtml"/>
+            <br/>
+
+            <p:dataScroller id="ads-scroller" value="#{dataScroller.ads}" var="currentAd" chunkSize="10">
 
                 <f:facet id="hejsan" name="header">
                     <p:commandButton
@@ -32,14 +36,14 @@
 
                     <p:outputPanel>
                         <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Id:"/>
-                            <h:outputText value="#{book.id}" style="font-weight: bold"/>
+                            <h:outputText value="CourseCode:"/>
+                            <h:outputText value="#{currentAd.date}" style="font-weight: bold"/>
 
                             <h:outputText value="Name:"/>
-                            <h:outputText value="#{book.name}" style="font-weight: bold"/>
+                            <h:outputText value="#{currentAd.book.name}" style="font-weight: bold"/>
 
                             <h:outputText value="Price:"/>
-                            <h:outputText value="#{book.price}" style="font-weight: bold"/>
+                            <h:outputText value="#{currentAd.price}" style="font-weight: bold"/>
                         </h:panelGrid>
                     </p:outputPanel>
                 </h:panelGrid>
