@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Log
-@WebFilter("/*")
+@WebFilter("/authorized/*")
 public class SecurityFilter extends HttpFilter {
 
     @Inject

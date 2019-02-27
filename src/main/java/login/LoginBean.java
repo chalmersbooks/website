@@ -24,15 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
-import static javax.faces.annotation.FacesConfig.Version.JSF_2_3;
-import static javax.security.enterprise.AuthenticationStatus.SEND_CONTINUE;
-import static javax.security.enterprise.AuthenticationStatus.SEND_FAILURE;
+import static javax.security.enterprise.AuthenticationStatus.*;
 import static javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters.withParams;
 
-@FacesConfig(
-// Activates CDI build-in beans
-        version = JSF_2_3
-)
 @CustomFormAuthenticationMechanismDefinition(
         loginToContinue = @LoginToContinue()
 )
@@ -59,11 +53,11 @@ public class LoginBean {
                 getHttpRequestFromFacesContext(),
                 getHttpResponseFromFacesContext(),
                 withParams().credential(credential));
-        if (status.equals(SEND_CONTINUE)) {
+
+        if (status.equals(SUCCESS)) {
             return "valid";
         } else if (status.equals(SEND_FAILURE)) {
             // TODO: Send message to screen that login was invalid
-            log.info("THIS DOES NOT WORK!!!");
             Messages.addGlobalError( "Something went wrong");
             return "";
         } else {

@@ -38,8 +38,8 @@ public class StartupDummyApp {
         User u = new User();
         u.setEmail("test@test.com");
         u.setName("test testsson");
-        u.setPassword("password");
-        //u.setPassword(passwordHash.generate("password".toCharArray()));
+        /*u.setPassword("password");*/
+        u.setPassword(passwordHash.generate("password".toCharArray()));
 
         userFacade.create(u);
 

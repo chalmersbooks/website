@@ -39,11 +39,8 @@ public class IdentityStoreImpl implements IdentityStore {
             return false;
         }
 
-
-
         String storedHashedPassword = storedUser.getPassword();
-        //return passwordHash.verify(givenPassword.toCharArray(), storedHashedPassword);
-        return storedHashedPassword.equals(givenPassword);
+        return passwordHash.verify(givenPassword.toCharArray(), storedHashedPassword);
     }
 
 

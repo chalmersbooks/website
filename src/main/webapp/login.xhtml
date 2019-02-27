@@ -1,74 +1,63 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:b="http://bootsfaces.net/ui">
 
 <h:head>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"/>
+
 </h:head>
 
 <h:body>
     <h:outputStylesheet name="css/login.css"/>
     <h1 id="chalmers-books-text">Chalmers Books</h1>
-
     <h:form>
-        <p:panelGrid id="panelgrid-sign-in" columns="1">
-            <p:spacer height="30">
-            </p:spacer>
-
-            <p:row>
+        <b:panelGrid id="panelgrid-sign-in" columns="1">
+            <b:row>
                 <h2 id="sign-in-text">Sign in</h2>
-            </p:row>
-            <p:row>
-                <p:spacer width="20">
-                </p:spacer>
+            </b:row>
+            <b:row>
                 <div id="username-icon-container" class="ui-g-12 ui-md-4">
                     <div class="ui-inputgroup">
             <span id="username-icon" class="ui-inputgroup-addon">
                 <i class="fa fa-user">
                 </i>
             </span>
-                        <p:inputText value="#{loginBean.email}" id="username-box" placeholder="Username"
+                        <b:inputText value="#{loginBean.email}" id="username-box" placeholder="Username"
                                      required="true"/>
                     </div>
                 </div>
-            </p:row>
+            </b:row>
 
-            <p:row>
+            <b:row>
                 <div id="password-icon-container" class="ui-g-12 ui-md-4">
                     <div class="ui-inputgroup">
             <span id="password-icon" class="ui-inputgroup-addon">
                 <i class="fa fa-key">
                 </i>
             </span>
-                        <p:password value="#{loginBean.password}" id="password-box" placeholder="Password"
-                                    required="true"/>
+                        <b:inputText value="#{loginBean.password}" id="password-box" placeholder="Password"
+                                     type="password"
+                                     required="true"/>
                     </div>
                 </div>
-            </p:row>
-
-            <p:row>
-                <b:commandButton look="success" action="#{loginBean.login}" >
+            </b:row>
+            <b:row>
+                <b:commandButton look="success" action="#{loginBean.login}">
                     <b:iconAwesome value="sign-in"/>
                     Sign in
                 </b:commandButton>
-            </p:row>
+            </b:row>
 
-            <p:row>
+            <b:row>
                 <button id="register-in-button" type="button" class="btn btn-primary">
                     <i class="fa fa-edit">
                     </i>
                     Register
                 </button>
-            </p:row>
+            </b:row>
 
-            <p:spacer height="40">
-            </p:spacer>
-        </p:panelGrid>
+
+        </b:panelGrid>
     </h:form>
 
 </h:body>
