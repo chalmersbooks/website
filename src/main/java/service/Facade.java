@@ -33,10 +33,4 @@ public abstract class Facade<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
 
-    // TODO: This method does not work!!!! FIX IT ASAP
-    /*public T findById(Object id) {
-        return getEntityManager().find(entityClass, id);
-    }*/
-
-
 }

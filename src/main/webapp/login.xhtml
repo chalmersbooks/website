@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -14,59 +15,61 @@
     <h:outputStylesheet name="css/login.css"/>
     <h1 id="chalmers-books-text">Chalmers Books</h1>
 
-    <p:panelGrid id="panelgrid-sign-in" columns="1">
-        <p:spacer height="30">
-        </p:spacer>
-
-        <p:row>
-            <h2 id="sign-in-text">Sign in</h2>
-        </p:row>
-
-        <p:row>
-            <p:spacer width="20">
+    <h:form>
+        <p:panelGrid id="panelgrid-sign-in" columns="1">
+            <p:spacer height="30">
             </p:spacer>
-            <div id="username-icon-container" class="ui-g-12 ui-md-4">
-                <div class="ui-inputgroup">
+
+            <p:row>
+                <h2 id="sign-in-text">Sign in</h2>
+            </p:row>
+            <p:row>
+                <p:spacer width="20">
+                </p:spacer>
+                <div id="username-icon-container" class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
             <span id="username-icon" class="ui-inputgroup-addon">
                 <i class="fa fa-user">
                 </i>
             </span>
-                    <p:inputText id="username-box" placeholder="Username" required="true"/>
+                        <p:inputText value="#{loginBean.email}" id="username-box" placeholder="Username"
+                                     required="true"/>
+                    </div>
                 </div>
-            </div>
-        </p:row>
+            </p:row>
 
-        <p:row>
-            <div id="password-icon-container" class="ui-g-12 ui-md-4">
-                <div class="ui-inputgroup">
+            <p:row>
+                <div id="password-icon-container" class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
             <span id="password-icon" class="ui-inputgroup-addon">
                 <i class="fa fa-key">
                 </i>
             </span>
-                    <p:password id="password-box" placeholder="Password" required="true"/>
+                        <p:password value="#{loginBean.password}" id="password-box" placeholder="Password"
+                                    required="true"/>
+                    </div>
                 </div>
-            </div>
-        </p:row>
+            </p:row>
 
-        <p:row>
-            <button id="sign-in-button" type="button" class="btn btn-success">
-                <i class="fa fa-sign-in">
-                </i>
-                Sign in
-            </button>
-        </p:row>
+            <p:row>
+                <b:commandButton look="success" action="#{loginBean.login}" >
+                    <b:iconAwesome value="sign-in"/>
+                    Sign in
+                </b:commandButton>
+            </p:row>
 
-        <p:row>
-            <button id="register-in-button" type="button" class="btn btn-primary">
-                <i class="fa fa-edit">
-                </i>
-                Register
-            </button>
-        </p:row>
+            <p:row>
+                <button id="register-in-button" type="button" class="btn btn-primary">
+                    <i class="fa fa-edit">
+                    </i>
+                    Register
+                </button>
+            </p:row>
 
-        <p:spacer height="40">
-        </p:spacer>
-    </p:panelGrid>
+            <p:spacer height="40">
+            </p:spacer>
+        </p:panelGrid>
+    </h:form>
 
 </h:body>
 </html>

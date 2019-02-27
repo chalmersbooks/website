@@ -3,10 +3,7 @@ package service;
 import entity.User;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 
 @Stateless
 public class UserFacade extends Facade<User> {
@@ -20,6 +17,16 @@ public class UserFacade extends Facade<User> {
 
     public UserFacade() {
         super(User.class);
+    }
+
+    public User getUserById(String id) {
+        try {
+            return em.createNamedQuery("User.findById", User.class)
+                    .setParameter("email", id)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
 }

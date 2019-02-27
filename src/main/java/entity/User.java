@@ -8,17 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
-@NamedQuery(name = "User.findByCid", query = "SELECT user FROM User user WHERE user.cid = :cid")
+@NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.email = :email")
 @Data
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue
-    private long id;
+    private String email;
     private String name;
-    @NotNull
-    private String cid;
     @NotNull
     private String password;
 
