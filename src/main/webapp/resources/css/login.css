@@ -1,0 +1,103 @@
+body {
+}
+
+#chalmers-books-text {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    font-size: 52px;
+}
+
+#sign-in-text {
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+}
+
+#username-icon-container {
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+#password-icon-container {
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+.ui-panelgrid {
+    border-radius: 5px !important;
+}
+
+#panelgrid-sign-in {
+    margin: auto !important;
+    width: max-content  !important;
+    box-shadow: 2px 2px 3px lightgrey !important;
+}
+
+#username-box {
+    box-shadow: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#password-box {
+    box-shadow: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#username-icon {
+    box-sizing: content-box;
+}
+
+#password-icon {
+    box-sizing: content-box;
+}
+
+
+#username-icon i {
+    position: relative;
+    top: 20%;
+}
+
+#password-icon i {
+    position: relative;
+    top: 20%;
+}
+
+#sign-in-button {
+    font-size: 18px;
+    padding: 10px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 90%;
+}
+
+
+#register-in-button {
+    font-size: 18px;
+    padding: 10px;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 90%;
+}
+
+#sign-in-button .ui-button-icon-left {
+    font-weight: normal;
+}
+
+.ui-widget-content {
+    border: transparent;
+}
+
+.ui-widget-content .ui-panelgrid-cell {
+    padding-left: 30px !important;
+    padding-right: 0px !important;
+}
+
+.ui-inputgroup {
+    box-sizing: content-box !important;
+}

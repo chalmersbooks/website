@@ -23,7 +23,7 @@ public class DummyBookService {
 
 
     private String getRandomName() {
-        return "Book " + (int) (Math.random() * 100);
+        return "Book " + (int) (Math.random() * 1000);
     }
 
     private int getRandomPrice() {

@@ -4,19 +4,24 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
 </h:head>
 
 <h:body>
-    <h:outputStylesheet name="css/style.css"/>
+    <h:outputStylesheet name="css/ad_list.css"/>
 
     <div id="ads">
         <h:form>
 
-            <p:dataScroller id="ads-scroller" value="#{dataScroller.books}" var="book" chunkSize="10">
+            <p:dataScroller id="ads-scroller" value="#{dataScroller.books}" var="dummybook" chunkSize="10">
 
-                <f:facet id="hejsan" name="header">
+                <f:facet name="header">
+
                     <p:commandButton
+                            class="sort-ads-button"
                             value="DATUM"
                             icon="fa fa-fw fa-sort-numeric-asc"
                             action="#{dataScroller.sort}"
@@ -24,7 +29,10 @@
                 </f:facet>
 
                 <f:facet name="loader">
-                    <p:commandButton type="button" value="More" icon="pi pi-chevron-circle-down"/>
+                    <p:commandButton
+                            type="button"
+                            value="More"
+                            icon="pi pi-chevron-circle-down"/>
                 </f:facet>
 
                 <h:panelGrid columns="2" columnClasses="logo,detail">
@@ -33,13 +41,13 @@
                     <p:outputPanel>
                         <h:panelGrid columns="2" cellpadding="5">
                             <h:outputText value="Id:"/>
-                            <h:outputText value="#{book.id}" style="font-weight: bold"/>
+                            <h:outputText value="#{dummybook.id}" style="font-weight: bold"/>
 
                             <h:outputText value="Name:"/>
-                            <h:outputText value="#{book.name}" style="font-weight: bold"/>
+                            <h:outputText value="#{dummybook.name}" style="font-weight: bold"/>
 
                             <h:outputText value="Price:"/>
-                            <h:outputText value="#{book.price}" style="font-weight: bold"/>
+                            <h:outputText value="#{dummybook.price} kr" style="font-weight: bold"/>
                         </h:panelGrid>
                     </p:outputPanel>
                 </h:panelGrid>

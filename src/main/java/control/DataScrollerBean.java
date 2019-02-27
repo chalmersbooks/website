@@ -19,7 +19,7 @@ public class DataScrollerBean implements Serializable {
     private boolean SORTED = false;
 
     public List<DummyBook> getBooks() {
-        books = service.createCars(100);
+        books = service.createCars(50);
 
         if (SORTED) {
 
