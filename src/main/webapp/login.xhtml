@@ -2,63 +2,32 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
-
 <h:head>
-
 </h:head>
+<h:outputStylesheet name="css/login.css"/>
+<b:container>
+    <h1 class="sign-in-h1">Chalmers Books</h1>
 
-<h:body>
-    <h:outputStylesheet name="css/login.css"/>
-    <h1 id="chalmers-books-text">Chalmers Books</h1>
-    <h:form>
-        <b:panelGrid id="panelgrid-sign-in" columns="1">
-            <b:row>
-                <h2 id="sign-in-text">Sign in</h2>
-            </b:row>
-            <b:row>
-                <div id="username-icon-container" class="ui-g-12 ui-md-4">
-                    <div class="ui-inputgroup">
-            <span id="username-icon" class="ui-inputgroup-addon">
-                <i class="fa fa-user">
-                </i>
-            </span>
-                        <b:inputText value="#{loginBean.email}" id="username-box" placeholder="Username"
-                                     required="true"/>
-                    </div>
-                </div>
-            </b:row>
+    <h:form styleClass="sign-in-form" prependId="false">
+        <h2 class="sign-in-h2">Sign in</h2>
 
-            <b:row>
-                <div id="password-icon-container" class="ui-g-12 ui-md-4">
-                    <div class="ui-inputgroup">
-            <span id="password-icon" class="ui-inputgroup-addon">
-                <i class="fa fa-key">
-                </i>
-            </span>
-                        <b:inputText value="#{loginBean.password}" id="password-box" placeholder="Password"
-                                     type="password"
-                                     required="true"/>
-                    </div>
-                </div>
-            </b:row>
-            <b:row>
-                <b:commandButton look="success" action="#{loginBean.login}">
-                    <b:iconAwesome value="sign-in"/>
-                    Sign in
-                </b:commandButton>
-            </b:row>
+        <b:inputText id="email" placeholder="Email address" fieldSize="lg"
+                     value="#{loginBean.email}">
+            <f:facet name="prepend">
+                <b:icon name="user"/>
+            </f:facet>
+        </b:inputText>
 
-            <b:row>
-                <button id="register-in-button" type="button" class="btn btn-primary">
-                    <i class="fa fa-edit">
-                    </i>
-                    Register
-                </button>
-            </b:row>
+        <b:inputText id="password" placeholder="Password" type="password" fieldSize="lg"
+                     value="#{loginBean.password}">
+            <f:facet name="prepend">
+                <b:iconAwesome name="key"/>
+            </f:facet>
+        </b:inputText>
 
-
-        </b:panelGrid>
+        <b:commandButton look="success btn-block" value="Sign In" icon="log-in" size="lg"
+                         action="#{loginBean.login}"/>
+        <b:commandButton look="primary btn-block" value="Register" iconAwesome="fa-edit" size="lg"/>
     </h:form>
-
-</h:body>
+</b:container>
 </html>

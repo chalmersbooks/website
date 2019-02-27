@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+</h:head>
+<h:outputStylesheet name="css/login.css"/>
+<b:container>
+    <h1 class="sign-in-h1">Chalmers Books</h1>
+
+    <h:form styleClass="register-form" prependId="false">
+        <h2 class="sign-in-h2">Register</h2>
+        <b:inputText id="email" placeholder="CID" fieldSize="lg" value="#{loginBean.email}">
+            <f:facet name="prepend">
+                <b:icon name="user"/>
+            </f:facet>
+        </b:inputText>
+        <b:inputText id="password" placeholder="Password" type="password" fieldSize="lg" value="#{loginBean.password}">
+            <f:facet name="prepend">
+                <b:iconAwesome name="key"/>
+            </f:facet>
+        </b:inputText>
+        <b:commandButton look="success btn-block" value="Register" icon="fa-edit" size="lg"/>
+        <b:commandButton look="danger btn-block" value="Cancel" icon="fa-close" size="lg"/>
+    </h:form>
+</b:container>
+</html>
