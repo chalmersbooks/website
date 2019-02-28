@@ -7,11 +7,7 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>
-        <param-name>primefaces.FONT_AWESOME</param-name>
-        <param-value>true</param-value>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
     </context-param>
-    <mime-mapping>
-        <extension>woff2</extension>
-        <mime-type>application/x-font-woff2</mime-type>
-    </mime-mapping>
 </web-app>
