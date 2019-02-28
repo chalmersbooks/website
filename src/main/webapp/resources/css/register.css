@@ -19,7 +19,7 @@
     margin: 0px;
     font-family: Roboto;
     font-weight: lighter;
-    font-size: 46px;
+    font-size: 48px;
 }
 
 .register-h2 {
@@ -28,7 +28,63 @@
 
 }
 
+.radiobutton-row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
+    margin: 0px !important;
+}
+
+.radiobutton-row .radio {
+    padding: 10px !important;
+    margin: 0px !important;
+}
+
+.email-type-p {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.input-group-addon {
+    background-color: transparent !important;
+    border-radius: 0px 6px 6px 0px !important;
+    border-right: 1px solid #ccc !important;
+    border-top: 1px solid #ccc !important;
+    border-bottom: 1px solid #ccc !important;
+}
+
+.CID-inputtext .input-group .input_email {
+    border-right-color: transparent !important;
+}
+
+#input_CID-inputtext {
+    border-right: 1px dotted #ccc;
+}
+
+.role-type-p {
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 18px !important;
+    font-weight: lighter !important;
+}
+
+.email-type-p {
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 16px !important;
+    font-weight: lighter !important;
+}
+
+.email-radiobutton label {
+    color: #565656;
+    font-size: 16px;
+    font-weight: lighter !important;
+}
+
 * {
-    font-family: Roboto;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
 }
