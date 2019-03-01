@@ -27,6 +27,19 @@
     font-weight: lighter;
 }
 
+#input-group-addon {
+    -webkit-border-radius: 6px 0px 0px 6px !important;
+    -moz-border-radius: 6px 0px 0px 6px !important;
+    border-radius: 6px 0px 0px 6px !important;
+}
+
+#input_login-password {
+    height: 44px !important;
+    -webkit-border-radius: 0px 6px 6px 0px !important;
+    -moz-border-radius: 0px 6px 6px 0px !important;
+    border-radius: 0px 6px 6px 0px !important;
+}
+
 .wrong-message {
     padding-left: 0px !important;
     padding-right: 0px !important;

@@ -74,7 +74,6 @@ public class RegisterBean implements Serializable {
     }
 
     private void invalidPasswordMessage(FacesContext context, UIComponent comp, String message) {
-        //((UIInput) comp).setValid(false);
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, message, null);
         context.addMessage(comp.getClientId(context), fm);
     }
