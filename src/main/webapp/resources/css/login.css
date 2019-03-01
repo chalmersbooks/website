@@ -25,7 +25,34 @@
 .sign-in-h2 {
     color: grey;
     font-weight: lighter;
+}
 
+.wrong-message {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
+}
+
+.wrong-message .close {
+    display: none !important;
+}
+
+/*
+Error message required field
+Because nothing else worked...
+*/
+#j_idt9 {
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
+}
+
+/*Error message required field*/
+#j_idt11 {
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
 }
 
 * {

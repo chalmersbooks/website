@@ -29,8 +29,6 @@
 }
 
 .radiobutton-row {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
     display: flex !important;
     justify-content: center !important;
     padding-top: 5px !important;
@@ -82,6 +80,15 @@
     color: #565656;
     font-size: 16px;
     font-weight: lighter !important;
+}
+
+.alert {
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
+}
+
+.alert .bf-message-detail {
+    padding: 0px !important;
 }
 
 * {

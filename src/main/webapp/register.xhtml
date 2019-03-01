@@ -1,39 +1,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 </h:head>
 <h:outputStylesheet name="css/register.css"/>
 <b:container>
     <h1 class="register-h1">ChalmersBooks</h1>
-
     <h:form styleClass="register-form" prependId="false">
         <h2 class="register-h2">Register</h2>
-
-        <b:inputText id="CID-inputtext" placeholder="CID" fieldSize="lg">
+        <b:inputText id="CID-inputtext"
+                     placeholder="CID"
+                     fieldSize="lg"
+                     required="true"
+                     requiredMessage="Enter CID"
+                     maxlength="10">
             <f:facet name="append">
                 <p class="email-type-p">
                     #{registerBean.emailType}
                 </p>
             </f:facet>
         </b:inputText>
-
+        <b:message for="CID-inputtext" showIcon="false"/>
         <p class="role-type-p">What's your role at Chalmers?</p>
         <b:row styleClass="radiobutton-row" prependId="false">
-            <b:radiobutton styleClass="email-radiobutton" prependId="false" value="#{registerBean.emailType}" update="CID-inputtext">
+            <b:radiobutton styleClass="email-radiobutton"
+                           id="roles-radiobutton"
+                           prependId="false"
+                           update="CID-inputtext"
+                           required="true"
+                           requiredMessage="Choose a role"
+                           value="#{registerBean.emailType}">
                 <f:selectItems value="#{registerBean.emails}"/>
             </b:radiobutton>
         </b:row>
-
-        <b:inputSecret id="password-inputtext" placeholder="Password" type="password" fieldSize="lg">
+        <b:message for="roles-radiobutton" showIcon="false"/>
+        <b:inputSecret id="register-password"
+                       placeholder="Password"
+                       fieldSize="lg"
+                       required="true"
+                       requiredMessage="Enter password"
+                       tooltip="Example: Password123@"
+                       validator="#{registerBean.validatePassword}"
+                       value="#{registerBean.password}">
         </b:inputSecret>
-
-        <b:inputSecret id="verify-password" placeholder="Verify password" type="password" fieldSize="lg">
+        <b:message for="register-password" showIcon="false"/>
+        <b:inputSecret id="confirm-password"
+                       placeholder="Confirm password"
+                       fieldSize="lg"
+                       required="true"
+                       requiredMessage="Confirm password"
+                       value="#{registerBean.confirmPassword}">
         </b:inputSecret>
-
-        <b:commandButton look="success btn-block" value="Register" iconAwesome="fa-edit" size="lg"/>
-        <b:commandButton look="danger btn-block" value="Cancel" iconAwesome="fa-close" size="lg"/>
+        <b:message for="confirm-password" showIcon="false"/>
+        <o:validateEqual id="equal"
+                         components="register-password confirm-password"
+                         message="Passwords are not equal"
+                         showMessageFor="@invalid"/>
+        <b:commandButton look="success btn-block"
+                         value="Register"
+                         iconAwesome="fa-edit"
+                         size="lg"
+                         action="#{registerBean.register}"/>
+        <b:commandButton look="danger btn-block"
+                         value="Cancel"
+                         iconAwesome="fa-close"
+                         size="lg"/>
+        <b:growl id="growl"
+                 globalOnly="true"
+                 showDetail="true"
+                 severity="info, error"/>
     </h:form>
 </b:container>
 </html>
