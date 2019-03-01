@@ -1,6 +1,8 @@
 :root {
     --primary-color: rgba(172, 182, 229, 0.5);
     --secondary-color: rgba(116, 235, 213, 0.5);
+    --primary-color-full-op: rgba(172, 182, 229, 1.0);
+    --text-color: rgba(86, 86, 86, 1.0);
 }
 
 body {
@@ -29,11 +31,11 @@ body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
     font-size: 48px;
-    color: rgba(172, 182, 229, 1.0);
+    color: var(--primary-color-full-op);
 }
 
 .sign-in-h2 {
-    color: #565656;
+    color: var(--text-color);
     font-weight: lighter;
 }
 
