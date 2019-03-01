@@ -15,12 +15,14 @@
                      fieldSize="lg"
                      required="true"
                      requiredMessage="Enter CID"
-                     maxlength="10">
+                     maxlength="10"
+                     value="#{registerBean.CID}">
             <f:facet name="append">
                 <p class="email-type-p">
                     #{registerBean.emailType}
                 </p>
             </f:facet>
+            <f:ajax/>
         </b:inputText>
         <b:message for="CID-inputtext" showIcon="false"/>
         <p class="role-type-p">What's your role at Chalmers?</p>

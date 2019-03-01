@@ -9,7 +9,6 @@ import net.bootsfaces.utils.FacesMessages;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -23,6 +22,10 @@ public class RegisterBean implements Serializable {
     @Getter
     @Setter
     private Map<String, String> emails = new HashMap<>();
+
+    @Getter
+    @Setter
+    private String CID;
 
     @Getter
     @Setter
@@ -53,10 +56,10 @@ public class RegisterBean implements Serializable {
     }
 
     public void register() {
-        if (!verifiedPassword()) {
-            FacesMessages.error("Error!", "Password do not match");
+        if (!isRegistered()) {
+            //TODO Register user
         } else {
-            FacesMessages.info("Info", "Success!");
+            FacesMessages.fatal("CID already registered");
         }
     }
 
@@ -80,8 +83,10 @@ public class RegisterBean implements Serializable {
         return password.toString().matches(regex);
     }
 
-    private boolean verifiedPassword() {
-        return password.equals(confirmPassword);
+    private boolean isRegistered() {
+        //TODO Check if user already exists
+
+        return true;
     }
 
 }
