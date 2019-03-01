@@ -1,3 +1,12 @@
+:root {
+    --primary-color: rgba(172, 182, 229, 0.5);
+    --secondary-color: rgba(116, 235, 213, 0.5);
+}
+
+body {
+    background-image: linear-gradient(var(--primary-color), var(--secondary-color)) !important;
+}
+
 .sign-in-form {
     margin: 0 auto;
     max-width: 340px;
@@ -5,48 +14,49 @@
     padding-right: 20px;
     padding-top: 40px;
     padding-bottom: 40px;
-    border: solid 1px lightgrey;
-    box-shadow: 2px 2px 4px lightgrey;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    background-image: linear-gradient(var(--secondary-color), var(--primary-color)) !important;
+    opacity: 0.8;
 }
 
 .sign-in-h1 {
     text-align: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    margin: 0px;
-    font-family: Roboto;
+    margin: 0;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
     font-size: 48px;
+    color: rgba(172, 182, 229, 1.0);
 }
 
 .sign-in-h2 {
-    color: grey;
+    color: #565656;
     font-weight: lighter;
 }
 
 #input-group-addon {
-    -webkit-border-radius: 6px 0px 0px 6px !important;
-    -moz-border-radius: 6px 0px 0px 6px !important;
-    border-radius: 6px 0px 0px 6px !important;
+    -webkit-border-radius: 6px 0 0 6px !important;
+    -moz-border-radius: 6px 0 0 6px !important;
+    border-radius: 6px 0 0 6px !important;
 }
 
 #input_login-password {
     height: 44px !important;
-    -webkit-border-radius: 0px 6px 6px 0px !important;
-    -moz-border-radius: 0px 6px 6px 0px !important;
-    border-radius: 0px 6px 6px 0px !important;
+    -webkit-border-radius:  6px 6px 0 !important;
+    -moz-border-radius: 0 6px 6px 0 !important;
+    border-radius: 0 6px 6px 0 !important;
 }
 
 .wrong-message {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     padding-top: 2px !important;
     padding-bottom: 2px !important;
     margin-bottom: 15px !important;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 
 .wrong-message .close {
@@ -54,21 +64,21 @@
 }
 
 /*
-Error message required field
+Error message required-input-message
 Because nothing else worked...
 */
 #j_idt9 {
     margin-bottom: 15px !important;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 
-/*Error message required field*/
+/*Error message required-input-message*/
 #j_idt11 {
     margin-bottom: 15px !important;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
 }
 
 * {
-    font-family: Roboto;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
 }
