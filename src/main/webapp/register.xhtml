@@ -60,12 +60,14 @@
                          components="register-password confirm-password"
                          message="Passwords are not equal"
                          showMessageFor="confirm-password"/>
-        <b:commandButton look="success btn-block"
-                         value="Register"
+        <b:commandButton id="submit-button"
+                         look="success btn-block"
+                         value="Submit"
                          iconAwesome="fa-edit"
                          size="lg"
                          action="#{registerBean.register}"/>
-        <b:commandButton look="danger btn-block"
+        <b:commandButton id="cancel-button"
+                         look="danger btn-block"
                          value="Cancel"
                          iconAwesome="fa-close"
                          size="lg"/>

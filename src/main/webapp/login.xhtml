@@ -3,8 +3,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
+    <h:outputStylesheet name="css/login.css"/>
 </h:head>
-<h:outputStylesheet name="css/login.css"/>
 <b:container>
     <h1 class="sign-in-h1">ChalmersBooks</h1>
     <h:form styleClass="sign-in-form" prependId="false">
@@ -38,13 +38,15 @@
                     showDetail="true"
                     severity="fatal"
                     showIcon="false"/>
-        <b:commandButton look="success btn-block"
+        <b:commandButton id="sign-in-button"
+                         look="success btn-block"
                          value="Sign In"
                          icon="log-in"
                          size="lg"
                          update="@form"
                          action="#{loginBean.login}"/>
-        <b:commandButton look="primary btn-block"
+        <b:commandButton id="register-button"
+                         look="primary btn-block"
                          value="Register"
                          iconAwesome="fa-edit"
                          size="lg"/>
