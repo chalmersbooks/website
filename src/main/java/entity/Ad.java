@@ -3,6 +3,8 @@ package entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,11 +27,17 @@ public class Ad {
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
+    private final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    private String formatedDate;
+
     public void addCourseCode(CourseCode code) {
         if (!courseCodes.contains(code)) {
             courseCodes.add(code);
         }
     }
 
+    public String getFormatedDate() {
+        return dateFormatter.format(this.date);
+    }
 
 }
