@@ -17,6 +17,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -35,6 +36,8 @@ public class StartupDummyApp {
     @EJB
     private AdFacade adFacade;
 
+    private final Random random = new Random();
+
     @Inject
     private Pbkdf2PasswordHash passwordHash;
 
@@ -43,10 +46,11 @@ public class StartupDummyApp {
 
         // TODO: Setup the whole application with dummy data here....
 
-        //addTestAccount();
+        addTestAccount();
         //addTestBooks();
         //addTestCourseCodes();
-        //addTestAds();
+        addTestAds();
+
     }
 
     public void addTestAccount() {
@@ -61,45 +65,23 @@ public class StartupDummyApp {
     }
 
     public void addTestAds() {
-        List<CourseCode> courseCodes = new ArrayList<>();
-        courseCodes.add(buildRandomCourseCode());
-
-        Ad ad = new AdBuilder()
-                .setPrice(generateRandomPrice())
-                .setCourseCodes(courseCodes)
-                .setBook(courseCodes.get(0).getBooks().get(0))
-                .setUser(generateRandomUser())
-                .build();
-
-        adFacade.create(ad);
-    }
-
-    public void addTestBooks() {
-
-        for (int i = 0; i < 5; i++) {
-
-            Book b = new BookBuilder()
-                    .setISBN("1234" + i)
-                    .setName("How to make a website 10" + i)
-                    .setAuthor("Joakim")
+        List<CourseCode> courseCodes;
+        User user = buildRandomUser();
+        int n = 25;
+        for (int i = 0; i < n; i++) {
+            courseCodes = new ArrayList<>();
+            courseCodes.add(buildRandomCourseCode());
+            Ad ad = new AdBuilder()
+                    .setPrice(generateRandomPrice())
+                    .setCourseCodes(courseCodes)
+                    .setBook(courseCodes.get(0).getBooks().get(0))
+                    .setUser(user)
                     .build();
-
-            bookFacade.create(b);
-
+            adFacade.create(ad);
         }
     }
 
-    public void addTestCourseCodes() {
-
-        List<Book> books = bookFacade.findAll();
-        CourseCode cc = new CourseCode();
-        cc.setCourseCode("DAT076");
-        cc.setBooks(books);
-
-        ccFacade.create(cc);
-    }
-
-    private User generateRandomUser() {
+    private User buildRandomUser() {
         User user = new User();
         user.setEmail("slavnic@student.chalmers.se");
         user.setName("Sanjin");
@@ -134,11 +116,11 @@ public class StartupDummyApp {
     }
 
     private String generateRandomISBN() {
-        return UUID.randomUUID().toString().substring(0, 8);
+        return String.valueOf(Math.abs(random.nextLong() / 1000000)); //13-digit
     }
 
     private String generateRandomName() {
-        return "Book " + (int) (Math.random() * 100);
+        return "Encyclopedia volume " + (int) (Math.random() * 100);
     }
 
     private int generateRandomPrice() {
@@ -146,7 +128,6 @@ public class StartupDummyApp {
     }
 
     private String generateRandomCourseCode() {
-        Random random = new Random();
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < 3; i++) {
@@ -156,5 +137,25 @@ public class StartupDummyApp {
         sb.append(random.nextInt(999));
 
         return sb.toString();
+    }
+
+
+    public void addTestBooks() {
+        for (int i = 0; i < 5; i++) {
+            Book b = new BookBuilder()
+                    .setISBN("1234" + i)
+                    .setName("How to make a website 10" + i)
+                    .setAuthor("Joakim")
+                    .build();
+            bookFacade.create(b);
+        }
+    }
+
+    public void addTestCourseCodes() {
+        List<Book> books = bookFacade.findAll();
+        CourseCode cc = new CourseCode();
+        cc.setCourseCode("DAT076");
+        cc.setBooks(books);
+        ccFacade.create(cc);
     }
 }
