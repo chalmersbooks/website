@@ -16,6 +16,11 @@
                 padding: 4px;
             }
 
+            .full {
+                width: 100%;
+                padding: 4px;
+            }
+
             .grid {
                 width: 100%;
             }
@@ -43,12 +48,9 @@
                 <p:tab id="course" title="Course">
                     <p:panel header="What course(course Code) do the book belong to?">
                         <p:messages/>
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Course Code: *"/>
-                            <p:inputText value="#{adWizardBean.ad.courseCode}" required="true" label="CourseCode"
-                                         autocomplete="#{adWizardBean.allCourseCodes}">
-                            </p:inputText>
-                        </h:panelGrid>
+                        <p:inputText value="#{adWizardBean.ad.courseCode}" required="true" label="Course Code"
+                                     autocomplete="#{adWizardBean.allCourseCodes}"/>
+
                     </p:panel>
                 </p:tab>
 
@@ -81,51 +83,36 @@
                     </p:panel>
                 </p:tab>
 
-                <!--<p:tab id="confirm" title="Confirmation">
-                    <p:panel header="Confirmation">
-                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
-                            <h:panelGrid columns="2" columnClasses="label, value">
-                                <h:outputText value="Firstname: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText value="Lastname: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText value="Age: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-                            </h:panelGrid>
-
-                            <h:panelGrid columns="2" columnClasses="label, value">
-                                <h:outputText value="Street: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText value="Postal: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText value="City: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-                            </h:panelGrid>
-
-                            <h:panelGrid columns="2" columnClasses="label, value">
-                                <h:outputText value="Email: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText value="Phone "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText value="Info: "/>
-                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
-
-                                <h:outputText/>
-                                <h:outputText/>
-                            </h:panelGrid>
+                <p:tab id="information" title="Information">
+                    <p:panel header="Information">
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Price: "/>
+                            <p:inputText value="#{adWizardBean.ad.price}" required="true"/>
+                            <h:outputText value="Course Codes "/>
+                            <b:inputText value="#{adWizardBean.ad.showableCourseCodes}"
+                                         tags="true"
+                                         placeholder="Hit return to add new code"
+                                         style-class="tags"/>
+                            <script>
+                                $('.tags').tagsinput('refresh');
+                            </script>
+                            <p:row/>
+                            <h:outputText value="Name: "/>
+                            <h:outputText value="#{adWizardBean.ad.book.name}"/>
+                            <h:outputText value="Volume: "/>
+                            <h:outputText value="#{adWizardBean.ad.book.edition}"/>
+                            <h:outputText value="Author(s): "/>
+                            <h:outputText value="#{adWizardBean.ad.book.authors}"/>
+                            <h:outputText value="ISBN: "/>
+                            <h:outputText value="#{adWizardBean.ad.book.isbn}"/>
                         </h:panelGrid>
-
-                        <p:commandButton value="Submit" action="#{adWizardBean.save}" update="growl" process="@this"/>
+                        <p:separator/>
+                        <p>Image coming later!</p>
+                        <p:commandButton value="Create Ad" action="#{adWizardBean.save}" update="growl"
+                                         process="@this"/>
                     </p:panel>
-                </p:tab>-->
+                </p:tab>
             </p:wizard>
-
         </h:form>
     </ui:define>
 </ui:composition>
