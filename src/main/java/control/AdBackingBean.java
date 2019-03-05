@@ -82,6 +82,7 @@ public class AdBackingBean implements Serializable {
         u.setEmail("test@test.com");
         u.setPassword("123");
         return u;
+
     }
 
     public List<CourseCode> getCourseCodesFromBook(String ISBN) {
