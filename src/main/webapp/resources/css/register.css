@@ -1,3 +1,32 @@
+:root {
+    --opacity: 0.6;
+    --background-opacity: 0.6;
+    --primary-color: rgba(172, 182, 229, var(--opacity));
+    --secondary-color: rgba(116, 235, 213, var(--opacity));
+    --primary-color-full-op: rgba(172, 182, 229, 1.0);
+    --secondary-color-full-op: rgba(116, 235, 213, 1.0);
+    --text-color: rgba(86, 86, 86, 1.0);
+    --background-color: linear-gradient(rgba(172, 182, 229, var(--background-opacity)), rgba(116, 235, 213, var(--background-opacity)));
+}
+
+body {
+    background-image: var(--background-color) !important;
+}
+
+h1 {
+    text-shadow: 1px 1px 30px white;
+}
+
+#submit-button {
+    background-image: linear-gradient(var(--primary-color), var(--secondary-color)) !important;
+    border: 1px solid var(--primary-color) !important;
+}
+
+#cancel-button {
+    background-image: linear-gradient(var(--primary-color), var(--secondary-color)) !important;
+    border: 1px solid var(--primary-color) !important;
+}
+
 .register-form {
     margin: 0 auto;
     max-width: 340px;
@@ -5,30 +34,103 @@
     padding-right: 20px;
     padding-top: 40px;
     padding-bottom: 40px;
-    border: solid 1px lightgrey;
-    box-shadow: 2px 2px 4px lightgrey;
+    opacity: 0.8;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    background-image: linear-gradient(var(--secondary-color), var(--primary-color)) !important;
+    box-shadow: 2px 2px 50px rgba(255, 255, 255, 0.5);
 }
 
 .register-h1 {
     text-align: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    margin: 0px;
-    font-family: Roboto;
+    margin: 0;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
-    font-size: 46px;
+    color: var(--text-color);
+    font-size: 48px;
 }
 
 .register-h2 {
-    color: grey;
+    color: var(--text-color);
     font-weight: lighter;
 
 }
 
+.radiobutton-row {
+    display: flex !important;
+    justify-content: center !important;
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
+    margin: 0 !important;
+}
+
+.radiobutton-row .radio {
+    padding: 10px !important;
+    margin: 0 !important;
+}
+
+.email-type-p {
+    color: var(--text-color);
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.radiobutton-row .email-radiobutton label input {
+    transform: scale(1.3) !important;
+    transition: ease-in-out 0.25s;
+}
+
+.radiobutton-row .email-radiobutton label input:hover {
+    transform: scale(1.6) !important;
+    transition: ease-in-out 0.25s;
+}
+
+.input-group-addon {
+    background-color: white !important;
+    border-radius: 0 6px 6px 0 !important;
+}
+
+.CID-inputtext .input-group .input_email {
+    border-right-color: transparent !important;
+}
+
+#input_CID-inputtext {
+    border-right: 1px dotted var(--primary-color-full-op);
+}
+
+.role-type-p {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 18px !important;
+    font-weight: lighter !important;
+}
+
+.email-type-p {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: lighter !important;
+}
+
+.email-radiobutton label {
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: lighter !important;
+}
+
+.alert {
+    margin-bottom: 15px !important;
+    margin-top: 0 !important;
+}
+
+.alert .bf-message-detail {
+    padding: 0 !important;
+}
+
 * {
-    font-family: Roboto;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: lighter;
 }

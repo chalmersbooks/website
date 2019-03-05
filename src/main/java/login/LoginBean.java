@@ -3,14 +3,10 @@ package login;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
+import net.bootsfaces.utils.FacesMessages;
 import org.omnifaces.util.Faces;
-import org.omnifaces.util.FacesLocal;
-import org.omnifaces.util.Messages;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.FacesConfig;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.AuthenticationStatus;
@@ -31,7 +27,7 @@ import static javax.security.enterprise.authentication.mechanism.http.Authentica
         loginToContinue = @LoginToContinue()
 )
 @Log
-@Named
+@Named("loginBean")
 @RequestScoped
 public class LoginBean {
 
@@ -42,27 +38,20 @@ public class LoginBean {
     @Setter
     @NotNull
     private String email;
+
     @Getter
     @Setter
     @NotNull
     private String password;
 
     public String login() {
-        Credential credential = new UsernamePasswordCredential(email, new Password(password));
-        AuthenticationStatus status = securityContext.authenticate(
-                getHttpRequestFromFacesContext(),
-                getHttpResponseFromFacesContext(),
-                withParams().credential(credential));
-
-        if (status.equals(SUCCESS)) {
-            return "valid";
-        } else if (status.equals(SEND_FAILURE)) {
-            // TODO: Send message to screen that login was invalid
-            Messages.addGlobalError( "Something went wrong");
-            return "";
-        } else {
-            return null;
+        String status = checkStatus(getStatus(email, password));
+        if (status.equals("")) {
+            email = "";
+            password = "";
+            FacesMessages.fatal("Wrong email or password");
         }
+        return status;
     }
 
     private HttpServletRequest getHttpRequestFromFacesContext() {
@@ -77,5 +66,23 @@ public class LoginBean {
                 .getResponse();
     }
 
+    private AuthenticationStatus getStatus(String email, String password) {
+        Credential credential = new UsernamePasswordCredential(email, new Password(password));
 
+        AuthenticationStatus status = securityContext.authenticate(
+                getHttpRequestFromFacesContext(),
+                getHttpResponseFromFacesContext(),
+                withParams().credential(credential));
+
+        return status;
+    }
+
+    private String checkStatus(AuthenticationStatus status) {
+        if (status.equals(SUCCESS)) {
+            return "valid";
+        } else if (status.equals(SEND_FAILURE)) {
+            return "";
+        }
+        return null;
+    }
 }
