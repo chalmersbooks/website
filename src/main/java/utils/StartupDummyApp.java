@@ -1,6 +1,11 @@
 package utils;
 
+import core.BookBuilder;
+import entity.Book;
+import entity.CourseCode;
 import entity.User;
+import service.BookFacade;
+import service.CourseCodeFacade;
 import service.UserFacade;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +14,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
+import java.util.List;
 
 @Startup
 @Singleton
@@ -16,6 +22,10 @@ public class StartupDummyApp {
 
     @EJB
     private UserFacade userFacade;
+    @EJB
+    private BookFacade bookFacade;
+    @EJB
+    private CourseCodeFacade ccFacade;
     @Inject
     private Pbkdf2PasswordHash passwordHash;
 
@@ -26,9 +36,10 @@ public class StartupDummyApp {
         // TODO: Setup the whole application with dummy data here....
 
 
-    addTestAccount();
-    addTestAds();
-
+        addTestAccount();
+        addTestBooks();
+        addTestCourseCodes();
+        addTestAds();
 
 
     }
@@ -49,7 +60,31 @@ public class StartupDummyApp {
 
     }
 
+    public void addTestBooks() {
 
+        for (int i = 0; i < 5; i++) {
+
+            Book b = new BookBuilder()
+                    .setISBN("1234" + i)
+                    .setName("How to make a website 10" + i)
+                    .setAuthor("Joakim")
+                    .build();
+
+            bookFacade.create(b);
+
+        }
+    }
+
+    public void addTestCourseCodes() {
+
+        List<Book> books = bookFacade.findAll();
+        CourseCode cc = new CourseCode();
+        cc.setCourseCode("DAT076");
+        cc.setBooks(books);
+
+        ccFacade.create(cc);
+
+    }
 
 
 }

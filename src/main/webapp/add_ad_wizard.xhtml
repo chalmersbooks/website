@@ -1,0 +1,131 @@
+<ui:composition template="template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <style type="text/css">
+            .label {
+                width: 20%;
+                padding: 4px;
+            }
+
+            .value {
+                width: 80%;
+                padding: 4px;
+            }
+
+            .grid {
+                width: 100%;
+            }
+
+            .error {
+                color: red;
+            }
+
+            .outputLabel {
+                font-weight: bold;
+            }
+
+            .grid {
+                width: 33%;
+                padding: 4px;
+            }
+        </style>
+
+
+        <h:form>
+
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+
+            <p:wizard flowListener="#{adWizardBean.onFlowProcess}">
+                <p:tab id="course" title="Course">
+                    <p:panel header="What course(course Code) do the book belong to?">
+                        <p:messages/>
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Course Code: *"/>
+                            <p:inputText value="#{adWizardBean.ad.courseCode}" required="true" label="CourseCode"
+                                         autocomplete="#{adWizardBean.allCourseCodes}">
+                            </p:inputText>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="book" title="Book">
+                    <p:panel header="Book">
+                        <p:messages/>
+                        <p>Found books</p>
+                        <h:panelGrid columns="1" id="BooksButtons">
+                            <b:radiobutton value="#{adWizardBean.markedBook}"
+                                           required="false" update="BookForm">
+                                <f:ajax execute="BooksButtons" listener="#{adWizardBean.fillFormWithMarkedBook}"/>
+                                <f:selectItems value="#{adWizardBean.booksBelongingToCourseCode}"/>
+                            </b:radiobutton>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="BookForm">
+                            <h:outputText value="Name: "/>
+                            <p:inputText value="#{adWizardBean.ad.book.name}" required="true"/>
+                            <h:outputText value="Volume: "/>
+                            <p:inputText value="#{adWizardBean.ad.book.edition}" required="true"/>
+                            <h:outputText value="Author(s): "/>
+                            <p:inputText value="#{adWizardBean.ad.book.authors}" required="true"/>
+                            <h:outputText value="ISBN: "/>
+                            <p:inputText value="#{adWizardBean.ad.book.isbn}" required="true"/>
+                        </h:panelGrid>
+                        <!--<h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Street: "/>
+                        <p:inputText value="#{adWizardBean.nothing}"/>
+-->
+                        <!--</h:panelGrid>-->
+                    </p:panel>
+                </p:tab>
+
+                <!--<p:tab id="confirm" title="Confirmation">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Firstname: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Lastname: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Age: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Street: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Postal: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText value="City: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Phone "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Info: "/>
+                                <h:outputText value="#{adWizardBean.nothing}" styleClass="outputLabel"/>
+
+                                <h:outputText/>
+                                <h:outputText/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" action="#{adWizardBean.save}" update="growl" process="@this"/>
+                    </p:panel>
+                </p:tab>-->
+            </p:wizard>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

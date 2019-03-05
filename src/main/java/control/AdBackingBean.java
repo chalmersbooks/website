@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import service.AdFacade;
-import service.CourseCodeFacade;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log
-@Named("ad")
+@Named("adBean")
 @ViewScoped
 public class AdBackingBean implements Serializable {
 
