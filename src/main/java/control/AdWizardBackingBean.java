@@ -14,6 +14,7 @@ import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.FlowEvent;
 import service.AdFacade;
+import service.BookFacade;
 import service.CourseCodeFacade;
 import service.UserFacade;
 
@@ -51,6 +52,8 @@ public class AdWizardBackingBean implements Serializable {
     private UserFacade userFacade;
     @EJB
     private AdFacade adFacade;
+    @EJB
+    private BookFacade bookFacade;
 
     @Getter
     @Setter
@@ -82,20 +85,40 @@ public class AdWizardBackingBean implements Serializable {
 
     }
 
-    public void save() {
+    public String save() {
+
+        // TODO: guess we need som error check here if add is incomplete or something...
 
         adFacade.create(makeAd());
         Messages.addGlobal(Messages.createInfo("Add created"));
+
+        return "Complete";
 
     }
 
     private Ad makeAd() {
         return new AdBuilder()
-                .setBook(ad.getBook())
+                .setBook(getCurrentBook())
                 .setCourseCodes(convertCourseCodeTags())
                 .setPrice(ad.getPrice())
                 .setUser(fetchUser())
                 .build();
+    }
+
+    private Book getCurrentBook() {
+        Book book = bookFacade.findById(ad.getBook().getIsbn());
+        if (book != null) {
+            if (book.equals(ad.getBook())) {
+                return book;
+            } else {
+                // TODO: This will give a server error. Getting here should probably not happen.
+                return null;
+            }
+        } else {
+            book = ad.getBook();
+            bookFacade.create(book);
+            return book;
+        }
     }
 
     private List<CourseCode> convertCourseCodeTags() {

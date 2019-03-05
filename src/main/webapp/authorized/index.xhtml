@@ -4,19 +4,21 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:define name="content">
-    <b:container>
+        <b:container>
             <b:jumbotron>
                 <h1>ChalmersBooks</h1>
                 <p>This website is a part of Webapplication course and will be released asap.</p>
                 <p><a class="btn btn-primary btn-lg" href="https://github.com/chalmersbooks">Learn more</a></p>
             </b:jumbotron>
-            <b:navLink value="go to user page" href="user.xhtml"/>
+            <b:navLink value="go to user page" href="authorized/user.xhtml"/>
             <br/>
-            <b:navLink value="go to add ad page" href="add_ad.xhtml"/>
+            <b:navLink value="go to add ad page" href="authorized/add_ad.xhtml"/>
             <br/>
-            <b:navLink value="go to ad list" href="ad_list.xhtml" />
+            <b:navLink value="go to add ad wizard" href="authorized/add_ad_wizard.xhtml"/>
             <br/>
-            <b:navLink value="go to profile page" href="profile.xhtml" />
+            <b:navLink value="go to ad list" href="authorized/ad_list.xhtml"/>
+            <br/>
+            <b:navLink value="go to profile page" href="authorized/profile.xhtml"/>
         </b:container>
     </ui:define>
 </ui:composition>
