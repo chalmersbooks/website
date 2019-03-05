@@ -1,0 +1,122 @@
+<ui:composition template="../template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <b:container>
+            <b:column span="3">
+                <b:panel look="primary" title="#{profile.name}">
+                    <b:listLinks>
+                        <div class="w3-container">
+                            <h2>W3.CSS Login Modal</h2>
+                            <button onclick="document.getElementById('id01').style.display='block'"
+                                    class="w3-button w3-green w3-large">Login
+                            </button>
+                        </div>
+
+                        <div id="id01" class="w3-modal">
+                            <div class="w3-modal-content w3-card-4 w3-animate-left" style="max-width:600px">
+                                <div class="w3-center">
+                                    <span onclick="document.getElementById('id01').style.display='none'"
+                                          class="w3-button w3-xlarge w3-hover-red w3-display-topright"
+                                          title="Cancel">&times;</span>
+                                </div>
+                                <form class="w3-container" action="#{profile.changePassword}">
+                                    <div class="w3-section">
+                                        <h:panelGrid columns="1" id="passGrid" cellpadding="5">
+                                            <b:row>
+                                                <h:outputLabel for="oldPassword" value="Old password: *"/>
+                                                <p:password id="oldPassword"
+                                                            value="#{profile.oldPassword}"
+                                                            required="true">
+                                                </p:password>
+                                            </b:row>
+                                            <b:row>
+                                                <h:outputLabel for="newPassword" value="New password: *"/>
+                                                <p:password id="newPassword"
+                                                            value="#{profile.newPassword}"
+                                                            label="New password"
+                                                            required="true"
+                                                            match="repeatPassword">
+                                                </p:password>
+                                            </b:row>
+                                            <b:row>
+                                                <h:outputLabel for="repeatPassword" value="Repeat password: *"/>
+                                                <p:password id="repeatPassword"
+                                                            value="#{profile.repeatPassword}"
+                                                            label="Repeat password"
+                                                            required="true">
+                                                </p:password>
+                                            </b:row>
+                                            <b:row>
+                                                <b:column>
+                                                    <p:button value="Cancel"
+                                                              dismiss="modal"/>
+                                                    <p:commandButton value="Update password" look="success"
+                                                                     update="passGrid"/>
+                                                </b:column>
+                                            </b:row>
+                                            <b:fetchBeanInfos/>
+                                            <b:messages id="messages" showDetail="true" autoUpdate="true"/>
+                                        </h:panelGrid>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!--
+                        <b:button onclick="$('.modal').modal('show')" value="Change Password"/>
+                        <div class="w3-modal-content w3-animate-left">
+                        <b:modal title="Change Password" styleClass="modal"
+                                 closable="false"
+                                 closeOnEscape="true">
+                            <b:form>
+                                <h:panelGrid columns="1" id="passGrid" cellpadding="5">
+                                    <b:row>
+                                        <h:outputLabel for="oldPassword" value="Old password: *"/>
+                                        <p:password id="oldPassword"
+                                                    value="#{profile.oldPassword}"
+                                                    required="true">
+                                        </p:password>
+                                    </b:row>
+                                    <b:row>
+                                        <h:outputLabel for="newPassword" value="New password: *"/>
+                                        <p:password id="newPassword"
+                                                    value="#{profile.newPassword}"
+                                                    label="New password"
+                                                    required="true"
+                                                    match="repeatPassword">
+                                        </p:password>
+                                    </b:row>
+                                    <b:row>
+                                        <h:outputLabel for="repeatPassword" value="Repeat password: *"/>
+                                        <p:password id="repeatPassword"
+                                                    value="#{profile.repeatPassword}"
+                                                    label="Repeat password"
+                                                    required="true">
+                                        </p:password>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column>
+                                            <p:button value="Cancel"
+                                                      dismiss="modal"/>
+                                            <p:commandButton value="Update password" look="success"
+                                                             update="passGrid"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:fetchBeanInfos/>
+                                    <b:messages id="messages" showDetail="true" autoUpdate="true"/>
+                                </h:panelGrid>
+                            </b:form>
+                        </b:modal>
+                        </div>
+                        -->
+                    </b:listLinks>
+                </b:panel>
+            </b:column>
+        </b:container>
+    </ui:define>
+</ui:composition>

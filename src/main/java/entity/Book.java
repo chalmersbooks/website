@@ -14,5 +14,4 @@ public class Book {
     private String authors;
     private String name;
     private int edition;
-
 }

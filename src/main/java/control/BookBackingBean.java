@@ -11,9 +11,10 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 @Log
-@Named("book")
+@Named("bookBean")
 @ViewScoped
 public class BookBackingBean implements Serializable {
 
@@ -60,6 +61,14 @@ public class BookBackingBean implements Serializable {
                 .setAuthor(authorNames)
                 .build();
         return book;
+    }
+
+    public List<Book> getAll() {
+        return bookFacade.findAll();
+    }
+
+    public Book getbyId(String id) {
+        return bookFacade.findById(id);
     }
 
 
