@@ -31,9 +31,9 @@ public class StartupDummyApp {
     @EJB
     private BookFacade bookFacade;
     @EJB
-    private AdFacade adFacade;
+    private CourseCodeFacade ccFacade;
     @EJB
-    private CourseCodeFacade courseCodeFacade;
+    private AdFacade adFacade;
 
     @Inject
     private Pbkdf2PasswordHash passwordHash;
@@ -44,6 +44,8 @@ public class StartupDummyApp {
         // TODO: Setup the whole application with dummy data here....
 
         addTestAccount();
+        addTestBooks();
+        addTestCourseCodes();
         addTestAds();
     }
 
@@ -72,6 +74,31 @@ public class StartupDummyApp {
         adFacade.create(ad);
     }
 
+    public void addTestBooks() {
+
+        for (int i = 0; i < 5; i++) {
+
+            Book b = new BookBuilder()
+                    .setISBN("1234" + i)
+                    .setName("How to make a website 10" + i)
+                    .setAuthor("Joakim")
+                    .build();
+
+            bookFacade.create(b);
+
+        }
+    }
+
+    public void addTestCourseCodes() {
+
+        List<Book> books = bookFacade.findAll();
+        CourseCode cc = new CourseCode();
+        cc.setCourseCode("DAT076");
+        cc.setBooks(books);
+
+        ccFacade.create(cc);
+    }
+
     private User generateRandomUser() {
         User user = new User();
         user.setEmail("slavnic@student.chalmers.se");
@@ -84,7 +111,7 @@ public class StartupDummyApp {
         List<Book> books = new ArrayList<>();
         books.add(buildRandomBook());
         CourseCode cc = buildRandomCourseCode(books);
-        courseCodeFacade.create(cc);
+        ccFacade.create(cc);
         return cc;
     }
 
