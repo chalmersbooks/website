@@ -46,7 +46,7 @@ public class StartupDummyApp {
         addTestAccount();
         addTestBooks();
         addTestCourseCodes();
-        addTestAds();
+        //addTestAds();
     }
 
     public void addTestAccount() {
@@ -104,6 +104,7 @@ public class StartupDummyApp {
         user.setEmail("slavnic@student.chalmers.se");
         user.setName("Sanjin");
         user.setPassword("password");
+        userFacade.create(user);
         return user;
     }
 
