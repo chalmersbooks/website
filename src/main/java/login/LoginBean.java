@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
+
 import static javax.security.enterprise.AuthenticationStatus.*;
 import static javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters.withParams;
 
@@ -29,7 +31,7 @@ import static javax.security.enterprise.authentication.mechanism.http.Authentica
 @Log
 @Named("loginBean")
 @RequestScoped
-public class LoginBean {
+public class LoginBean implements Serializable {
 
     @Inject
     private SecurityContext securityContext;
