@@ -35,6 +35,7 @@ public class IdentityStoreImpl implements IdentityStore {
     }
 
     private boolean validatePassword(User storedUser, String givenPassword) {
+
         if (storedUser == null) {
             return false;
         }
