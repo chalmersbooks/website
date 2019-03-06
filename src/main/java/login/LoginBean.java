@@ -7,6 +7,7 @@ import net.bootsfaces.utils.FacesMessages;
 import org.omnifaces.util.Faces;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.AuthenticationStatus;
@@ -30,7 +31,7 @@ import static javax.security.enterprise.authentication.mechanism.http.Authentica
 )
 @Log
 @Named("loginBean")
-@RequestScoped
+@ViewScoped
 public class LoginBean implements Serializable {
 
     @Inject
@@ -47,8 +48,8 @@ public class LoginBean implements Serializable {
     private String password;
 
     public String login() {
-        String status = checkStatus(getStatus(email, password));
-        if (status.equals("")) {
+        String status = checkStatus(getStatus());
+        if (status == null || status.equals("")) {
             email = "";
             password = "";
             FacesMessages.fatal("Wrong email or password");
@@ -68,7 +69,7 @@ public class LoginBean implements Serializable {
                 .getResponse();
     }
 
-    private AuthenticationStatus getStatus(String email, String password) {
+    private AuthenticationStatus getStatus() {
         Credential credential = new UsernamePasswordCredential(email, new Password(password));
 
         AuthenticationStatus status = securityContext.authenticate(
@@ -83,7 +84,7 @@ public class LoginBean implements Serializable {
         if (status.equals(SUCCESS)) {
             return "valid";
         } else if (status.equals(SEND_FAILURE)) {
-            return "";
+            return null;
         }
         return null;
     }
