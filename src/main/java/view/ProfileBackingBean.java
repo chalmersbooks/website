@@ -1,4 +1,4 @@
-package control;
+package view;
 
 import entity.User;
 import lombok.Getter;
