@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
+import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.io.Serializable;
 
 @Named("profile")
@@ -22,6 +23,9 @@ public class ProfileBackingBean implements Serializable {
     @Inject
     private SecurityContext securityContext;
 
+    @Inject
+    transient private Pbkdf2PasswordHash passwordHash;
+
     @Getter
     @Setter
     private String oldPassword;
@@ -31,22 +35,32 @@ public class ProfileBackingBean implements Serializable {
     @Getter
     @Setter
     private String repeatPassword;
+    @Setter
+    private String userName;
 
 
     private User getCurrent(){
         return facade.getUserById(securityContext.getCallerPrincipal().getName());
     }
 
-    public String getName(){
+    public String getUserName(){
         return getCurrent().getName();
     }
 
+
     public boolean changePassword(){
-        //TODO current password is encrypted so comparing wont work.
-        if(getCurrent().getPassword().equals(oldPassword)){
-            getCurrent().setPassword(newPassword);
+        String pwhash = getCurrent().getPassword();
+        if(passwordHash.verify(oldPassword.toCharArray(), pwhash)){
+            getCurrent().setPassword(passwordHash.generate(newPassword.toCharArray()));
+            facade.edit(getCurrent());
             return true;
-        }else
-            return false;
+        }
+        return false;
+    }
+
+    public void applyChanges(){
+        getCurrent().setName(userName);
+        facade.edit(getCurrent());
+        System.out.println(userName);
     }
 }
