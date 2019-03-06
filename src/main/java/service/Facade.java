@@ -33,4 +33,8 @@ public abstract class Facade<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
 
+    public void edit(T entity){
+        getEntityManager().merge(entity);
+    }
+
 }

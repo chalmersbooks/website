@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.user.name = :name")
+@NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.user.email = :name")
 public class Ad {
 
     @Id
