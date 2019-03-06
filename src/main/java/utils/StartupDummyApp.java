@@ -46,10 +46,10 @@ public class StartupDummyApp {
 
         // TODO: Setup the whole application with dummy data here....
 
-        addTestAccount();
+        //addTestAccount();
         //addTestBooks();
         //addTestCourseCodes();
-        addTestAds();
+        //addTestAds();
 
     }
 

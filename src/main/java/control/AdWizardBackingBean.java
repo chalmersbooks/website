@@ -123,7 +123,10 @@ public class AdWizardBackingBean implements Serializable {
 
     private List<CourseCode> convertCourseCodeTags() {
         List<CourseCode> courseCodes = new ArrayList<>();
-        for (String code : ad.getShowableCourseCodes().replace(" ", "").split(",")) {
+        String[] codes = ad.getShowableCourseCodes().replace(" ", "").split(",");
+        log.info("Showable courses are: " + ad.getShowableCourseCodes());
+        for (String code : codes) {
+            log.info("Current: " + code);
             CourseCode cc = ccBean.getCourseCode(code);
             if (cc == null) {
                 cc = makeCourseCode(code);
