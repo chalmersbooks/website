@@ -1,12 +1,17 @@
 package control;
 
 import entity.Ad;
+import lombok.Getter;
+import lombok.Setter;
 import service.AdFacade;
+import service.UserFacade;
 
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.SecurityContext;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
@@ -17,6 +22,10 @@ public class DataScrollerBean implements Serializable {
 
     @EJB
     private AdFacade adFacade;
+
+    @Inject
+    private SecurityContext securityContext;
+
     private List<Ad> ads;
 
     public List<Ad> getAds() {
@@ -43,5 +52,13 @@ public class DataScrollerBean implements Serializable {
             }
         });
     }
+
+    public List<Ad> getUserAds(){
+        String name = securityContext.getCallerPrincipal().getName();
+        ads = adFacade.findByName(name);
+
+        return ads;
+    }
+
 
 }
