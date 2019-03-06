@@ -1,16 +1,14 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+* {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+}
+
 :root {
-    --opacity: 0.6;
-    --background-opacity: 0.6;
-    --primary-color: rgba(172, 182, 229, var(--opacity));
-    --secondary-color: rgba(116, 235, 213, var(--opacity));
-    --primary-color-full-op: rgba(172, 182, 229, 1.0);
-    --secondary-color-full-op: rgba(116, 235, 213, 1.0);
     --text-color: rgba(86, 86, 86, 1.0);
-    --background-color: linear-gradient(rgba(172, 182, 229, var(--background-opacity)), rgba(116, 235, 213, var(--background-opacity)));
 }
 
 body {
-    background-image: var(--background-color) !important;
 }
 
 h1 {
@@ -18,13 +16,9 @@ h1 {
 }
 
 #submit-button {
-    background-image: linear-gradient(var(--primary-color), var(--secondary-color)) !important;
-    border: 1px solid var(--primary-color) !important;
 }
 
 #cancel-button {
-    background-image: linear-gradient(var(--primary-color), var(--secondary-color)) !important;
-    border: 1px solid var(--primary-color) !important;
 }
 
 .register-form {
@@ -38,8 +32,8 @@ h1 {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    background-image: linear-gradient(var(--secondary-color), var(--primary-color)) !important;
-    box-shadow: 2px 2px 50px rgba(255, 255, 255, 0.5);
+    border: 1px solid lightgrey;
+    box-shadow: 2px 2px 5px lightgrey;
 }
 
 .register-h1 {
@@ -98,7 +92,7 @@ h1 {
 }
 
 #input_CID-inputtext {
-    border-right: 1px dotted var(--primary-color-full-op);
+    border-right: 1px dotted lightgrey;
 }
 
 .role-type-p {
@@ -130,7 +124,3 @@ h1 {
     padding: 0 !important;
 }
 
-* {
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: lighter;
-}
