@@ -12,5 +12,21 @@
             <to-view-id>/authorized/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/register.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{registerBean.register}</from-action>
+            <from-outcome>Created</from-outcome>
+            <to-view-id>/registered.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/authorized/add_ad_wizard.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{adWizardBean.save}</from-action>
+            <from-outcome>Complete</from-outcome>
+            <to-view-id>/authorized/ad_list.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
 </faces-config>

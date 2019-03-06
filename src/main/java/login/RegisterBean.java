@@ -2,16 +2,22 @@ package login;
 
 import core.EmailTypes;
 import core.PasswordConstraints;
+import entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import net.bootsfaces.utils.FacesMessages;
+import org.omnifaces.util.Messages;
+import service.UserFacade;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,18 +25,21 @@ import java.util.Map;
 @Named("registerBean")
 @ViewScoped
 public class RegisterBean implements Serializable {
+
+    @EJB
+    private UserFacade userFacade;
+    @Inject
+    transient private Pbkdf2PasswordHash passwordHash;
+
     @Getter
     @Setter
     private Map<String, String> emails = new HashMap<>();
-
     @Getter
     @Setter
     private String CID;
-
     @Getter
     @Setter
     private String emailType;
-
     @Getter
     @Setter
     /*
@@ -41,7 +50,6 @@ public class RegisterBean implements Serializable {
     @Pattern(regexp = "^(?=.*[@#$%^&+=]).*$", message = "Password must contain at least one special character: @#$%^&+=")
     */
     private String password;
-
     @Getter
     @Setter
     private String confirmPassword;
@@ -55,12 +63,30 @@ public class RegisterBean implements Serializable {
         }
     }
 
-    public void register() {
+    public String register() {
         if (!isRegistered()) {
-            //TODO Register user
+            userFacade.create(makeUser());
+            Messages.addGlobal(Messages.createInfo("User Created"));
+            return "Created";
         } else {
             FacesMessages.fatal("CID already registered");
         }
+        return null;
+    }
+
+    private boolean isRegistered() {
+        return userFacade.getUserById(getUsername()) != null;
+    }
+
+    private String getUsername() {
+        return CID.concat(emailType);
+    }
+
+    private User makeUser() {
+        User user = new User();
+        user.setPassword(passwordHash.generate(password.toCharArray()));
+        user.setEmail(getUsername());
+        return user;
     }
 
     public void validatePassword(FacesContext context, UIComponent comp, Object value) {
@@ -82,10 +108,5 @@ public class RegisterBean implements Serializable {
         return password.toString().matches(regex);
     }
 
-    private boolean isRegistered() {
-        //TODO Check if user already exists
-
-        return true;
-    }
 
 }

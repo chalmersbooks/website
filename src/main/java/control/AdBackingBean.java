@@ -74,7 +74,15 @@ public class AdBackingBean implements Serializable {
     }
 
     private User fetchUser() {
-        return new User();
+
+        // TODO: Temporary for testing at the moment
+        // return real user later on
+
+        User u = new User();
+        u.setEmail("test@test.com");
+        u.setPassword("123");
+        return u;
+
     }
 
     public List<CourseCode> getCourseCodesFromBook(String ISBN) {

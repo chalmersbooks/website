@@ -23,8 +23,9 @@ public class Ad {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String imageURL;
-    // TODO: User here is temporary. Cascade should not be as this. Only for testing purposes.
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*// TODO: User here is temporary. Cascade should not be as this. Only for testing purposes.
+    @ManyToOne(cascade = CascadeType.ALL)*/
+    @ManyToOne
     private User user;
 
     private final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");

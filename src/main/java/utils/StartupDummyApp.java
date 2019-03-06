@@ -46,10 +46,11 @@ public class StartupDummyApp {
 
         // TODO: Setup the whole application with dummy data here....
 
-        addTestAccount();
+        //addTestAccount();
         //addTestBooks();
         //addTestCourseCodes();
-        addTestAds();
+        //addTestAds();
+
     }
 
     public void addTestAccount() {
@@ -85,6 +86,7 @@ public class StartupDummyApp {
         user.setEmail("slavnic@student.chalmers.se");
         user.setName("Sanjin");
         user.setPassword("password");
+        userFacade.create(user);
         return user;
     }
 
