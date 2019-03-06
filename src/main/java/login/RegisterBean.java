@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -100,6 +101,7 @@ public class RegisterBean implements Serializable {
     }
 
     private void invalidPasswordMessage(FacesContext context, UIComponent comp, String message) {
+        ((UIInput) comp).setValid(false);
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, message, null);
         context.addMessage(comp.getClientId(context), fm);
     }

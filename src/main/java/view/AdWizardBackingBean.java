@@ -1,4 +1,4 @@
-package control;
+package view;
 
 import core.AdBuilder;
 import core.MakingAd;
@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import org.omnifaces.util.Ajax;
-import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.FlowEvent;
 import service.AdFacade;
@@ -20,7 +19,6 @@ import service.UserFacade;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

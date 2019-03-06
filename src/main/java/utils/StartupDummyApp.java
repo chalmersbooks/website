@@ -49,7 +49,7 @@ public class StartupDummyApp {
         //addTestAccount();
         //addTestBooks();
         //addTestCourseCodes();
-        //addTestAds();
+        addTestAds();
 
     }
 
@@ -67,7 +67,7 @@ public class StartupDummyApp {
     public void addTestAds() {
         List<CourseCode> courseCodes;
         User user = buildRandomUser();
-        int n = 25;
+        int n = 100;
         for (int i = 0; i < n; i++) {
             courseCodes = new ArrayList<>();
             courseCodes.add(buildRandomCourseCode());

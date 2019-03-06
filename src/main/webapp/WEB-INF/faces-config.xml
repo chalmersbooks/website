@@ -25,7 +25,7 @@
         <navigation-case>
             <from-action>#{adWizardBean.save}</from-action>
             <from-outcome>Complete</from-outcome>
-            <to-view-id>/authorized/ad_list.xhtml</to-view-id>
+            <to-view-id>/ad_list.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
