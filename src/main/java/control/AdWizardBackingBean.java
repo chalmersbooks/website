@@ -92,7 +92,7 @@ public class AdWizardBackingBean implements Serializable {
         adFacade.create(makeAd());
         Messages.addGlobal(Messages.createInfo("Add created"));
 
-        return "Complete";
+        return "list_add.xhtml?faces-redirect=true";
 
     }
 

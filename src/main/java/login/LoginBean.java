@@ -53,8 +53,10 @@ public class LoginBean implements Serializable {
             email = "";
             password = "";
             FacesMessages.fatal("Wrong email or password");
+            return null;
+        } else {
+            return "index.xhtml?faces-redirect=true";
         }
-        return status;
     }
 
     private HttpServletRequest getHttpRequestFromFacesContext() {

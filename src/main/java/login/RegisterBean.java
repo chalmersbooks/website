@@ -67,7 +67,7 @@ public class RegisterBean implements Serializable {
         if (!isRegistered()) {
             userFacade.create(makeUser());
             Messages.addGlobal(Messages.createInfo("User Created"));
-            return "Created";
+            return "registered.xhtml?faces-redirect=true";
         } else {
             FacesMessages.fatal("CID already registered");
         }
