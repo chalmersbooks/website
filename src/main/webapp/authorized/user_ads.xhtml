@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+</h:head>
+
+<h:body>
+    <h:outputStylesheet name="css/ad_list.css"/>
+    <div id="ads">
+        <h:form>
+            <b:commandLink value="go back" href="index.xhtml"/>
+            <br/>
+
+            <p:dataScroller id="ads-scroller" value="#{dataScroller.userAds}" var="currentAd" chunkSize="10">
+
+                <f:facet name="header">
+                    <p:commandButton
+                            class="sort-ads-button"
+                            value="DATUM"
+                            icon="fa fa-fw fa-sort-numeric-asc"
+                            action="#{dataScroller.sort}"
+                            update="ads-scroller"/>
+                </f:facet>
+
+                <f:facet name="loader">
+                    <p:commandButton
+                            type="button"
+                            value="More"
+                            icon="pi pi-chevron-circle-down"/>
+                </f:facet>
+
+                <h:panelGrid columns="2" columnClasses="logo,detail">
+                    <p:graphicImage name="images/book.png"/>
+
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="CourseCode:"/>
+                            <h:outputText value="#{currentAd.date}" style="font-weight: bold"/>
+
+                            <h:outputText value="Name:"/>
+                            <h:outputText value="#{currentAd.book.name}" style="font-weight: bold"/>
+
+                            <h:outputText value="Price:"/>
+                            <h:outputText value="#{currentAd.price}" style="font-weight: bold"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+
+            </p:dataScroller>
+
+        </h:form>
+
+    </div>
+</h:body>
+
+</html>

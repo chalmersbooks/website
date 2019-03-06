@@ -2,6 +2,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:define name="content">
@@ -13,31 +14,40 @@
                         <b:modal title="Change Password" styleClass="modal"
                                  closable="false"
                                  closeOnEscape="true">
-                            <b:form>
-                                <h:panelGrid columns="1" id="passGrid" cellpadding="5">
+                            <b:form id="passGrid">
+                                <div>
                                     <b:row>
-                                        <h:outputLabel for="oldPassword" value="Old password: *"/>
-                                        <p:password id="oldPassword"
-                                                    value="#{profile.oldPassword}"
-                                                    required="true">
-                                        </p:password>
+                                        <b:inputSecret id="old-password"
+                                                       placeholder="Old password"
+                                                       fieldSize="lg"
+                                                       required="true"
+                                                       requiredMessage="Enter password"
+                                                       value="#{profile.oldPassword}">
+                                        </b:inputSecret>
                                     </b:row>
                                     <b:row>
-                                        <h:outputLabel for="newPassword" value="New password: *"/>
-                                        <p:password id="newPassword"
-                                                    value="#{profile.newPassword}"
-                                                    label="New password"
-                                                    required="true"
-                                                    match="repeatPassword">
-                                        </p:password>
+                                        <b:inputSecret id="new-password"
+                                                       placeholder="New password"
+                                                       fieldSize="lg"
+                                                       required="true"
+                                                       requiredMessage="Enter password"
+                                                       validator="#{registerBean.validatePassword}"
+                                                       value="#{profile.newPassword}">
+                                        </b:inputSecret>
                                     </b:row>
                                     <b:row>
-                                        <h:outputLabel for="repeatPassword" value="Repeat password: *"/>
-                                        <p:password id="repeatPassword"
-                                                    value="#{profile.repeatPassword}"
-                                                    label="Repeat password"
-                                                    required="true">
-                                        </p:password>
+                                        <b:inputSecret id="repeat-password"
+                                                       placeholder="Repeat password"
+                                                       fieldSize="lg"
+                                                       required="true"
+                                                       requiredMessage="Enter password"
+                                                       value="#{profile.repeatPassword}">
+                                        </b:inputSecret>
+                                        <b:message for="confirm-password" showIcon="false"/>
+                                        <o:validateEqual id="equal"
+                                                         components="new-password repeat-password"
+                                                         message="Passwords are not equal"
+                                                         showMessageFor="repeat-password"/>
                                     </b:row>
                                     <b:row>
                                         <b:column>
@@ -49,12 +59,15 @@
                                     </b:row>
                                     <b:fetchBeanInfos/>
                                     <b:messages id="messages" showDetail="true" autoUpdate="true"/>
-                                </h:panelGrid>
-                            </b:form>
-                        </b:modal>
-                    </b:listLinks>
-                </b:panel>
-            </b:column>
-        </b:container>
-    </ui:define>
-</ui:composition>
+                            </div>
+                        </b:form>
+                    </b:modal>
+                        <b:button href="user_ads.xhtml" value="See your active ads"/>
+                        <b:button href="user_info.xhtml" value="Edit personal information" disabled="true"/>
+                        <b:button href="index.xhtml" value="Go back"/>
+                </b:listLinks>
+            </b:panel>
+        </b:column>
+    </b:container>
+</ui:define>
+        </ui:composition>
