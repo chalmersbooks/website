@@ -7,7 +7,9 @@ import service.UserFacade;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.SecurityContext;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,6 +24,9 @@ public class IndexBackingBean implements Serializable {
 
     @EJB
     private UserFacade facade;
+
+    @Inject
+    private SecurityContext securityContext;
 
     @Setter
     private String soon = "Coming soon";
@@ -48,6 +53,14 @@ public class IndexBackingBean implements Serializable {
         }
 
         return "its not null!!! :D:D:D:D";
+    }
+
+    public boolean getUserLoggedIn() {
+        return securityContext.getCallerPrincipal() != null;
+    }
+
+    public void logout() {
+        log.info("LOGOUT MADDA FAKKA");
     }
 
 }

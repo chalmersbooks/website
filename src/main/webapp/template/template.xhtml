@@ -7,22 +7,21 @@
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>ChalmersBooks</title>
-    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="customStyling.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </h:head>
 
 <h:body>
-
-    <!-- TODO Maybe place menu here -->
-    <b:form>
-        <b:navBar brand="Chalmersbooks" brandHref="index.xhtml" inverse="true" position="top" sticky="true">
-            <b:navbarLinks pull="right">
-                <b:navLink value="Profile" href="authorized/profile.xhtml"/>
-                <b:commandLink value="Logout" action="#{logoutBean.logout}"/>
-            </b:navbarLinks>
-        </b:navBar>
-    </b:form>
-
+    <b:navBar brand="ChalmersBooks" brandHref="index.xhtml" inverse="true">
+        <b:navbarLinks pull="right">
+            <b:navLink value="Create Add" outcome="authorized/add_ad_wizard.xhtml"/>
+            <b:navLink value="Profile" outcome="authorized/profile.xhtml"/>
+            <b:navLink rendered="#{indexer.userLoggedIn}" value="Logout">
+                <f:ajax listener="#{indexer.logout}"/>
+            </b:navLink>
+            <b:navLink rendered="#{!indexer.userLoggedIn}" value="Login" outcome="login.xhtml"/>
+        </b:navbarLinks>
+    </b:navBar>
 
     <!-- Main content -->
     <b:container>
@@ -30,11 +29,19 @@
     </b:container>
 
     <!-- Footer -->
-    <div class="container">
-        <div class="text-center navbar-fixed-bottom">
-            <a href="https://github.com/chalmersbooks">
-                <i id="social-github" class="fa fa-github-square fa-5x social"/>
-            </a>
+    <style>
+
+    </style>
+    <div class="footer">
+        <div class="container">
+            <b:row>
+                <b:column span="5">
+                    <p>© Copyright 2019 Chalmersbooks</p>
+                </b:column>
+                <b:column span="6">
+                    <i id="social-github" class="fa fa-github-square fa-3x social" style="float: right;"/>
+                </b:column> 
+            </b:row>
         </div>
     </div>
 
