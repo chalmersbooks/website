@@ -14,6 +14,14 @@
 <h:body>
 
     <!-- TODO Maybe place menu here -->
+    <b:form>
+        <b:navBar brand="Chalmersbooks" brandHref="index.xhtml" inverse="true" position="top" sticky="true">
+            <b:navbarLinks pull="right">
+                <b:navLink value="Profile" href="authorized/profile.xhtml"/>
+                <b:commandLink value="Logout" action="#{logoutBean.logout}"/>
+            </b:navbarLinks>
+        </b:navBar>
+    </b:form>
 
 
     <!-- Main content -->

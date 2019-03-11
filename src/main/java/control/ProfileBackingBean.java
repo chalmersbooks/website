@@ -59,8 +59,8 @@ public class ProfileBackingBean implements Serializable {
     }
 
     public void applyChanges(){
+        System.out.println(userName);
         getCurrent().setName(userName);
         facade.edit(getCurrent());
-        System.out.println(userName);
     }
 }

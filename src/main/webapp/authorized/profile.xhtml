@@ -1,12 +1,12 @@
-<ui:composition template="../template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:b="http://bootsfaces.net/ui"
-                xmlns:o="http://omnifaces.org/ui"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="content">
-        <b:container>
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+    <ui:composition template="../template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml">
+        <ui:define name="content">
             <b:column span="3">
                 <b:panel look="primary" title="#{profile.userName}">
                     <b:listLinks>
@@ -52,16 +52,16 @@
                                     <b:row>
                                         <b:column>
                                             <b:button value="Cancel"
-                                                      dismiss="passModal"/>
+                                                      dismiss="modal"/>
                                             <b:commandButton value="Update password" look="success"
                                                              update="passGrid" action="#{profile.changePassword}"/>
                                         </b:column>
                                     </b:row>
                                     <b:fetchBeanInfos/>
                                     <b:messages id="messages" showDetail="true" autoUpdate="true"/>
-                            </div>
-                        </b:form>
-                    </b:modal>
+                                </div>
+                            </b:form>
+                        </b:modal>
                         <b:button href="user_ads.xhtml" value="See your active ads"/>
                         <b:button onclick="$('.infoModal').modal('show')" value="Edit personal information"/>
                         <b:modal id="infoModal"
@@ -78,7 +78,7 @@
                                 </b:row>
                                 <b:row>
                                     <b:button value="Cancel"
-                                              dismiss="infoModal"/>
+                                              dismiss="modal"/>
                                     <b:commandButton value="Update information"
                                                      look="success"
                                                      action="#{profile.applyChanges}"/>
@@ -87,9 +87,10 @@
                             </b:form>
                         </b:modal>
                         <b:button href="index.xhtml" value="Go back"/>
-                </b:listLinks>
-            </b:panel>
-        </b:column>
-    </b:container>
-</ui:define>
-        </ui:composition>
+                    </b:listLinks>
+                </b:panel>
+            </b:column>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
