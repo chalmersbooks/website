@@ -49,18 +49,20 @@ public class ProfileBackingBean implements Serializable {
 
 
     public boolean changePassword(){
+        User u = getCurrent();
         String pwhash = getCurrent().getPassword();
         if(passwordHash.verify(oldPassword.toCharArray(), pwhash)){
-            getCurrent().setPassword(passwordHash.generate(newPassword.toCharArray()));
-            facade.createOrUpdate(getCurrent());
+            u.setPassword(passwordHash.generate(newPassword.toCharArray()));
+            facade.createOrUpdate(u);
             return true;
         }
         return false;
     }
 
     public void applyChanges(){
+        User u = getCurrent();
         System.out.println(userName);
-        getCurrent().setName(userName);
-        facade.createOrUpdate(getCurrent());
+        u.setName(userName);
+        facade.createOrUpdate(u);
     }
 }
