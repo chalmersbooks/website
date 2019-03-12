@@ -25,7 +25,6 @@ public class CourseCodeFacade extends Facade<CourseCode> {
         super(CourseCode.class);
     }
 
-    // TODO: Can this look better?
     public CourseCode findById(String courseCode) {
         try {
             return em.createNamedQuery("CourseCode.findById", CourseCode.class)
@@ -36,11 +35,17 @@ public class CourseCodeFacade extends Facade<CourseCode> {
         }
     }
 
-    public List<CourseCode> findByBook(String isbn) {
+    public List<CourseCode> findByBookId(String isbn) {
         return em.createNamedQuery("CourseCode.findByBook", CourseCode.class)
                 .setParameter("isbn", isbn)
                 .getResultList();
 
+    }
+
+    public List<CourseCode> findByIds(List<String> codes) {
+        return em.createNamedQuery("CourseCode.findByIds", CourseCode.class)
+                .setParameter("listOfCodes", codes)
+                .getResultList();
     }
 
     private boolean containsBook(CourseCode cc, String isbn) {

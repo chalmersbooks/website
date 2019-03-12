@@ -18,13 +18,7 @@ public abstract class Facade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        EntityManager em = getEntityManager();
-        if (em == null) {
-            log.info("EntityManager is null inside Facade");
-        }
-        log.info("Adding {" + entity.toString() + "} to database!");
         getEntityManager().persist(entity);
-        log.info("Data added to database successful!");
     }
 
     public List<T> findAll() {
@@ -33,7 +27,7 @@ public abstract class Facade<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
 
-    public void edit(T entity){
+    public void createOrUpdate(T entity) {
         getEntityManager().merge(entity);
     }
 

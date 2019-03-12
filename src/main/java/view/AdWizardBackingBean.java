@@ -1,6 +1,10 @@
-package control;
+package view;
 
+import controll.BookController;
+import controll.CourseCodeController;
+import controll.UserController;
 import core.AdBuilder;
+import core.LoggedInUser;
 import core.MakingAd;
 import entity.Ad;
 import entity.Book;
@@ -10,21 +14,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import org.omnifaces.util.Ajax;
-import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.FlowEvent;
 import service.AdFacade;
-import service.BookFacade;
-import service.CourseCodeFacade;
-import service.UserFacade;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.enterprise.SecurityContext;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,10 +34,12 @@ import java.util.Map;
 @ViewScoped
 public class AdWizardBackingBean implements Serializable {
 
-    // TODO: Clean this class, ALOT!
-
     @Inject
-    private SecurityContext securityContext;
+    private BookController bookController;
+    @Inject
+    private CourseCodeController ccController;
+    @Inject
+    private UserController userController;
 
     @Inject
     private CourseCodeBackingBean ccBean;
@@ -47,13 +47,7 @@ public class AdWizardBackingBean implements Serializable {
     private BookBackingBean bookBean;
 
     @EJB
-    private CourseCodeFacade ccFacade;
-    @EJB
-    private UserFacade userFacade;
-    @EJB
     private AdFacade adFacade;
-    @EJB
-    private BookFacade bookFacade;
 
     @Getter
     @Setter
@@ -73,7 +67,7 @@ public class AdWizardBackingBean implements Serializable {
 
     @Getter
     @Setter
-    private String markedBook;
+    private String markedBookId;
 
     @PostConstruct
     public void init() {
@@ -106,53 +100,19 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private Book getCurrentBook() {
-        Book book = bookFacade.findById(ad.getBook().getIsbn());
-        if (book != null) {
-            if (book.equals(ad.getBook())) {
-                return book;
-            } else {
-                // TODO: This will give a server error. Getting here should probably not happen.
-                return null;
-            }
-        } else {
-            book = ad.getBook();
-            bookFacade.create(book);
-            return book;
-        }
+        bookController.createOrUpdate(ad.getBook());
+        return ad.getBook();
     }
 
     private List<CourseCode> convertCourseCodeTags() {
-        List<CourseCode> courseCodes = new ArrayList<>();
         String[] codes = ad.getShowableCourseCodes().replace(" ", "").split(",");
-        log.info("Showable courses are: " + ad.getShowableCourseCodes());
-        for (String code : codes) {
-            log.info("Current: " + code);
-            CourseCode cc = ccBean.getCourseCode(code);
-            if (cc == null) {
-                cc = makeCourseCode(code);
-            }
-            if (!cc.getBooks().contains(ad.getBook())) {
-                cc.getBooks().add(ad.getBook());
-                // TODO: Implement this method
-                // ccFacade.update(cc);
-            }
-        }
-        return courseCodes;
-    }
-
-    private CourseCode makeCourseCode(String codeName) {
-        CourseCode cc = new CourseCode();
-        cc.setCourseCode(codeName);
-        List<Book> books = new ArrayList<>();
-        books.add(ad.getBook());
-        cc.setBooks(books);
-
-        ccFacade.create(cc);
-        return cc;
+        ccController.createOrUpdate(codes, ad.getBook());
+        return ccController.getCourseCodesFromStrings(codes);
     }
 
     private User fetchUser() {
-        return userFacade.getUserById(securityContext.getCallerPrincipal().getName());
+        LoggedInUser user = userController.getUser();
+        return userController.convertToEntity(user);
     }
 
     public String onFlowProcess(FlowEvent event) {
@@ -183,13 +143,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private CourseCode getCurrentCourseCode() {
-        // TODO: Should we make new query instead of looping list?
-        for (CourseCode cc : allCourseCodes) {
-            if (cc.getCourseCode().equals(ad.getCourseCode())) {
-                return cc;
-            }
-        }
-        return null;
+        return ccController.get(ad.getCourseCode());
     }
 
     private String makeShowableName(Book book) {
@@ -201,16 +155,11 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     public void fillFormWithMarkedBook() {
-        if (markedBook == null) {
-            log.info("Marked book is null for some reason...");
+        if (this.markedBookId == null) {
             return;
         }
-        Book markedBook = fetchMarkedBook();
+        Book markedBook = bookController.get(this.markedBookId);
         ad.setBook(markedBook);
-    }
-
-    private Book fetchMarkedBook() {
-        return bookBean.getbyId(markedBook);
     }
 
     private void setInformationFields() {
@@ -221,12 +170,9 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private List<CourseCode> getCourseCodesFromCurrentBook() {
-        List<CourseCode> courseCodes = new ArrayList<>();
-        for (CourseCode cc : allCourseCodes) {
-            if (cc.getBooks().contains(ad.getBook())) {
-                courseCodes.add(cc);
-            }
-        }
+
+        List<CourseCode> courseCodes = ccController.getCourseCodesFromBook(ad.getBook());
+
         if (!containsGivenCourse(ad.getCourseCode(), courseCodes)) {
             CourseCode cc = new CourseCode();
             List<Book> books = new ArrayList<>();

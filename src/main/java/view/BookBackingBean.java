@@ -1,4 +1,4 @@
-package control;
+package view;
 
 import core.BookBuilder;
 import entity.Book;

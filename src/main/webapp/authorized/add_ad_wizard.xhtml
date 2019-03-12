@@ -59,7 +59,7 @@
                         <p:messages/>
                         <p>Found books</p>
                         <h:panelGrid columns="1" id="BooksButtons">
-                            <b:radiobutton value="#{adWizardBean.markedBook}"
+                            <b:radiobutton value="#{adWizardBean.markedBookId}"
                                            required="false" update="BookForm">
                                 <f:ajax execute="BooksButtons" listener="#{adWizardBean.fillFormWithMarkedBook}"/>
                                 <f:selectItems value="#{adWizardBean.booksBelongingToCourseCode}"/>

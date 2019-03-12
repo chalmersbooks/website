@@ -1,29 +1,26 @@
 package login;
 
-
+import lombok.extern.java.Log;
 import org.omnifaces.util.Faces;
-
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
 import java.io.Serializable;
 
-@Named("logoutBean")
-@SessionScoped
+@Log
+@Named
+@ViewScoped
 public class LogoutBean implements Serializable {
 
-    @Inject
-    private SecurityContext securityContext;
-
-    public String logout() throws ServletException {
-        if (securityContext.getCallerPrincipal() == null) {
-            return null;
-        } else {
+    public String logout() {
+        try {
             Faces.logout();
-            return "login.xhtml";
+            return "";
+        } catch (ServletException se) {
+            log.info("Something went wrong when logging out");
         }
-
+        //Faces.getExternalContext().invalidateSession();
+        //return "index.xhtml?faces-redirect=true";
+        return "";
     }
 }

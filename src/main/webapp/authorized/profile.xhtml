@@ -1,96 +1,91 @@
-<html xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:body>
-    <ui:composition template="../template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml">
-        <ui:define name="content">
-            <b:column span="3">
-                <b:panel look="primary" title="#{profile.userName}">
-                    <b:listLinks>
-                        <b:button onclick="$('.passModal').modal('show')" value="Change Password"/>
-                        <b:modal id="passModal" title="Change Password" styleClass="passModal"
-                                 closable="false"
-                                 closeOnEscape="true">
-                            <b:form id="passGrid">
-                                <div>
-                                    <b:row>
-                                        <b:inputSecret id="old-password"
-                                                       placeholder="Old password *"
-                                                       fieldSize="lg"
-                                                       required="true"
-                                                       requiredMessage="Enter password"
-                                                       value="#{profile.oldPassword}">
-                                        </b:inputSecret>
-                                    </b:row>
-                                    <b:row>
-                                        <b:inputSecret id="new-password"
-                                                       placeholder="New password *"
-                                                       fieldSize="lg"
-                                                       required="true"
-                                                       requiredMessage="Enter password"
-                                                       validator="#{registerBean.validatePassword}"
-                                                       value="#{profile.newPassword}">
-                                        </b:inputSecret>
-                                    </b:row>
-                                    <b:row>
-                                        <b:inputSecret id="repeat-password"
-                                                       placeholder="Repeat password *"
-                                                       fieldSize="lg"
-                                                       required="true"
-                                                       requiredMessage="Enter password"
-                                                       value="#{profile.repeatPassword}">
-                                        </b:inputSecret>
-                                        <b:message for="confirm-password" showIcon="false"/>
-                                        <o:validateEqual id="equal"
-                                                         components="new-password repeat-password"
-                                                         message="Passwords are not equal"
-                                                         showMessageFor="repeat-password"/>
-                                    </b:row>
-                                    <b:row>
-                                        <b:column>
-                                            <b:button value="Cancel"
-                                                      dismiss="modal"/>
-                                            <b:commandButton value="Update password" look="success"
-                                                             update="passGrid" action="#{profile.changePassword}"/>
-                                        </b:column>
-                                    </b:row>
-                                    <b:fetchBeanInfos/>
-                                    <b:messages id="messages" showDetail="true" autoUpdate="true"/>
-                                </div>
-                            </b:form>
-                        </b:modal>
-                        <b:button href="user_ads.xhtml" value="See your active ads"/>
-                        <b:button onclick="$('.infoModal').modal('show')" value="Edit personal information"/>
-                        <b:modal id="infoModal"
-                                 title="Edit personal information"
-                                 closable="false"
-                                 closeOnEscape="true"
-                                 styleClass="infoModal">
-                            <b:form id="infoForm">
+<ui:composition template="../template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <b:column span="3">
+            <b:panel look="primary" title="#{profile.userName}">
+                <b:listLinks>
+                    <b:button onclick="$('.passModal').modal('show')" value="Change Password"/>
+                    <b:modal id="passModal" title="Change Password" styleClass="passModal"
+                             closable="false"
+                             closeOnEscape="true">
+                        <b:form id="passGrid">
+                            <div>
                                 <b:row>
-                                    <b:inputText label="Name"
-                                                 id="Name"
-                                                 value="#{profile.userName}"
-                                                 fieldSize="lg"/>
+                                    <b:inputSecret id="old-password"
+                                                   placeholder="Old password *"
+                                                   fieldSize="lg"
+                                                   required="true"
+                                                   requiredMessage="Enter password"
+                                                   value="#{profile.oldPassword}">
+                                    </b:inputSecret>
                                 </b:row>
                                 <b:row>
-                                    <b:button value="Cancel"
-                                              dismiss="modal"/>
-                                    <b:commandButton value="Update information"
-                                                     look="success"
-                                                     action="#{profile.applyChanges}"/>
+                                    <b:inputSecret id="new-password"
+                                                   placeholder="New password *"
+                                                   fieldSize="lg"
+                                                   required="true"
+                                                   requiredMessage="Enter password"
+                                                   validator="#{registerBean.validatePassword}"
+                                                   value="#{profile.newPassword}">
+                                    </b:inputSecret>
                                 </b:row>
+                                <b:row>
+                                    <b:inputSecret id="repeat-password"
+                                                   placeholder="Repeat password *"
+                                                   fieldSize="lg"
+                                                   required="true"
+                                                   requiredMessage="Enter password"
+                                                   value="#{profile.repeatPassword}">
+                                    </b:inputSecret>
+                                    <b:message for="confirm-password" showIcon="false"/>
+                                    <o:validateEqual id="equal"
+                                                     components="new-password repeat-password"
+                                                     message="Passwords are not equal"
+                                                     showMessageFor="repeat-password"/>
+                                </b:row>
+                                <b:row>
+                                    <b:column>
+                                        <b:button value="Cancel"
+                                                  dismiss="modal"/>
+                                        <b:commandButton value="Update password" look="success"
+                                                         update="passGrid" action="#{profile.changePassword}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:fetchBeanInfos/>
+                                <b:messages id="messages" showDetail="true" autoUpdate="true"/>
+                            </div>
+                        </b:form>
+                    </b:modal>
+                    <b:button href="user_ads.xhtml" value="See your active ads"/>
+                    <b:button onclick="$('.infoModal').modal('show')" value="Edit personal information"/>
+                    <b:modal id="infoModal"
+                             title="Edit personal information"
+                             closable="false"
+                             closeOnEscape="true"
+                             styleClass="infoModal">
+                        <b:form id="infoForm">
+                            <b:row>
+                                <b:inputText label="Name"
+                                             id="Name"
+                                             value="#{profile.userName}"
+                                             fieldSize="lg"/>
+                            </b:row>
+                            <b:row>
+                                <b:button value="Cancel"
+                                          dismiss="modal"/>
+                                <b:commandButton value="Update information"
+                                                 look="success"
+                                                 action="#{profile.applyChanges}"/>
+                            </b:row>
 
-                            </b:form>
-                        </b:modal>
-                        <b:button href="index.xhtml" value="Go back"/>
-                    </b:listLinks>
-                </b:panel>
-            </b:column>
-        </ui:define>
-    </ui:composition>
-</h:body>
-</html>
+                        </b:form>
+                    </b:modal>
+                    <b:button href="index.xhtml" value="Go back"/>
+                </b:listLinks>
+            </b:panel>
+        </b:column>
+    </ui:define>
+</ui:composition>

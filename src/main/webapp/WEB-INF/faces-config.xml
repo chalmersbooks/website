@@ -4,12 +4,15 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <navigation-rule>
+    <!--TODO: Saving these if everything stops working after changes-->
+
+    <!-- * Login/Register Stuff * -->
+   <!-- <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{loginBean.login}</from-action>
             <from-outcome>valid</from-outcome>
-            <to-view-id>/authorized/index.xhtml</to-view-id>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -20,13 +23,25 @@
             <to-view-id>/registered.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
+    &lt;!&ndash; * Add ads stuff * &ndash;&gt;
     <navigation-rule>
         <from-view-id>/authorized/add_ad_wizard.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{adWizardBean.save}</from-action>
             <from-outcome>Complete</from-outcome>
-            <to-view-id>/authorized/ad_list.xhtml</to-view-id>
+            <to-view-id>/ad_list.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
+    &lt;!&ndash; * Pure navigation stuff * &ndash;&gt;
+    <navigation-rule>
+        <from-view-id>/template/template.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigationBean.goTo}</from-action>
+            <from-outcome>create</from-outcome>
+            <to-view-id>/authorized/add_ad_wizard.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>-->
 
 </faces-config>

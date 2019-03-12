@@ -1,4 +1,4 @@
-package control;
+package view;
 
 import entity.User;
 import lombok.Getter;
@@ -52,7 +52,7 @@ public class ProfileBackingBean implements Serializable {
         String pwhash = getCurrent().getPassword();
         if(passwordHash.verify(oldPassword.toCharArray(), pwhash)){
             getCurrent().setPassword(passwordHash.generate(newPassword.toCharArray()));
-            facade.edit(getCurrent());
+            facade.createOrUpdate(getCurrent());
             return true;
         }
         return false;
@@ -61,6 +61,6 @@ public class ProfileBackingBean implements Serializable {
     public void applyChanges(){
         System.out.println(userName);
         getCurrent().setName(userName);
-        facade.edit(getCurrent());
+        facade.createOrUpdate(getCurrent());
     }
 }

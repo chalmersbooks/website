@@ -1,4 +1,4 @@
-package control;
+package view;
 
 import entity.Book;
 import entity.CourseCode;
@@ -62,7 +62,7 @@ public class CourseCodeBackingBean implements Serializable {
     }
 
     public List<CourseCode> getCourseCodesFromBook(String isbn) {
-        return ccFacade.findByBook(isbn);
+        return ccFacade.findByBookId(isbn);
     }
 
     public List<CourseCode> getAll() {
