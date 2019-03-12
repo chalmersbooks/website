@@ -12,16 +12,18 @@
 </h:head>
 
 <h:body>
-    <b:navBar brand="ChalmersBooks" brandHref="index.xhtml" inverse="true">
-        <b:navbarLinks pull="right">
-            <b:navLink value="Create Add" outcome="authorized/add_ad_wizard.xhtml"/>
-            <b:navLink value="Profile" outcome="authorized/profile.xhtml"/>
-            <b:navLink rendered="#{indexer.userLoggedIn}" value="Logout">
-                <f:ajax listener="#{logoutBean.logout}"/>
-            </b:navLink>
-            <b:navLink rendered="#{!indexer.userLoggedIn}" value="Login" outcome="login.xhtml"/>
-        </b:navbarLinks>
-    </b:navBar>
+    <b:form>
+        <b:navBar brand="ChalmersBooks" brandHref="index.xhtml" inverse="true" id="menu">
+            <b:navbarLinks pull="right">
+                <b:navLink value="Create Add" outcome="authorized/add_ad_wizard.xhtml"/>
+                <b:navLink value="Profile" outcome="authorized/profile.xhtml"/>
+                <b:navCommandLink rendered="#{userController.loggedIn}" value="Logout"
+                                  action="#{logoutBean.logout}" update="menu" outcome="index.xhtml">
+                </b:navCommandLink>
+                <b:navLink rendered="#{!userController.loggedIn}" value="Login" outcome="login.xhtml"/>
+            </b:navbarLinks>
+        </b:navBar>
+    </b:form>
 
     <!-- Main content -->
     <b:container>
@@ -40,7 +42,7 @@
                 </b:column>
                 <b:column span="6">
                     <i id="social-github" class="fa fa-github-square fa-3x social" style="float: right;"/>
-                </b:column> 
+                </b:column>
             </b:row>
         </div>
     </div>

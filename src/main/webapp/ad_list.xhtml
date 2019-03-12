@@ -1,82 +1,74 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <h:outputStylesheet name="css/ad_list.css"/>
+        <div id="ads">
+            <h:form>
+                <p:dataScroller id="ads-scroller"
+                                var="currentAd"
+                                chunkSize="10"
+                                lazy="true"
+                                rendered="true"
+                                value="#{adListBackingBean.lazyDataModel}">
+                    <f:facet name="header">
+                        <b:commandLink value="go back" href="index.xhtml"/>
+                        <!--
+                           <p:commandButton
+                                   class="sort-ads-button"
+                                   value="Price"
+                                   update="ads-scroller"/>
+                           <p:commandButton
+                                   class="sort-ads-button"
+                                   value="Date"
+                                   update="ads-scroller"/>
+                       </f:facet>
+                       <f:facet name="loader">
+                           <p:commandButton
+                                   type="button"
+                                   value="More"
+                                   icon="pi pi-chevron-circle-down">
+                           </p:commandButton>
+                       </f:facet>
+                       -->
+                    </f:facet>
 
-<h:head>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"/>
-</h:head>
+                    <h:panelGrid columns="2" columnClasses="logo,detail">
+                        <p:graphicImage name="images/book.png"/>
 
-<h:body>
-    <h:outputStylesheet name="css/ad_list.css"/>
-    <div id="ads">
-        <h:form>
-            <p:dataScroller id="ads-scroller"
-                            var="currentAd"
-                            chunkSize="10"
-                            lazy="true"
-                            rendered="true"
-                            value="#{adListBackingBean.lazyDataModel}">
-                <f:facet name="header">
-                    <b:commandLink value="go back" href="index.xhtml"/>
-                    <!--
-                       <p:commandButton
-                               class="sort-ads-button"
-                               value="Price"
-                               update="ads-scroller"/>
-                       <p:commandButton
-                               class="sort-ads-button"
-                               value="Date"
-                               update="ads-scroller"/>
-                   </f:facet>
-                   <f:facet name="loader">
-                       <p:commandButton
-                               type="button"
-                               value="More"
-                               icon="pi pi-chevron-circle-down">
-                       </p:commandButton>
-                   </f:facet>
-                   -->
-                </f:facet>
+                        <p:outputPanel>
+                            <b:panelGrid columns="2">
+                                <b:column class="ad-left-column" span="2">
+                                    <b:row class="coursecode-row">
+                                        <!--<ui:repeat value="#{adBean.getCourseCodesFromBook(currentAd.book.isbn)}"
+                                                   var="courses">
+                                            <b:badge value="#{courses.courseCode}"/>
+                                        </ui:repeat>
+                                        -->
+                                    </b:row>
+                                    <b:row class="book-name-row">
+                                        <h:outputText value="#{currentAd.book.name}"/>
+                                    </b:row>
+                                    <b:row class="ad-price-row">
+                                        <h:outputText value="#{currentAd.price} kr"/>
+                                    </b:row>
+                                </b:column>
+                                <b:column class="ad-right-column">
+                                    <b:row class="ad-date-row">
+                                        <h:outputText value="#{currentAd.formatedDate}"/>
+                                    </b:row>
+                                </b:column>
+                            </b:panelGrid>
+                        </p:outputPanel>
 
-                <h:panelGrid columns="2" columnClasses="logo,detail">
-                    <p:graphicImage name="images/book.png"/>
+                    </h:panelGrid>
 
-                    <p:outputPanel>
-                        <b:panelGrid columns="2">
-                            <b:column class="ad-left-column" span="2">
-                                <b:row class="coursecode-row">
-                                    <!--<ui:repeat value="#{adBean.getCourseCodesFromBook(currentAd.book.isbn)}"
-                                               var="courses">
-                                        <b:badge value="#{courses.courseCode}"/>
-                                    </ui:repeat>
-                                    -->
-                                </b:row>
-                                <b:row class="book-name-row">
-                                    <h:outputText value="#{currentAd.book.name}"/>
-                                </b:row>
-                                <b:row class="ad-price-row">
-                                    <h:outputText value="#{currentAd.price} kr"/>
-                                </b:row>
-                            </b:column>
-                            <b:column class="ad-right-column">
-                                <b:row class="ad-date-row">
-                                    <h:outputText value="#{currentAd.formatedDate}"/>
-                                </b:row>
-                            </b:column>
-                        </b:panelGrid>
-                    </p:outputPanel>
+                </p:dataScroller>
 
-                </h:panelGrid>
-
-            </p:dataScroller>
-
-        </h:form>
-    </div>
-</h:body>
-</html>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
