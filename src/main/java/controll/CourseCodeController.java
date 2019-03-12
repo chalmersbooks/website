@@ -73,4 +73,8 @@ public class CourseCodeController implements Serializable {
         return ccFacade.findByBookId(book.getIsbn());
     }
 
+    public List<CourseCode> getAllCourseCodes() {
+        return ccFacade.findAll();
+    }
+
 }

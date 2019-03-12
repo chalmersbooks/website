@@ -1,8 +1,6 @@
 package view;
 
-import controll.BookController;
-import controll.CourseCodeController;
-import controll.UserController;
+import controll.*;
 import core.AdBuilder;
 import core.LoggedInUser;
 import core.MakingAd;
@@ -40,19 +38,8 @@ public class AdWizardBackingBean implements Serializable {
     private CourseCodeController ccController;
     @Inject
     private UserController userController;
-
     @Inject
-    private CourseCodeBackingBean ccBean;
-    @Inject
-    private BookBackingBean bookBean;
-
-    @EJB
-    private AdFacade adFacade;
-
-    @Getter
-    @Setter
-    private String nothing = "nothing";
-    private boolean skip;
+    private AdController adController;
 
     @Getter
     @Setter
@@ -71,7 +58,7 @@ public class AdWizardBackingBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        allCourseCodes = ccBean.getAll();
+        allCourseCodes = ccController.getAllCourseCodes();
         booksBelongingToCourseCode = new HashMap<>();
 
         ad = new MakingAd();
@@ -82,12 +69,14 @@ public class AdWizardBackingBean implements Serializable {
     public String save() {
 
         // TODO: guess we need som error check here if add is incomplete or something...
-
-        adFacade.create(makeAd());
-        Messages.addGlobal(Messages.createInfo("Add created"));
-
-        return "list_add.xhtml?faces-redirect=true";
-
+        try {
+            adController.createAd(makeAd());
+            Messages.addGlobal(Messages.createInfo("Add created"));
+            return "list_add.xhtml?faces-redirect=true";
+        } catch (AdException ae) {
+            Messages.addGlobal(Messages.createError(ae.getMessage()));
+        }
+        return "";
     }
 
     private Ad makeAd() {
@@ -196,6 +185,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private void setShowableCourseCodes() {
+        // TODO: This is not working as intended...
         String courseCodes = "";
         for (CourseCode cc : ad.getCourseCodes()) {
             courseCodes = courseCodes.concat(cc.getCourseCode()
@@ -203,28 +193,5 @@ public class AdWizardBackingBean implements Serializable {
         }
         ad.setShowableCourseCodes(courseCodes);
     }
-
-
-    /**
-     * OLD CODE FROM EXAMPLE. SAVED IF NEEDED OR AS INSPIRATION
-     */
-
-    public boolean isSkip() {
-        return skip;
-    }
-
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-
-    public String OLDonFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        } else {
-            return event.getNewStep();
-        }
-    }
-
 
 }
