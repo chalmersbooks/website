@@ -18,14 +18,14 @@
             <b:commandLink value="go back" href="profile.xhtml"/>
             <br/>
 
-            <p:dataScroller id="ads-scroller" value="#{dataScroller.userAds}" var="currentAd" chunkSize="10">
+            <p:dataScroller id="ads-scroller" value="#{adListController.userAds}" var="currentAd" chunkSize="10">
 
                 <f:facet name="header">
                     <p:commandButton
                             class="sort-ads-button"
                             value="DATUM"
                             icon="fa fa-fw fa-sort-numeric-asc"
-                            action="#{dataScroller.sort}"
+                            action="#{adListController.sort}"
                             update="ads-scroller"/>
                 </f:facet>
 
