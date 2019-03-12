@@ -24,7 +24,7 @@ import java.util.Map;
 public class AdListBackingBean implements Serializable {
 
     @Inject
-    AdListController adListController;
+    private AdListController adListController;
 
     @Getter
     @Setter

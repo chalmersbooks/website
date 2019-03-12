@@ -7,11 +7,14 @@ import service.AdFacade;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+@Named
 @RequestScoped
-public class AdListController {
+public class AdListController implements Serializable {
 
     @EJB
     private AdFacade adFacade;
