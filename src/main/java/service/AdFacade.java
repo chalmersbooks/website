@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.Map;
 
-
 @Stateless
 public class AdFacade extends Facade<Ad> {
 
