@@ -1,8 +1,5 @@
 package login;
 
-
-
-
 import org.omnifaces.util.Faces;
 
 import javax.enterprise.context.SessionScoped;
@@ -16,6 +13,6 @@ public class LogoutBean implements Serializable {
 
     public String logout() throws ServletException {
         Faces.logout();
-        return "login.xhtml";
+        return "login.xhtml?faces-redirect=true";
     }
 }

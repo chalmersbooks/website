@@ -17,7 +17,7 @@
             <b:navLink value="Create Add" outcome="authorized/add_ad_wizard.xhtml"/>
             <b:navLink value="Profile" outcome="authorized/profile.xhtml"/>
             <b:navLink rendered="#{indexer.userLoggedIn}" value="Logout">
-                <f:ajax listener="#{indexer.logout}"/>
+                <f:ajax listener="#{logoutBean.logout}"/>
             </b:navLink>
             <b:navLink rendered="#{!indexer.userLoggedIn}" value="Login" outcome="login.xhtml"/>
         </b:navbarLinks>
