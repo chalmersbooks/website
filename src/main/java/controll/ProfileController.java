@@ -1,5 +1,6 @@
 package controll;
 
+import model.bean.UserComponent;
 import view.ProfileBackingBean;
 
 import javax.faces.view.ViewScoped;

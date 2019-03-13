@@ -2,14 +2,15 @@ package login;
 
 import lombok.extern.java.Log;
 import org.omnifaces.util.Faces;
-import javax.faces.view.ViewScoped;
+
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import java.io.Serializable;
 
 @Log
 @Named
-@ViewScoped
+@RequestScoped
 public class LogoutBean implements Serializable {
 
     public String logout() {
