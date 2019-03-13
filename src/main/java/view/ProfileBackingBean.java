@@ -1,68 +1,42 @@
 package view;
 
+import controll.UserComponent;
 import entity.User;
+import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import service.UserFacade;
 
-import javax.ejb.EJB;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.enterprise.SecurityContext;
-import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.io.Serializable;
 
-@Named("profile")
+@Data
 @ViewScoped
+@Named("profile")
 public class ProfileBackingBean implements Serializable {
 
-    @EJB
-    private UserFacade facade;
-
     @Inject
-    private SecurityContext securityContext;
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private UserComponent userComponent;
 
-    @Inject
-    transient private Pbkdf2PasswordHash passwordHash;
-
-    @Getter
-    @Setter
     private String oldPassword;
-    @Getter
-    @Setter
     private String newPassword;
-    @Getter
-    @Setter
-    private String repeatPassword;
-    @Setter
-    private String userName;
+    private User user;
+    private boolean disabled;
 
 
-    private User getCurrent(){
-        return facade.getUserById(securityContext.getCallerPrincipal().getName());
+    @PostConstruct
+    private void init(){
+        user = userComponent.getUser();
     }
 
-    public String getUserName(){
-        return getCurrent().getName();
+    public void setDisabled(){
+
     }
 
-
-    public boolean changePassword(){
-        User u = getCurrent();
-        String pwhash = getCurrent().getPassword();
-        if(passwordHash.verify(oldPassword.toCharArray(), pwhash)){
-            u.setPassword(passwordHash.generate(newPassword.toCharArray()));
-            facade.createOrUpdate(u);
-            return true;
-        }
-        return false;
-    }
-
-    public void applyChanges(){
-        User u = getCurrent();
-        System.out.println(userName);
-        u.setName(userName);
-        facade.createOrUpdate(u);
-    }
 }
+
