@@ -30,7 +30,7 @@ public class AdFormBackingBean implements Serializable {
     @Inject
     private BookComponent bookComponent;
     @Inject
-    private UserController userController;
+    private UserComponent userComponent;
 
     @Getter
     @Setter
@@ -74,6 +74,6 @@ public class AdFormBackingBean implements Serializable {
     }
 
     private User fetchUser() {
-        return userController.convertToEntity(userController.getUser());
+        return userComponent.getUser();
     }
 }

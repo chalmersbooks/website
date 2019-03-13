@@ -3,14 +3,11 @@ package view;
 import controll.*;
 import lombok.Data;
 import model.AdBuilder;
-import model.LoggedInUser;
 import model.MakingAd;
 import entity.Ad;
 import entity.Book;
 import entity.CourseCode;
 import entity.User;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.java.Log;
 import model.bean.BookComponent;
 import model.bean.CourseCodeComponent;
@@ -37,7 +34,7 @@ public class AdWizardBackingBean implements Serializable {
     @Inject
     private CourseCodeComponent ccComponent;
     @Inject
-    private UserController userController;
+    private UserComponent userComponent;
 
     private List<CourseCode> allCourseCodes;
     private Map<String, String> booksBelongingToCourseCode;
@@ -75,8 +72,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private User fetchUser() {
-        LoggedInUser user = userController.getUser();
-        return userController.convertToEntity(user);
+        return userComponent.getUser();
     }
 
     public void setFoundBooks() {

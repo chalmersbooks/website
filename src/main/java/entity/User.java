@@ -18,5 +18,13 @@ public class User {
     private String name;
     @NotNull
     private String password;
+    private String phoneNumber;
+    private String address;
+
+    public void setAll(User u){
+        this.name = u.name;
+        this.phoneNumber = u.phoneNumber;
+        this.address = u.address;
+    }
 
 }
