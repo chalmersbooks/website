@@ -1,13 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <!--TODO: Saving these if everything stops working after changes-->
-
     <!-- * Login/Register Stuff * -->
-   <!-- <navigation-rule>
+    <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{loginBean.login}</from-action>
@@ -19,29 +17,27 @@
         <from-view-id>/register.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{registerBean.register}</from-action>
-            <from-outcome>Created</from-outcome>
+            <from-outcome>registered</from-outcome>
             <to-view-id>/registered.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
-    &lt;!&ndash; * Add ads stuff * &ndash;&gt;
+    <!-- * Add ads stuff * -->
     <navigation-rule>
         <from-view-id>/authorized/add_ad_wizard.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{adWizardBean.save}</from-action>
-            <from-outcome>Complete</from-outcome>
+            <from-action>#{adWizardController.save}</from-action>
+            <from-outcome>saved</from-outcome>
             <to-view-id>/ad_list.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
-    &lt;!&ndash; * Pure navigation stuff * &ndash;&gt;
     <navigation-rule>
-        <from-view-id>/template/template.xhtml</from-view-id>
+        <from-view-id>/authorized/add_ad_form.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{navigationBean.goTo}</from-action>
-            <from-outcome>create</from-outcome>
-            <to-view-id>/authorized/add_ad_wizard.xhtml</to-view-id>
+            <from-action>#{adFormController.save}</from-action>
+            <from-outcome>saved</from-outcome>
+            <to-view-id>/ad_list.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>-->
+    </navigation-rule>
 
 </faces-config>

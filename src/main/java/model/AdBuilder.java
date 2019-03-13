@@ -1,4 +1,4 @@
-package core;
+package model;
 
 import entity.Ad;
 import entity.Book;

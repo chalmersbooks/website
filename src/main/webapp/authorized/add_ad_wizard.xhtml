@@ -44,7 +44,7 @@
 
             <p:growl id="growl" sticky="true" showDetail="true"/>
 
-            <p:wizard flowListener="#{adWizardBean.onFlowProcess}">
+            <p:wizard flowListener="#{adWizardController.onFlowProcess}">
                 <p:tab id="course" title="Course">
                     <p:panel header="What course(course Code) do the book belong to?">
                         <p:messages/>
@@ -75,11 +75,6 @@
                             <h:outputText value="ISBN: "/>
                             <p:inputText value="#{adWizardBean.ad.book.isbn}" required="true"/>
                         </h:panelGrid>
-                        <!--<h:panelGrid columns="2" columnClasses="label, value">
-                        <h:outputText value="Street: "/>
-                        <p:inputText value="#{adWizardBean.nothing}"/>
--->
-                        <!--</h:panelGrid>-->
                     </p:panel>
                 </p:tab>
 
@@ -108,7 +103,7 @@
                         </h:panelGrid>
                         <p:separator/>
                         <p>Image coming later!</p>
-                        <p:commandButton value="Create Ad" action="#{adWizardBean.save}" update="growl"
+                        <p:commandButton value="Create Ad" action="#{adWizardController.save}" update="growl"
                                          process="@this"/>
                     </p:panel>
                 </p:tab>

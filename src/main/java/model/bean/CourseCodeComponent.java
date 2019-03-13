@@ -1,20 +1,18 @@
-package controll;
+package model.bean;
 
 import entity.Book;
 import entity.CourseCode;
 import service.CourseCodeFacade;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.enterprise.context.Dependent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Named
-@RequestScoped
-public class CourseCodeController implements Serializable {
+@Dependent
+public class CourseCodeComponent implements Serializable {
 
     @EJB
     private CourseCodeFacade ccFacade;
@@ -26,6 +24,17 @@ public class CourseCodeController implements Serializable {
     public List<CourseCode> getCourseCodesFromStrings(String[] codes) {
         return getCourseCodesFromStrings(Arrays.asList(codes));
 
+    }
+
+    public CourseCode getCourseCodeFromString(String code) {
+        String[] asArray = {code};
+        // TODO: Check nullpointer?
+        return getCourseCodesFromStrings(asArray).get(0);
+    }
+
+    public void createOrUpdate(String code, Book book) {
+        String[] asArray = {code};
+        createOrUpdate(asArray, book);
     }
 
     public void createOrUpdate(String[] codes, Book book) {
@@ -73,4 +82,7 @@ public class CourseCodeController implements Serializable {
         return ccFacade.findByBookId(book.getIsbn());
     }
 
+    public List<CourseCode> getAllCourseCodes() {
+        return ccFacade.findAll();
+    }
 }

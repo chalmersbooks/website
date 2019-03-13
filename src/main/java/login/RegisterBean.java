@@ -1,7 +1,7 @@
 package login;
 
-import core.EmailTypes;
-import core.PasswordConstraints;
+import model.EmailTypes;
+import model.PasswordConstraints;
 import entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,7 +68,7 @@ public class RegisterBean implements Serializable {
         if (!isRegistered()) {
             userFacade.create(makeUser());
             Messages.addGlobal(Messages.createInfo("User Created"));
-            return "registered.xhtml?faces-redirect=true";
+            return "registered";
         } else {
             FacesMessages.fatal("CID already registered");
         }

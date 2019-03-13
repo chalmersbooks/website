@@ -1,24 +1,19 @@
 package view;
 
-import controll.BookController;
-import controll.CourseCodeController;
-import controll.UserComponent;
-import core.AdBuilder;
-import core.MakingAd;
+import controll.*;
+import lombok.Data;
+import model.AdBuilder;
+import model.MakingAd;
 import entity.Ad;
 import entity.Book;
 import entity.CourseCode;
 import entity.User;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.java.Log;
+import model.bean.BookComponent;
+import model.bean.CourseCodeComponent;
 import org.omnifaces.util.Ajax;
-import org.omnifaces.util.Messages;
-import org.primefaces.event.FlowEvent;
-import service.AdFacade;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,48 +24,26 @@ import java.util.List;
 import java.util.Map;
 
 @Log
+@Data
 @Named("adWizardBean")
 @ViewScoped
 public class AdWizardBackingBean implements Serializable {
 
     @Inject
-    private BookController bookController;
+    private BookComponent bookComponent;
     @Inject
-    private CourseCodeController ccController;
+    private CourseCodeComponent ccComponent;
     @Inject
     private UserComponent userComponent;
 
-    @Inject
-    private CourseCodeBackingBean ccBean;
-    @Inject
-    private BookBackingBean bookBean;
-
-    @EJB
-    private AdFacade adFacade;
-
-    @Getter
-    @Setter
-    private String nothing = "nothing";
-    private boolean skip;
-
-    @Getter
-    @Setter
     private List<CourseCode> allCourseCodes;
-    @Getter
-    @Setter
     private Map<String, String> booksBelongingToCourseCode;
-
-    @Getter
-    @Setter
     private MakingAd ad;
-
-    @Getter
-    @Setter
     private String markedBookId;
 
     @PostConstruct
     public void init() {
-        allCourseCodes = ccBean.getAll();
+        allCourseCodes = ccComponent.getAllCourseCodes();
         booksBelongingToCourseCode = new HashMap<>();
 
         ad = new MakingAd();
@@ -78,18 +51,7 @@ public class AdWizardBackingBean implements Serializable {
 
     }
 
-    public String save() {
-
-        // TODO: guess we need som error check here if add is incomplete or something...
-
-        adFacade.create(makeAd());
-        Messages.addGlobal(Messages.createInfo("Add created"));
-
-        return "list_add.xhtml?faces-redirect=true";
-
-    }
-
-    private Ad makeAd() {
+    public Ad makeAd() {
         return new AdBuilder()
                 .setBook(getCurrentBook())
                 .setCourseCodes(convertCourseCodeTags())
@@ -99,34 +61,21 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private Book getCurrentBook() {
-        bookController.createOrUpdate(ad.getBook());
+        bookComponent.createOrUpdate(ad.getBook());
         return ad.getBook();
     }
 
     private List<CourseCode> convertCourseCodeTags() {
         String[] codes = ad.getShowableCourseCodes().replace(" ", "").split(",");
-        ccController.createOrUpdate(codes, ad.getBook());
-        return ccController.getCourseCodesFromStrings(codes);
+        ccComponent.createOrUpdate(codes, ad.getBook());
+        return ccComponent.getCourseCodesFromStrings(codes);
     }
 
     private User fetchUser() {
         return userComponent.getUser();
     }
 
-    public String onFlowProcess(FlowEvent event) {
-        String nextStep = event.getNewStep();
-
-        log.info("Next step is -> " + nextStep);
-        if (nextStep.equals("book")) {
-            setFoundBooks();
-        } else if (nextStep.equals("information")) {
-            setInformationFields();
-        }
-
-        return nextStep;
-    }
-
-    private void setFoundBooks() {
+    public void setFoundBooks() {
         log.info("Setting found books");
         CourseCode cc = getCurrentCourseCode();
         if (cc == null) {
@@ -141,7 +90,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private CourseCode getCurrentCourseCode() {
-        return ccController.get(ad.getCourseCode());
+        return ccComponent.get(ad.getCourseCode());
     }
 
     private String makeShowableName(Book book) {
@@ -156,11 +105,11 @@ public class AdWizardBackingBean implements Serializable {
         if (this.markedBookId == null) {
             return;
         }
-        Book markedBook = bookController.get(this.markedBookId);
+        Book markedBook = bookComponent.get(this.markedBookId);
         ad.setBook(markedBook);
     }
 
-    private void setInformationFields() {
+    public void setInformationFields() {
         List<CourseCode> courseCodesBelongingToCurrentBook = getCourseCodesFromCurrentBook();
         ad.setCourseCodes(courseCodesBelongingToCurrentBook);
         setShowableCourseCodes();
@@ -169,7 +118,7 @@ public class AdWizardBackingBean implements Serializable {
 
     private List<CourseCode> getCourseCodesFromCurrentBook() {
 
-        List<CourseCode> courseCodes = ccController.getCourseCodesFromBook(ad.getBook());
+        List<CourseCode> courseCodes = ccComponent.getCourseCodesFromBook(ad.getBook());
 
         if (!containsGivenCourse(ad.getCourseCode(), courseCodes)) {
             CourseCode cc = new CourseCode();
@@ -194,6 +143,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private void setShowableCourseCodes() {
+        // TODO: This is not working as intended...
         String courseCodes = "";
         for (CourseCode cc : ad.getCourseCodes()) {
             courseCodes = courseCodes.concat(cc.getCourseCode()
@@ -201,28 +151,5 @@ public class AdWizardBackingBean implements Serializable {
         }
         ad.setShowableCourseCodes(courseCodes);
     }
-
-
-    /**
-     * OLD CODE FROM EXAMPLE. SAVED IF NEEDED OR AS INSPIRATION
-     */
-
-    public boolean isSkip() {
-        return skip;
-    }
-
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-
-    public String OLDonFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        } else {
-            return event.getNewStep();
-        }
-    }
-
 
 }
