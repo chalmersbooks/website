@@ -1,48 +1,30 @@
-package login;
+package view;
 
-import model.EmailTypes;
-import model.PasswordConstraints;
-import entity.User;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import net.bootsfaces.utils.FacesMessages;
-import org.omnifaces.util.Messages;
-import service.UserFacade;
+import model.EmailTypes;
+import model.PasswordConstraints;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-@Named("registerBean")
+@Data
+@Named
 @ViewScoped
-public class RegisterBean implements Serializable {
+public class RegisterBackingBean implements Serializable {
 
-    @EJB
-    private UserFacade userFacade;
-    @Inject
-    transient private Pbkdf2PasswordHash passwordHash;
-
-    @Getter
-    @Setter
     private Map<String, String> emails = new HashMap<>();
-    @Getter
-    @Setter
     private String CID;
-    @Getter
-    @Setter
     private String emailType;
-    @Getter
-    @Setter
     /*
     @Pattern(regexp = "^(?=.{8,}).*$", message = "Password must contain at least 8 character")
     @Pattern(regexp = "^(?=.*[a-z]).*$", message = "Password must contain at least one lower character")
@@ -51,43 +33,14 @@ public class RegisterBean implements Serializable {
     @Pattern(regexp = "^(?=.*[@#$%^&+=]).*$", message = "Password must contain at least one special character: @#$%^&+=")
     */
     private String password;
-    @Getter
-    @Setter
     private String confirmPassword;
 
-
     @PostConstruct
-    public void setup() {
+    public void init() {
         EmailTypes[] re = EmailTypes.values();
         for (EmailTypes temp : re) {
             emails.put(temp.getType(), temp.getEmail());
         }
-    }
-
-    public String register() {
-        if (!isRegistered()) {
-            userFacade.create(makeUser());
-            Messages.addGlobal(Messages.createInfo("User Created"));
-            return "registered";
-        } else {
-            FacesMessages.fatal("CID already registered");
-        }
-        return null;
-    }
-
-    private boolean isRegistered() {
-        return userFacade.getUserById(getUsername()) != null;
-    }
-
-    private String getUsername() {
-        return CID.concat(emailType);
-    }
-
-    private User makeUser() {
-        User user = new User();
-        user.setPassword(passwordHash.generate(password.toCharArray()));
-        user.setEmail(getUsername());
-        return user;
     }
 
     public void validatePassword(FacesContext context, UIComponent comp, Object value) {
@@ -110,5 +63,7 @@ public class RegisterBean implements Serializable {
         return password.toString().matches(regex);
     }
 
-
+    public String getUsername() {
+        return CID.concat(emailType);
+    }
 }

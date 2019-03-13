@@ -1,6 +1,5 @@
 package view;
 
-import controll.*;
 import model.AdBuilder;
 import entity.Ad;
 import entity.Book;
@@ -11,6 +10,7 @@ import lombok.Setter;
 import lombok.extern.java.Log;
 import model.bean.BookComponent;
 import model.bean.CourseCodeComponent;
+import model.bean.UserComponent;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
