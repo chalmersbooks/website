@@ -2,9 +2,8 @@ package view;
 
 import controll.BookController;
 import controll.CourseCodeController;
-import controll.UserController;
+import controll.UserComponent;
 import core.AdBuilder;
-import core.LoggedInUser;
 import core.MakingAd;
 import entity.Ad;
 import entity.Book;
@@ -39,7 +38,7 @@ public class AdWizardBackingBean implements Serializable {
     @Inject
     private CourseCodeController ccController;
     @Inject
-    private UserController userController;
+    private UserComponent userComponent;
 
     @Inject
     private CourseCodeBackingBean ccBean;
@@ -111,8 +110,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private User fetchUser() {
-        LoggedInUser user = userController.getUser();
-        return userController.convertToEntity(user);
+        return userComponent.getUser();
     }
 
     public String onFlowProcess(FlowEvent event) {

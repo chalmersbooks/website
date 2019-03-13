@@ -21,7 +21,7 @@ public class AdListController implements Serializable {
     private AdFacade adFacade;
 
     @Inject
-    private UserController userController;
+    private UserComponent userComponent;
 
     public List<Ad> getAds(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
         return adFacade.getAds(first, pageSize, sortField, sortOrder, filters);
@@ -32,7 +32,7 @@ public class AdListController implements Serializable {
     }
 
     public List<Ad> getUserAds() {
-        return adFacade.findByName(userController.getUser().getEmail());
+        return adFacade.findByName(userComponent.getUser().getEmail());
     }
 
     public void sort() {
