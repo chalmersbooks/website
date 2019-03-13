@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.java.Log;
 import net.bootsfaces.utils.FacesMessages;
 import org.omnifaces.util.Faces;
+import org.omnifaces.util.FacesLocal;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
@@ -55,7 +56,7 @@ public class LoginBean implements Serializable {
             FacesMessages.fatal("Wrong email or password");
             return null;
         } else {
-            return "index.xhtml?faces-redirect=true";
+            return "valid";
         }
     }
 

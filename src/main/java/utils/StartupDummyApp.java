@@ -1,7 +1,7 @@
 package utils;
 
-import core.AdBuilder;
-import core.BookBuilder;
+import model.AdBuilder;
+import model.BookBuilder;
 import entity.Ad;
 import entity.Book;
 import entity.CourseCode;
@@ -17,11 +17,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @Startup
 @Singleton

@@ -1,4 +1,4 @@
-package controll;
+package model.bean;
 
 import entity.Book;
 import service.BookFacade;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class BookController implements Serializable {
+public class BookComponent implements Serializable {
 
     @EJB
     private BookFacade bookFacade;

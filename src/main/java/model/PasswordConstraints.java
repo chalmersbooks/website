@@ -1,4 +1,4 @@
-package core;
+package model;
 
 public enum PasswordConstraints {
     MIN("^(?=.{8,}).*$", "Password must contain at least 8 character"),

@@ -1,6 +1,6 @@
 package controll;
 
-import core.LoggedInUser;
+import model.LoggedInUser;
 import entity.User;
 import service.UserFacade;
 

@@ -1,0 +1,31 @@
+<ui:composition template="../template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <b:container>
+
+            <b:form>
+                <p>Course Code</p>
+                <b:inputText value="#{adFormBean.courseCode}" placeholder="DAT076"/>
+                <p>Book Name</p>
+                <b:inputText value="#{adFormBean.book.name}" placeholder="How to make a website 101"/>
+                <p>Author</p>
+                <b:inputText value="#{adFormBean.book.authors}" placeholder="Group 13"/>
+                <p>ISBN</p>
+                <b:inputText value="#{adFormBean.book.isbn}" placeholder="xxxxxxxxxxxxx"/>
+                <p>Volume</p>
+                <b:inputText value="#{adFormBean.book.edition}" placeholder="1"/>
+                <p>Price</p>
+                <b:inputText value="#{adFormBean.price}" placeholder="123"/>
+                <b:commandLink value="add ad" action="#{adFormController.save}"/>
+                <br/>
+                <b:commandLink value="go back" href="index.xhtml" />
+            </b:form>
+
+            <br/>
+
+        </b:container>
+    </ui:define>
+</ui:composition>

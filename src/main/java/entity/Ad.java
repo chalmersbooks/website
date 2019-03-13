@@ -1,6 +1,8 @@
 package entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.text.DateFormat;
@@ -12,6 +14,8 @@ import java.util.List;
 @Entity
 @NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.user.email = :name")
 public class Ad {
+
+    // TODO: Replace AdBuilder with builder from this...
 
     @Id
     @GeneratedValue
