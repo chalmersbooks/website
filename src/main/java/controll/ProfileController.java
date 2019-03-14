@@ -1,5 +1,7 @@
 package controll;
 
+import entity.User;
+import service.UserFacade;
 import view.ProfileBackingBean;
 
 import javax.faces.view.ViewScoped;
@@ -15,13 +17,15 @@ public class ProfileController implements Serializable {
     private ProfileBackingBean pbb;
 
     @Inject
-    private UserComponent userComponent;
+    private UserFacade userFacade;
 
-    public boolean changePassword(){
-        return userComponent.changePassword(pbb.getOldPassword(), pbb.getNewPassword());
+
+    public boolean changePassword() {
+        return pbb.getUserComponent().changePassword(pbb.getOldPassword(), pbb.getNewPassword());
     }
 
-    public void applyChanges(){
-        userComponent.updateInfo(pbb.getUser());
+    public void applyChanges() {
+        User u = pbb.getUser();
+        userFacade.createOrUpdate(u);
     }
 }

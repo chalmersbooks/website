@@ -1,82 +1,82 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"/>
-</h:head>
 
-<h:body>
-    <h:outputStylesheet name="css/ad_list.css"/>
-    <div id="ads">
-        <h:form>
-            <p:dataScroller id="ads-scroller"
-                            var="currentAd"
-                            chunkSize="10"
-                            lazy="true"
-                            rendered="true"
-                            value="#{adListBackingBean.lazyDataModel}">
-                <f:facet name="header">
-                    <b:commandLink value="go back" href="index.xhtml"/>
-                    <!--
-                       <p:commandButton
-                               class="sort-ads-button"
-                               value="Price"
-                               update="ads-scroller"/>
-                       <p:commandButton
-                               class="sort-ads-button"
-                               value="Date"
-                               update="ads-scroller"/>
-                   </f:facet>
-                   <f:facet name="loader">
-                       <p:commandButton
-                               type="button"
-                               value="More"
-                               icon="pi pi-chevron-circle-down">
-                       </p:commandButton>
-                   </f:facet>
-                   -->
-                </f:facet>
+    <ui:define name="content">
+        <h:form id="form">
+            <p:dataView var="ad" value="#{adListBackingBean.ads}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
-                <h:panelGrid columns="2" columnClasses="logo,detail">
-                    <p:graphicImage name="images/book.png"/>
+                <p:dataViewGridItem>
+                    <p:panel header="#{ad.id}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
 
-                    <p:outputPanel>
-                        <b:panelGrid columns="2">
-                            <b:column class="ad-left-column" span="2">
-                                <b:row class="coursecode-row">
-                                    <!--<ui:repeat value="#{adBean.getCourseCodesFromBook(currentAd.book.isbn)}"
-                                               var="courses">
-                                        <b:badge value="#{courses.courseCode}"/>
-                                    </ui:repeat>
-                                    -->
-                                </b:row>
-                                <b:row class="book-name-row">
-                                    <h:outputText value="#{currentAd.book.name}"/>
-                                </b:row>
-                                <b:row class="ad-price-row">
-                                    <h:outputText value="#{currentAd.price} kr"/>
-                                </b:row>
-                            </b:column>
-                            <b:column class="ad-right-column">
-                                <b:row class="ad-date-row">
-                                    <h:outputText value="#{currentAd.formatedDate}"/>
-                                </b:row>
-                            </b:column>
-                        </b:panelGrid>
-                    </p:outputPanel>
 
-                </h:panelGrid>
+                            <h:outputText value="#{ad.book.name}"/>
 
-            </p:dataScroller>
+                            <p:commandLink update=":form:adDetail" oncomplete="PF('adDialog').show()"
+                                           title="View Detail">
+                                <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                <f:setPropertyActionListener value="#{ad}" target="#{adListBackingBean.modalAd}"/>
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataViewGridItem>
 
+                <p:dataViewListItem>
+                    <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+
+
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Title:"/>
+                                <h:outputText value="#{ad.book.name}" style="font-weight: bold"/>
+
+                                <h:outputText value="Price:"/>
+                                <h:outputText value="#{ad.price}kr" style="font-weight: bold"/>
+
+                                <h:outputText value="Date added:"/>
+                                <h:outputText value="#{ad.formatedDate}" style="font-weight: bold"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+
+                        <p:commandLink update=":form:adDetail" oncomplete="PF('adDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
+                            <f:setPropertyActionListener value="#{ad}" target="#{adListBackingBean.modalAd}"/>
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:dataViewListItem>
+            </p:dataView>
+
+            <p:dialog header="#{adListBackingBean.modalAd.book.name}" widgetVar="adDialog" modal="true"  showEffect="fade" hideEffect="fade"
+                      resizable="false" closeOnEscape="true" closable="true" draggable="false">
+                <p:outputPanel id="adDetail" style="text-align:center; color: black">
+                    <p:panelGrid columns="2" rendered="#{not empty adListBackingBean.modalAd}"
+                                 columnClasses="label,value">
+                        <f:facet name="header">
+                           <!-- <p:graphicImage name="images/book.png"/> -->
+                        </f:facet>
+
+                        <h:outputText value="Seller" style="color: black"/>
+                        <h:outputText value="#{adListBackingBean.modalAd.user.name}"/>
+
+                        <h:outputText value="e-mail:" style="color: black"/>
+                        <h:outputText value="#{adListBackingBean.modalAd.user.email}"/>
+
+                        <h:outputText value="Phone" style="color: black"/>
+                        <h:outputText value="$#{adListBackingBean.modalAd.user.phoneNumber}"/>
+
+                        <h:outputText value="Price:" style="color: black"/>
+                        <h:outputText value="#{adListBackingBean.modalAd.price}"/>
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
         </h:form>
-    </div>
-</h:body>
-</html>
+    </ui:define>
+</ui:composition>

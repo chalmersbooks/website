@@ -36,7 +36,7 @@ public class UserComponent implements Serializable {
 
 
     public boolean changePassword(String oldPassword, String newPassword){
-        User u = userFacade.getUserById(securityContext.getCallerPrincipal().getName());
+        User u = getUser();
         String pwhash = u.getPassword();
         if(passwordHash.verify(oldPassword.toCharArray(), pwhash)){
             u.setPassword(passwordHash.generate(newPassword.toCharArray()));
@@ -44,11 +44,6 @@ public class UserComponent implements Serializable {
             return true;
         }
         return false;
-    }
-
-    public void updateInfo(User u){
-        User tmp = userFacade.getUserById(securityContext.getCallerPrincipal().getName());
-        tmp.setAll(u);
     }
 
 }

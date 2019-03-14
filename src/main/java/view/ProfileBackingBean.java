@@ -19,7 +19,6 @@ import java.io.Serializable;
 public class ProfileBackingBean implements Serializable {
 
     @Inject
-    @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private UserComponent userComponent;
 
