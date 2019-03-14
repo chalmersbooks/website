@@ -16,7 +16,7 @@
                      required="true"
                      requiredMessage="Enter CID"
                      maxlength="10"
-                     value="#{registerBean.CID}">
+                     value="#{registerBackingBean.CID}">
             <f:facet name="append">
                 <p class="email-type-p">
                     #{registerBackingBean.emailType}
@@ -70,7 +70,10 @@
                          look="danger btn-block"
                          value="Cancel"
                          iconAwesome="fa-close"
-                         size="lg"/>
+                         size="lg"
+                         action="#{registerController.cancel}">
+            <f:ajax/><!-- Using this row to cancle form execution-->
+        </b:commandButton>
         <b:growl id="growl"
                  globalOnly="true"
                  showDetail="true"
