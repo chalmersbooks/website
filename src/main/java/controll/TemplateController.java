@@ -1,4 +1,4 @@
-package login;
+package controll;
 
 import lombok.extern.java.Log;
 import org.omnifaces.util.Faces;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Log
 @Named
 @RequestScoped
-public class LogoutBean implements Serializable {
+public class TemplateController implements Serializable {
 
     public String logout() {
         try {

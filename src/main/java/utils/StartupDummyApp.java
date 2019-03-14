@@ -56,6 +56,8 @@ public class StartupDummyApp {
         User u = new User();
         u.setEmail("test@test.com");
         u.setName("test testsson");
+        u.setAddress("asd");
+        u.setPhoneNumber("1234");
         /*u.setPassword("password");*/
         u.setPassword(passwordHash.generate("password".toCharArray()));
 
@@ -84,6 +86,8 @@ public class StartupDummyApp {
         user.setEmail("slavnic@student.chalmers.se");
         user.setName("Sanjin");
         user.setPassword(passwordHash.generate("password".toCharArray()));
+        user.setAddress("asd");
+        user.setPhoneNumber("1234");
         userFacade.create(user);
         return user;
     }

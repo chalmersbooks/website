@@ -8,9 +8,14 @@ import view.LoginBackingBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.authentication.mechanism.http.CustomFormAuthenticationMechanismDefinition;
+import javax.security.enterprise.authentication.mechanism.http.LoginToContinue;
 import java.io.Serializable;
 
 @Log
+@CustomFormAuthenticationMechanismDefinition(
+        loginToContinue = @LoginToContinue()
+)
 @Named
 @RequestScoped
 public class LoginController implements Serializable {
@@ -32,6 +37,10 @@ public class LoginController implements Serializable {
         } else {
             return "valid";
         }
+    }
+
+    public String register() {
+        return "register";
     }
 
 }
