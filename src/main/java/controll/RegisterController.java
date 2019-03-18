@@ -4,7 +4,6 @@ import entity.User;
 import login.PendingAccountBean;
 import lombok.extern.java.Log;
 import model.bean.UserComponent;
-import net.bootsfaces.utils.FacesMessages;
 import org.omnifaces.util.Messages;
 import service.UserFacade;
 import utils.EmailClient;
@@ -34,16 +33,16 @@ public class RegisterController implements Serializable {
 
     public String register() {
         if (isPending()) {
-            FacesMessages.fatal("Cid is pending activations. Check your email");
+            Messages.addGlobalError("Cid is pending activations. Check your email.");
             return "";
         }
         if (isRegistered()) {
-            FacesMessages.fatal("CID already registered");
+            Messages.addGlobalError("CID already registered.");
             return "";
         }
 
         User user = userComponent.makeUser(
-                backingBean.getUsername(),
+                backingBean.getUsername().toLowerCase(),
                 backingBean.getPassword()
         );
 
@@ -59,7 +58,7 @@ public class RegisterController implements Serializable {
     }
 
     private boolean isPending() {
-        return pendingAccountBean.isPending(backingBean.getUsername());
+        return pendingAccountBean.isPending(backingBean.getUsername().toLowerCase());
     }
 
     private void sendRegistrationEmail(User user) {

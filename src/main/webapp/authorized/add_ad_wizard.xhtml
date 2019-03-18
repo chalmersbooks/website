@@ -80,13 +80,14 @@
 
                 <p:tab id="information" title="Information">
                     <p:panel header="Information">
+                        <p:messages/>
                         <h:panelGrid columns="2">
                             <h:outputText value="Price: "/>
-                            <p:inputText value="#{adWizardBean.ad.price}" required="true"/>
+                            <b:inputText value="#{adWizardBean.ad.price}" required="true"/>
                             <h:outputText value="Course Codes "/>
                             <b:inputText value="#{adWizardBean.ad.showableCourseCodes}"
                                          tags="true"
-                                         placeholder="Hit return to add new code"
+                                         required="true"
                                          style-class="tags"/>
                             <script>
                                 $('.tags').tagsinput('refresh');
@@ -104,7 +105,7 @@
                         <p:separator/>
                         <p>Image coming later!</p>
                         <p:commandButton value="Create Ad" action="#{adWizardController.save}" update="growl"
-                                         process="@this"/>
+                                         process="@form"/>
                     </p:panel>
                 </p:tab>
             </p:wizard>

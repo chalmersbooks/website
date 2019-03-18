@@ -29,7 +29,7 @@ public class PendingAccountBean implements Serializable {
 
     public boolean isPending(String username) {
         User user = new User();
-        user.setEmail(username);
+        user.setEmail(username.toLowerCase());
         user.setPassword("");
         return accounts.containsKey(user);
     }
@@ -37,6 +37,7 @@ public class PendingAccountBean implements Serializable {
     public void activate(String hash) {
         User user = accounts.getKey(hash);
         userFacade.create(user);
+        accounts.remove(user);
     }
 
     public String getActivationHash(User user) {

@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.email = :email")
 @Data
 @Entity
+@EqualsAndHashCode(of = "email")
 public class User {
 
     @Id

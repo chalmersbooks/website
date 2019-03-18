@@ -66,7 +66,15 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private List<CourseCode> convertCourseCodeTags() {
+        log.info("Codes are: " + ad.getShowableCourseCodes());
         String[] codes = ad.getShowableCourseCodes().replace(" ", "").split(",");
+
+        log.info("Codes to convert are:");
+        for (String s : codes) {
+            log.info(s);
+        }
+        log.info("End of codes");
+
         ccComponent.createOrUpdate(codes, ad.getBook());
         return ccComponent.getCourseCodesFromStrings(codes);
     }
@@ -81,9 +89,7 @@ public class AdWizardBackingBean implements Serializable {
         if (cc == null) {
             return;
         }
-        log.info("Found books are:");
         for (Book b : cc.getBooks()) {
-            log.info(b.getName());
             booksBelongingToCourseCode.put(makeShowableName(b), b.getIsbn());
         }
         Ajax.update("BooksButtons");
