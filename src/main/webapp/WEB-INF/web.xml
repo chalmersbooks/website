@@ -4,7 +4,7 @@
     <display-name>Archetype Created Web Application</display-name>
 
     <welcome-file-list>
-        <welcome-file>login.xhtml</welcome-file>
+        <welcome-file>ad_list.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>
         <param-name>primefaces.THEME</param-name>

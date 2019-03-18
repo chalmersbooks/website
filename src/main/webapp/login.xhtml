@@ -1,58 +1,63 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
-<h:head>
-    <h:outputStylesheet name="css/login.css"/>
-</h:head>
-<b:container>
-    <h1 class="sign-in-h1">ChalmersBooks</h1>
-    <h:form styleClass="sign-in-form" prependId="false">
-        <h2 class="sign-in-h2">Sign in</h2>
-        <b:inputText id="email"
-                     placeholder="Email address"
-                     fieldSize="lg"
-                     required="true"
-                     requiredMessage="Enter email"
-                     value="#{loginBackingBean.email}">
-            <f:facet name="prepend">
-                <b:icon name="user"/>
-            </f:facet>
-        </b:inputText>
-        <b:message for="email"
-                   showIcon="false"/>
-        <b:inputSecret id="login-password"
-                       placeholder="Password"
-                       fieldSize="lg"
-                       required="true"
-                       requiredMessage="Enter password"
-                       value="#{loginBackingBean.password}">
-            <f:facet name="prepend">
-                <b:iconAwesome name="key"/>
-            </f:facet>
-        </b:inputSecret>
-        <b:message for="login-password"
-                   showIcon="false"/>
-        <b:messages class="wrong-message"
-                    globalOnly="true"
-                    showDetail="true"
-                    severity="fatal"
-                    showIcon="false"/>
-        <b:commandButton id="sign-in-button"
-                         look="success btn-block"
-                         value="Sign In"
-                         icon="log-in"
-                         size="lg"
-                         update="@form"
-                         action="#{loginController.login}"/>
-        <b:commandButton id="register-button"
-                         look="primary btn-block"
-                         value="Register"
-                         iconAwesome="fa-edit"
-                         size="lg"
-                         action="#{loginController.register}">
-            <f:ajax/><!-- Using this row to cancle form execution-->
-        </b:commandButton>
-    </h:form>
-</b:container>
-</html>
+<ui:composition template="template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="content">
+        <h:outputStylesheet name="login.css" library="css"/>
+        <b:container>
+            <h1 class="sign-in-h1">ChalmersBooks</h1>
+            <h:form styleClass="sign-in-form" prependId="false">
+                <h2 class="sign-in-h2">Sign in</h2>
+                <b:inputText id="email"
+                             placeholder="Email address"
+                             fieldSize="lg"
+                             required="true"
+                             requiredMessage="Enter email"
+                             value="#{loginBackingBean.email}">
+                    <f:facet name="prepend">
+                        <b:icon name="user"/>
+                    </f:facet>
+                </b:inputText>
+                <b:message for="email"
+                           showIcon="false"/>
+                <b:inputSecret id="login-password"
+                               placeholder="Password"
+                               fieldSize="lg"
+                               required="true"
+                               requiredMessage="Enter password"
+                               value="#{loginBackingBean.password}">
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key"/>
+                    </f:facet>
+                </b:inputSecret>
+                <b:message for="login-password"
+                           showIcon="false"/>
+                <b:messages class="wrong-message"
+                            globalOnly="true"
+                            showDetail="true"
+                            severity="fatal"
+                            showIcon="false"/>
+                <b:commandButton id="sign-in-button"
+                                 look="success btn-block"
+                                 value="Sign In"
+                                 icon="log-in"
+                                 size="lg"
+                                 update="@form"
+                                 action="#{loginController.login}"/>
+                <b:commandButton id="register-button"
+                                 look="primary btn-block"
+                                 value="Register"
+                                 iconAwesome="fa-edit"
+                                 size="lg"
+                                 action="#{loginController.register}">
+                    <f:ajax/><!-- Using this row to cancle form execution-->
+                </b:commandButton>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>

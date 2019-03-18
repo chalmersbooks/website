@@ -1,80 +1,85 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:b="http://bootsfaces.net/ui">
-<h:head>
-</h:head>
-<h:outputStylesheet name="css/register.css"/>
-<b:container>
-    <h1 class="register-h1">ChalmersBooks</h1>
-    <h:form styleClass="register-form" prependId="false">
-        <h2 class="register-h2">Register</h2>
-        <b:inputText id="CID-inputtext"
-                     placeholder="CID"
-                     fieldSize="lg"
-                     required="true"
-                     requiredMessage="Enter CID"
-                     maxlength="10"
-                     value="#{registerBackingBean.CID}">
-            <f:facet name="append">
-                <p class="email-type-p">
-                    #{registerBackingBean.emailType}
-                </p>
-            </f:facet>
-            <f:ajax/>
-        </b:inputText>
-        <b:message for="CID-inputtext" showIcon="false"/>
-        <p class="role-type-p">What's your role at Chalmers?</p>
-        <b:row styleClass="radiobutton-row" prependId="false">
-            <b:radiobutton styleClass="email-radiobutton"
-                           id="roles-radiobutton"
-                           prependId="false"
-                           update="CID-inputtext"
-                           required="true"
-                           requiredMessage="Choose a role"
-                           value="#{registerBackingBean.emailType}">
-                <f:selectItems value="#{registerBackingBean.emails}"/>
-            </b:radiobutton>
-        </b:row>
-        <b:message for="roles-radiobutton" showIcon="false"/>
-        <b:inputSecret id="register-password"
-                       placeholder="Password"
-                       fieldSize="lg"
-                       required="true"
-                       requiredMessage="Enter password"
-                       tooltip="Example: Password123@"
-                       validator="#{registerBackingBean.validatePassword}"
-                       value="#{registerBackingBean.password}">
-        </b:inputSecret>
-        <b:message for="register-password" showIcon="false"/>
-        <b:inputSecret id="confirm-password"
-                       placeholder="Confirm password"
-                       fieldSize="lg"
-                       required="true"
-                       requiredMessage="Confirm password"
-                       value="#{registerBackingBean.confirmPassword}">
-        </b:inputSecret>
-        <b:message for="confirm-password" showIcon="false"/>
-        <o:validateEqual id="equal"
-                         components="register-password confirm-password"
-                         message="Passwords are not equal"
-                         showMessageFor="confirm-password"/>
-        <b:commandButton id="submit-button"
-                         look="success btn-block"
-                         value="Submit"
-                         iconAwesome="fa-edit"
-                         size="lg"
-                         action="#{registerController.register}"/>
-        <b:commandButton id="cancel-button"
-                         look="danger btn-block"
-                         value="Cancel"
-                         iconAwesome="fa-close"
-                         size="lg"
-                         action="#{registerController.cancel}">
-            <f:ajax/><!-- Using this row to cancle form execution-->
-        </b:commandButton>
-        <b:growl id="growl"/>
-    </h:form>
-</b:container>
-</html>
+<ui:composition template="template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="content">
+        <h:outputStylesheet name="register.css" library="css"/>
+        <b:container>
+            <h1 class="register-h1">ChalmersBooks</h1>
+            <h:form styleClass="register-form" prependId="false">
+                <h2 class="register-h2">Register</h2>
+                <b:inputText id="CID-inputtext"
+                             placeholder="CID"
+                             fieldSize="lg"
+                             required="true"
+                             requiredMessage="Enter CID"
+                             maxlength="10"
+                             value="#{registerBackingBean.CID}">
+                    <f:facet name="append">
+                        <p class="email-type-p">
+                            #{registerBackingBean.emailType}
+                        </p>
+                    </f:facet>
+                    <f:ajax/>
+                </b:inputText>
+                <b:message for="CID-inputtext" showIcon="false"/>
+                <p class="role-type-p">What's your role at Chalmers?</p>
+                <b:row styleClass="radiobutton-row" prependId="false">
+                    <b:radiobutton styleClass="email-radiobutton"
+                                   id="roles-radiobutton"
+                                   prependId="false"
+                                   update="CID-inputtext"
+                                   required="true"
+                                   requiredMessage="Choose a role"
+                                   value="#{registerBackingBean.emailType}">
+                        <f:selectItems value="#{registerBackingBean.emails}"/>
+                    </b:radiobutton>
+                </b:row>
+                <b:message for="roles-radiobutton" showIcon="false"/>
+                <b:inputSecret id="register-password"
+                               placeholder="Password"
+                               fieldSize="lg"
+                               required="true"
+                               requiredMessage="Enter password"
+                               tooltip="Example: Password123@"
+                               validator="#{registerBackingBean.validatePassword}"
+                               value="#{registerBackingBean.password}">
+                </b:inputSecret>
+                <b:message for="register-password" showIcon="false"/>
+                <b:inputSecret id="confirm-password"
+                               placeholder="Confirm password"
+                               fieldSize="lg"
+                               required="true"
+                               requiredMessage="Confirm password"
+                               value="#{registerBackingBean.confirmPassword}">
+                </b:inputSecret>
+                <b:message for="confirm-password" showIcon="false"/>
+                <o:validateEqual id="equal"
+                                 components="register-password confirm-password"
+                                 message="Passwords are not equal"
+                                 showMessageFor="confirm-password"/>
+                <b:commandButton id="submit-button"
+                                 look="success btn-block"
+                                 value="Submit"
+                                 iconAwesome="fa-edit"
+                                 size="lg"
+                                 action="#{registerController.register}"/>
+                <b:commandButton id="cancel-button"
+                                 look="danger btn-block"
+                                 value="Cancel"
+                                 iconAwesome="fa-close"
+                                 size="lg"
+                                 action="#{registerController.cancel}">
+                    <f:ajax/><!-- Using this row to cancle form execution-->
+                </b:commandButton>
+                <b:growl id="growl"/>
+            </h:form>
+        </b:container>
+    </ui:define>
+</ui:composition>
