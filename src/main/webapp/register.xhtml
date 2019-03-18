@@ -16,10 +16,10 @@
                      required="true"
                      requiredMessage="Enter CID"
                      maxlength="10"
-                     value="#{registerBean.CID}">
+                     value="#{registerBackingBean.CID}">
             <f:facet name="append">
                 <p class="email-type-p">
-                    #{registerBean.emailType}
+                    #{registerBackingBean.emailType}
                 </p>
             </f:facet>
             <f:ajax/>
@@ -33,8 +33,8 @@
                            update="CID-inputtext"
                            required="true"
                            requiredMessage="Choose a role"
-                           value="#{registerBean.emailType}">
-                <f:selectItems value="#{registerBean.emails}"/>
+                           value="#{registerBackingBean.emailType}">
+                <f:selectItems value="#{registerBackingBean.emails}"/>
             </b:radiobutton>
         </b:row>
         <b:message for="roles-radiobutton" showIcon="false"/>
@@ -44,8 +44,8 @@
                        required="true"
                        requiredMessage="Enter password"
                        tooltip="Example: Password123@"
-                       validator="#{registerBean.validatePassword}"
-                       value="#{registerBean.password}">
+                       validator="#{registerBackingBean.validatePassword}"
+                       value="#{registerBackingBean.password}">
         </b:inputSecret>
         <b:message for="register-password" showIcon="false"/>
         <b:inputSecret id="confirm-password"
@@ -53,7 +53,7 @@
                        fieldSize="lg"
                        required="true"
                        requiredMessage="Confirm password"
-                       value="#{registerBean.confirmPassword}">
+                       value="#{registerBackingBean.confirmPassword}">
         </b:inputSecret>
         <b:message for="confirm-password" showIcon="false"/>
         <o:validateEqual id="equal"
@@ -65,12 +65,15 @@
                          value="Submit"
                          iconAwesome="fa-edit"
                          size="lg"
-                         action="#{registerBean.register}"/>
+                         action="#{registerController.register}"/>
         <b:commandButton id="cancel-button"
                          look="danger btn-block"
                          value="Cancel"
                          iconAwesome="fa-close"
-                         size="lg"/>
+                         size="lg"
+                         action="#{registerController.cancel}">
+            <f:ajax/><!-- Using this row to cancle form execution-->
+        </b:commandButton>
         <b:growl id="growl"
                  globalOnly="true"
                  showDetail="true"

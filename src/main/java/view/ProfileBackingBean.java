@@ -1,6 +1,6 @@
 package view;
 
-import controll.UserComponent;
+import model.bean.UserComponent;
 import entity.User;
 import lombok.AccessLevel;
 import lombok.Data;

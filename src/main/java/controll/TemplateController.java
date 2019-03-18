@@ -1,16 +1,17 @@
-package login;
+package controll;
 
 import lombok.extern.java.Log;
 import org.omnifaces.util.Faces;
-import javax.faces.view.ViewScoped;
+
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import java.io.Serializable;
 
 @Log
 @Named
-@ViewScoped
-public class LogoutBean implements Serializable {
+@RequestScoped
+public class TemplateController implements Serializable {
 
     public String logout() {
         try {

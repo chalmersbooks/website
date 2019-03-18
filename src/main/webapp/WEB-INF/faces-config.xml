@@ -8,17 +8,33 @@
     <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{loginBean.login}</from-action>
+            <from-action>#{loginController.login}</from-action>
             <from-outcome>valid</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{loginController.register}</from-action>
+            <from-outcome>register</from-outcome>
+            <to-view-id>/register.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/register.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{registerBean.register}</from-action>
+            <from-action>#{registerController.register}</from-action>
             <from-outcome>registered</from-outcome>
             <to-view-id>/registered.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/register.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{registerController.cancel}</from-action>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

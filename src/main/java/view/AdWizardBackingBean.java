@@ -1,6 +1,5 @@
 package view;
 
-import controll.*;
 import lombok.Data;
 import model.AdBuilder;
 import model.MakingAd;
@@ -11,6 +10,7 @@ import entity.User;
 import lombok.extern.java.Log;
 import model.bean.BookComponent;
 import model.bean.CourseCodeComponent;
+import model.bean.UserComponent;
 import org.omnifaces.util.Ajax;
 import service.Validator;
 

@@ -2,6 +2,7 @@ package controll;
 
 
 import entity.Ad;
+import model.bean.UserComponent;
 import org.primefaces.model.SortOrder;
 import service.AdFacade;
 

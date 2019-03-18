@@ -14,7 +14,7 @@
                      fieldSize="lg"
                      required="true"
                      requiredMessage="Enter email"
-                     value="#{loginBean.email}">
+                     value="#{loginBackingBean.email}">
             <f:facet name="prepend">
                 <b:icon name="user"/>
             </f:facet>
@@ -26,7 +26,7 @@
                        fieldSize="lg"
                        required="true"
                        requiredMessage="Enter password"
-                       value="#{loginBean.password}">
+                       value="#{loginBackingBean.password}">
             <f:facet name="prepend">
                 <b:iconAwesome name="key"/>
             </f:facet>
@@ -44,12 +44,15 @@
                          icon="log-in"
                          size="lg"
                          update="@form"
-                         action="#{loginBean.login}"/>
+                         action="#{loginController.login}"/>
         <b:commandButton id="register-button"
                          look="primary btn-block"
                          value="Register"
                          iconAwesome="fa-edit"
-                         size="lg"/>
+                         size="lg"
+                         action="#{loginController.register}">
+            <f:ajax/><!-- Using this row to cancle form execution-->
+        </b:commandButton>
     </h:form>
 </b:container>
 </html>
