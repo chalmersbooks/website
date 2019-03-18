@@ -75,10 +75,12 @@ public class StartupDummyApp {
                     .setPrice(generateRandomPrice())
                     .setCourseCodes(courseCodes)
                     .setBook(courseCodes.get(0).getBooks().get(0))
-                    .setUser(user)
+                    .setUser(user.getEmail())
                     .build();
             adFacade.create(ad);
+            user.addAd(ad);
         }
+        userFacade.createOrUpdate(user);
     }
 
     private User buildRandomUser() {

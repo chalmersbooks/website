@@ -9,11 +9,11 @@
     <ui:define name="content">
         <h:outputStylesheet name="ad_list.css" library="css"/>
         <h:form id="form">
-            <p:dataView var="ad" value="#{adListController.userAds}" rows="9" paginator="true"
+            <p:dataView var="ad" value="#{profileBackingBean.ads}" rows="9" paginator="true"
                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                         gridIcon="fa fa-th-large" listIcon="fa fa-th-list">
                 <f:facet name="header">
-                    <h:outputText value="#{profile.user.name}'s ads" styleClass="head"/>
+                    <h:outputText value="#{profileBackingBean.user.name}'s ads" styleClass="head"/>
                 </f:facet>
 
                 <p:dataViewGridItem>
@@ -55,9 +55,22 @@
                                 <h:outputText value="#{ad.formatedDate}" style="font-weight: bold"/>
                             </h:panelGrid>
                         </p:outputPanel>
+
+                        <p:commandLink  action="#{profileController.delete()}" title="Delete ad">
+                            <i class="fa fa-trash"/>
+                            <p:confirm header="Delete ad" message="Are you sure?" icon="fa fa-exclamation-triangle"/>
+                            <f:setPropertyActionListener value="#{ad}" target="#{profileController.ad}"/>
+                        </p:commandLink>
+
                     </h:panelGrid>
                 </p:dataViewListItem>
             </p:dataView>
+
+            <p:confirmDialog global="true" showEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+            </p:confirmDialog>
+
         </h:form>
     </ui:define>
 </ui:composition>

@@ -34,4 +34,8 @@ public class AdFacade extends Facade<Ad> {
         CriteriaQuery<Ad> cq = cb.createQuery(Ad.class);
         return em.createQuery(cq).setFirstResult(first).setMaxResults(pageSize).getResultList();
     }
+
+    public void delete(Ad ad){
+        em.createNamedQuery("Ad.delete", Ad.class).setParameter("id", ad.getId());
+    }
 }

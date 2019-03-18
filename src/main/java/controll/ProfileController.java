@@ -1,6 +1,10 @@
 package controll;
 
+import entity.Ad;
 import entity.User;
+import lombok.Getter;
+import lombok.Setter;
+import service.AdFacade;
 import service.UserFacade;
 import view.ProfileBackingBean;
 
@@ -18,6 +22,13 @@ public class ProfileController implements Serializable {
 
     @Inject
     private UserFacade userFacade;
+
+    @Inject
+    private AdFacade adFacade;
+
+    @Getter
+    @Setter
+    private Ad ad;
 
 
     public boolean changePassword() {
@@ -51,6 +62,13 @@ public class ProfileController implements Serializable {
             sb.append(Character.toString(a[i]).toLowerCase());
         }
         return sb.toString();
+    }
+
+    public void delete(){
+        User u = pbb.getUser();
+        u.getAds().remove(ad);
+        userFacade.createOrUpdate(u);
+        adFacade.delete(ad);
     }
 
 

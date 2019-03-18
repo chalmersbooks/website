@@ -12,7 +12,10 @@ import java.util.List;
 
 @Data
 @Entity
-@NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.user.email = :name")
+@NamedQueries({
+        @NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.userId = :name"),
+        @NamedQuery(name = "Ad.delete", query = "DELETE FROM Ad ad WHERE ad.id = :id")
+})
 public class Ad {
 
     // TODO: Replace AdBuilder with builder from this...
@@ -28,19 +31,10 @@ public class Ad {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String imageURL;
-    /*// TODO: User here is temporary. Cascade should not be as this. Only for testing purposes.
-    @ManyToOne(cascade = CascadeType.ALL)*/
-    @ManyToOne
-    private User user;
+    private String userId;
 
     private final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
     private String formatedDate;
-
-    public void addCourseCode(CourseCode code) {
-        if (!courseCodes.contains(code)) {
-            courseCodes.add(code);
-        }
-    }
 
     public String getFormatedDate() {
         return dateFormatter.format(this.date);

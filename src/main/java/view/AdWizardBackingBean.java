@@ -72,8 +72,8 @@ public class AdWizardBackingBean implements Serializable {
         return ccComponent.getCourseCodesFromStrings(codes);
     }
 
-    private User fetchUser() {
-        return userComponent.getUser();
+    private String fetchUser() {
+        return userComponent.getUser().getEmail();
     }
 
     public void setFoundBooks() {

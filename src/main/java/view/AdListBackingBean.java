@@ -2,9 +2,11 @@ package view;
 
 import controll.AdListController;
 import entity.Ad;
+import entity.User;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import model.bean.UserComponent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import service.AdFacade;
@@ -26,22 +28,20 @@ import java.util.Map;
 public class AdListBackingBean implements Serializable {
 
     @Inject
-    private AdListController adListController;
-
-    @Inject
     private AdFacade adFacade;
 
     private LazyDataModel lazyDataModel;
     private List<Ad> ads;
     private Ad modalAd;
+    private User user;
 
     @PostConstruct
     public void init() {
-        lazyDataModel = new LazyModel();
+        //lazyDataModel = new LazyModel();
         ads = adFacade.findAll();
     }
 
-
+    /*
     private class LazyModel extends LazyDataModel<Ad> {
 
 
@@ -58,4 +58,5 @@ public class AdListBackingBean implements Serializable {
             return ads;
         }
     }
+    */
 }

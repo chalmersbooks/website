@@ -1,5 +1,6 @@
 package model.bean;
 
+import entity.Ad;
 import entity.User;
 import org.omnifaces.util.Faces;
 import service.UserFacade;
@@ -96,6 +97,12 @@ public class UserComponent implements Serializable {
         user.setPassword(passwordHash.generate(password.toCharArray()));
         user.setEmail(username);
         return user;
+    }
+
+    public void addAd(Ad ad){
+        User u = getUser();
+        u.addAd(ad);
+        userFacade.createOrUpdate(u);
     }
 
 }

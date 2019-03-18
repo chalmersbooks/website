@@ -33,8 +33,8 @@ public class AdBuilder {
         return this;
     }
 
-    public AdBuilder setUser(User user) {
-        ad.setUser(user);
+    public AdBuilder setUser(String userId) {
+        ad.setUserId(userId);
         return this;
     }
 

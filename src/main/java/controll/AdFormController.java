@@ -15,9 +15,6 @@ import javax.inject.Named;
 public class AdFormController extends AdController {
 
     @Inject
-    @Getter
-    private AdFacade adFacade;
-    @Inject
     private AdFormBackingBean backingBean;
     @Inject
     @Getter

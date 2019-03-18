@@ -73,7 +73,7 @@ public class AdFormBackingBean implements Serializable {
         return book;
     }
 
-    private User fetchUser() {
-        return userComponent.getUser();
+    private String fetchUser() {
+        return userComponent.getUser().getEmail();
     }
 }

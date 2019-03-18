@@ -2,9 +2,13 @@ package controll;
 
 
 import entity.Ad;
+import entity.User;
+import lombok.Data;
 import model.bean.UserComponent;
 import org.primefaces.model.SortOrder;
 import service.AdFacade;
+import service.UserFacade;
+import view.AdListBackingBean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -14,29 +18,24 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+@Data
 @Named
 @RequestScoped
 public class AdListController implements Serializable {
 
-    @EJB
-    private AdFacade adFacade;
+    @Inject
+    private AdListBackingBean adListBackingBean;
 
     @Inject
-    private UserComponent userComponent;
+    private UserFacade userFacade;
 
-    public List<Ad> getAds(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-        return adFacade.getAds(first, pageSize, sortField, sortOrder, filters);
+    private Ad ad;
+
+
+    public void setAd(Ad ad){
+        System.out.println(ad.getUserId());
+        User u = userFacade.getUserById(ad.getUserId());
+        adListBackingBean.setUser(u);
     }
 
-    public List<Ad> getAllAds() {
-        return adFacade.findAll();
-    }
-
-    public List<Ad> getUserAds() {
-        return adFacade.findByName(userComponent.getUser().getEmail());
-    }
-
-    public void sort() {
-        // TODO: Should we have this function? Used in User_ads.xhtml
-    }
 }

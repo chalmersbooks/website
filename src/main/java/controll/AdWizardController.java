@@ -22,9 +22,6 @@ public class AdWizardController extends AdController {
     @Inject
     @Getter
     private AdComponent adComponent;
-    @Inject
-    @Getter
-    private AdFacade adFacade;
 
     public String onFlowProcess(FlowEvent event) {
         String nextStep = event.getNewStep();

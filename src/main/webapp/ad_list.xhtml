@@ -68,31 +68,29 @@
                         </p:outputPanel>
 
                         <p:commandLink update=":form:adDetail" oncomplete="PF('adDialog').show()" title="View Detail">
-                            <i class="fa fa-search" style="padding-left: 0px"/>
-                            <f:setPropertyActionListener value="#{ad}" target="#{adListBackingBean.modalAd}"/>
+                            <i class="fa fa-search"/>
+                            <f:setPropertyActionListener value="#{ad}" target="#{adListController.ad}"/>
                         </p:commandLink>
                     </h:panelGrid>
                 </p:dataViewListItem>
             </p:dataView>
 
-            <p:dialog header="#{adListBackingBean.modalAd.book.name}" widgetVar="adDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false"
-            >
+            <p:dialog header="#{adListController.ad.book.name}" widgetVar="adDialog" modal="true"
+                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false">
                 <p:outputPanel id="adDetail" style="text-align:center; color: black">
-                    <p:panelGrid columns="2" rendered="#{not empty adListBackingBean.modalAd}"
-                                 columnClasses="label,value">
+                    <p:panelGrid columns="2" columnClasses="label,value">
 
                         <h:outputText value="Seller" style="color: black"/>
-                        <h:outputText value="#{adListBackingBean.modalAd.user.name}"/>
+                        <h:outputText value="#{adListBackingBean.user.name}"/>
 
                         <h:outputText value="e-mail:" style="color: black"/>
-                        <h:outputText value="#{adListBackingBean.modalAd.user.email}"/>
+                        <h:outputText value="#{adListBackingBean.user.email}"/>
 
                         <h:outputText value="Phone" style="color: black"/>
-                        <h:outputText value="$#{adListBackingBean.modalAd.user.phoneNumber}"/>
+                        <h:outputText value="$#{adListBackingBean.user.phoneNumber}"/>
 
                         <h:outputText value="Price:" style="color: black"/>
-                        <h:outputText value="#{adListBackingBean.modalAd.price}"/>
+                        <h:outputText value="#{adListController.ad.price}"/>
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>

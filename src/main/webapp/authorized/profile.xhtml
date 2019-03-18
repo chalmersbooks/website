@@ -6,7 +6,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
         <b:column span="3">
-            <b:panel id="panel" look="primary" title="#{profile.user.name}">
+            <b:panel id="panel" look="primary" title="#{profileBackingBean.user.name}">
                 <b:listLinks>
                     <b:button onclick="$('.passModal').modal('show')" value="Change Password"/>
                     <b:modal id="passModal" title="Change Password" styleClass="passModal"
@@ -20,7 +20,7 @@
                                                    fieldSize="lg"
                                                    required="true"
                                                    requiredMessage="Enter password"
-                                                   value="#{profile.oldPassword}">
+                                                   value="#{profileBackingBean.oldPassword}">
                                     </b:inputSecret>
                                 </b:row>
                                 <b:row>
@@ -29,8 +29,8 @@
                                                    fieldSize="lg"
                                                    required="true"
                                                    requiredMessage="Enter password"
-                                                   validator="#{profile.validatePassword}"
-                                                   value="#{profile.newPassword}">
+                                                   validator="#{profileBackingBean.validatePassword}"
+                                                   value="#{profileBackingBean.newPassword}">
                                     </b:inputSecret>
                                 </b:row>
                                 <b:row>
@@ -72,13 +72,13 @@
                             <b:row>
                                 <b:inputText label="Name"
                                              id="Name"
-                                             value="#{profile.user.name}"
+                                             value="#{profileBackingBean.user.name}"
                                              fieldSize="lg"/>
                             </b:row>
                             <b:row>
                                 <b:inputText label="Phone Number"
                                              id="phoneNumber"
-                                             value="#{profile.user.phoneNumber}"
+                                             value="#{profileBackingBean.user.phoneNumber}"
                                              fieldSize="lg">
                                     <o:validator validatorId="javax.faces.RegularExpression"
                                                  pattern="[0-9]{1,10}"
@@ -89,7 +89,7 @@
                             <b:row>
                                 <b:inputText label="Address"
                                              id="address"
-                                             value="#{profile.user.address}"
+                                             value="#{profileBackingBean.user.address}"
                                              fieldSize="lg"/>
                             </b:row>
                             <b:row>
@@ -102,7 +102,6 @@
                             </b:row>
                         </b:form>
                     </b:modal>
-                    <b:button href="index.xhtml" value="Go back"/>
                 </b:listLinks>
             </b:panel>
         </b:column>
