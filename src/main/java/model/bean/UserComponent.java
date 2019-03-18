@@ -55,11 +55,6 @@ public class UserComponent implements Serializable {
         return false;
     }
 
-    public void updateInfo(User u){
-        User tmp = userFacade.getUserById(securityContext.getCallerPrincipal().getName());
-        tmp.setAll(u);
-    }
-
     public String loginUser(String username, String password) {
         return checkStatus(getStatus(username, password));
     }
