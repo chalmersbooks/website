@@ -21,29 +21,18 @@ public class CourseCodeComponent implements Serializable {
         return ccFacade.findByIds(codes);
     }
 
-    public List<CourseCode> getCourseCodesFromStrings(String[] codes) {
-        return getCourseCodesFromStrings(Arrays.asList(codes));
-
-    }
-
-    public CourseCode getCourseCodeFromString(String code) {
-        String[] asArray = {code};
-        // TODO: Check nullpointer?
-        return getCourseCodesFromStrings(asArray).get(0);
-    }
-
     public void createOrUpdate(String code, Book book) {
-        String[] asArray = {code};
-        createOrUpdate(asArray, book);
+        List<String> codes = new ArrayList<>();
+        codes.add(code);
+        createOrUpdate(codes, book);
     }
 
-    public void createOrUpdate(String[] codes, Book book) {
+    public void createOrUpdate(List<String> codes, Book book) {
         List<CourseCode> existingCourseCodes = getCourseCodesFromStrings(codes);
         List<CourseCode> newCourseCodes = createNonExistingCodes(existingCourseCodes, codes, book);
 
         createOrUpdate(existingCourseCodes);
         createOrUpdate(newCourseCodes);
-
     }
 
     public void createOrUpdate(List<CourseCode> courseCodes) {
@@ -52,7 +41,7 @@ public class CourseCodeComponent implements Serializable {
         }
     }
 
-    private List<CourseCode> createNonExistingCodes(List<CourseCode> existingCodes, String[] givenCodes, Book book) {
+    private List<CourseCode> createNonExistingCodes(List<CourseCode> existingCodes, List<String> givenCodes, Book book) {
         List<CourseCode> newCourseCodes = new ArrayList<>();
         for (String code : givenCodes) {
             CourseCode cc = makeCourseCode(code, book);
@@ -65,7 +54,7 @@ public class CourseCodeComponent implements Serializable {
 
     private CourseCode makeCourseCode(String code, Book book) {
         CourseCode cc = new CourseCode();
-        cc.setCourseCode(code);
+        cc.setCourseCode(code.toUpperCase());
 
         List<Book> books = new ArrayList<>();
         books.add(book);
@@ -75,7 +64,7 @@ public class CourseCodeComponent implements Serializable {
     }
 
     public CourseCode get(String courseCode) {
-        return ccFacade.findById(courseCode);
+        return ccFacade.findById(courseCode.toUpperCase());
     }
 
     public List<CourseCode> getCourseCodesFromBook(Book book) {

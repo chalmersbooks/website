@@ -5,6 +5,7 @@ import entity.CourseCode;
 import lombok.Data;
 import lombok.extern.java.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log
@@ -15,6 +16,18 @@ public class MakingAd {
     private Book book;
     private int price;
     private List<CourseCode> courseCodes;
-    private String showableCourseCodes;
+    private List<String> showableCourseCodes;
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode.toUpperCase();
+    }
+
+    public void setShowableCourseCodes(List<String> codes) {
+        List<String> toUpperCases = new ArrayList<>();
+        for (String s : codes) {
+            toUpperCases.add(s.toUpperCase());
+        }
+        showableCourseCodes = toUpperCases;
+    }
 
 }

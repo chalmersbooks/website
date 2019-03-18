@@ -27,7 +27,7 @@ public class LoginController implements Serializable {
 
     public String login() {
         String status = userComponent.loginUser(
-                backingBean.getEmail(),
+                backingBean.getEmail().toLowerCase(),
                 backingBean.getPassword());
         if (status == null || status.equals("")) {
             backingBean.setEmail("");

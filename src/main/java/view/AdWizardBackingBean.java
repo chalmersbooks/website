@@ -52,10 +52,6 @@ public class AdWizardBackingBean implements Serializable {
 
     }
 
-    public boolean validate(){
-        return Validator.validateISBN(ad.getBook().getIsbn());
-    }
-
     public Ad makeAd() {
         return new AdBuilder()
                 .setBook(getCurrentBook())
@@ -71,7 +67,7 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private List<CourseCode> convertCourseCodeTags() {
-        String[] codes = ad.getShowableCourseCodes().replace(" ", "").split(",");
+        List<String> codes = ad.getShowableCourseCodes();
         ccComponent.createOrUpdate(codes, ad.getBook());
         return ccComponent.getCourseCodesFromStrings(codes);
     }
@@ -86,9 +82,7 @@ public class AdWizardBackingBean implements Serializable {
         if (cc == null) {
             return;
         }
-        log.info("Found books are:");
         for (Book b : cc.getBooks()) {
-            log.info(b.getName());
             booksBelongingToCourseCode.put(makeShowableName(b), b.getIsbn());
         }
         Ajax.update("BooksButtons");
@@ -148,11 +142,9 @@ public class AdWizardBackingBean implements Serializable {
     }
 
     private void setShowableCourseCodes() {
-        // TODO: This is not working as intended...
-        String courseCodes = "";
+        List<String> courseCodes = new ArrayList<>();
         for (CourseCode cc : ad.getCourseCodes()) {
-            courseCodes = courseCodes.concat(cc.getCourseCode()
-                    .concat(", "));
+            courseCodes.add(cc.getCourseCode());
         }
         ad.setShowableCourseCodes(courseCodes);
     }
