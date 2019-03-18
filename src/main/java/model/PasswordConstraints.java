@@ -1,5 +1,10 @@
 package model;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+
 public enum PasswordConstraints {
     MIN("^(?=.{8,}).*$", "Password must contain at least 8 character"),
     LOWERCASE("^(?=.*[a-z]).*$", "Password must contain at least one lower character"),
@@ -21,5 +26,25 @@ public enum PasswordConstraints {
 
     public String getMessage() {
         return message;
+    }
+
+    public static void validatePassword(FacesContext context, UIComponent comp, Object value) {
+        PasswordConstraints[] pc = PasswordConstraints.values();
+        for (PasswordConstraints temp : pc) {
+            if (!isValid(value, temp.getRegex())) {
+                invalidPasswordMessage(context, comp, temp.getMessage());
+                break;
+            }
+        }
+    }
+
+    private static void invalidPasswordMessage(FacesContext context, UIComponent comp, String message) {
+        ((UIInput) comp).setValid(false);
+        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, message, null);
+        context.addMessage(comp.getClientId(context), fm);
+    }
+
+    private static boolean isValid(Object password, String regex) {
+        return password.toString().matches(regex);
     }
 }
