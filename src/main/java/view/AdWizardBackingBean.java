@@ -12,6 +12,7 @@ import model.bean.BookComponent;
 import model.bean.CourseCodeComponent;
 import model.bean.UserComponent;
 import org.omnifaces.util.Ajax;
+import service.Validator;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -49,6 +50,10 @@ public class AdWizardBackingBean implements Serializable {
         ad = new MakingAd();
         ad.setBook(new Book());
 
+    }
+
+    public boolean validate(){
+        return Validator.validateISBN(ad.getBook().getIsbn());
     }
 
     public Ad makeAd() {

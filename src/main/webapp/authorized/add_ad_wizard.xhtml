@@ -1,6 +1,7 @@
 <ui:composition template="../template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:o="http://omnifaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
@@ -49,7 +50,11 @@
                     <p:panel header="What course(course Code) do the book belong to?">
                         <p:messages/>
                         <p:inputText value="#{adWizardBean.ad.courseCode}" required="true" label="Course Code"
-                                     autocomplete="#{adWizardBean.allCourseCodes}"/>
+                                     autocomplete="#{adWizardBean.allCourseCodes}">
+                            <o:validator validatorId="javax.faces.RegularExpression"
+                                         pattern="[A-Za-z]{3}[0-9]{3}"
+                                         message="Course code not correct format"/>
+                        </p:inputText>
 
                     </p:panel>
                 </p:tab>
@@ -72,8 +77,10 @@
                             <p:inputText value="#{adWizardBean.ad.book.edition}" required="true"/>
                             <h:outputText value="Author(s): "/>
                             <p:inputText value="#{adWizardBean.ad.book.authors}" required="true"/>
-                            <h:outputText value="ISBN: "/>
-                            <p:inputText value="#{adWizardBean.ad.book.isbn}" required="true"/>
+                            <h:outputText id="isbn" value="ISBN: "/>
+                            <p:inputText value="#{adWizardBean.ad.book.isbn}" required="true">
+                                <o:validator disabled="#{adWizardBean.validate}" for="isbn" message="invalid isbn"/>
+                            </p:inputText>
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
