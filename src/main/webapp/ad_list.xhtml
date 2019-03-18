@@ -54,14 +54,12 @@
                 </p:dataViewListItem>
             </p:dataView>
 
-            <p:dialog header="#{adListBackingBean.modalAd.book.name}" widgetVar="adDialog" modal="true"  showEffect="fade" hideEffect="fade"
+            <p:dialog header="#{adListBackingBean.modalAd.book.name}" widgetVar="adDialog" modal="true"
+                      showEffect="fade" hideEffect="fade"
                       resizable="false" closeOnEscape="true" closable="true" draggable="false">
                 <p:outputPanel id="adDetail" style="text-align:center; color: black">
                     <p:panelGrid columns="2" rendered="#{not empty adListBackingBean.modalAd}"
                                  columnClasses="label,value">
-                        <f:facet name="header">
-                           <!-- <p:graphicImage name="images/book.png"/> -->
-                        </f:facet>
 
                         <h:outputText value="Seller" style="color: black"/>
                         <h:outputText value="#{adListBackingBean.modalAd.user.name}"/>
