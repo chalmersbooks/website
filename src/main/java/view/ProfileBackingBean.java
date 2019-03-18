@@ -1,5 +1,6 @@
 package view;
 
+import model.PasswordConstraints;
 import model.bean.UserComponent;
 import entity.User;
 import lombok.AccessLevel;
@@ -8,6 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.PostConstruct;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,6 +38,10 @@ public class ProfileBackingBean implements Serializable {
 
     public void setDisabled(){
 
+    }
+
+    public void validatePassword(FacesContext context, UIComponent comp, Object value) {
+        PasswordConstraints.validatePassword(context, comp, value);
     }
 
 }
