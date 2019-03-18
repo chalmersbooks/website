@@ -2,6 +2,7 @@ package view;
 
 import controll.AdListController;
 import entity.Ad;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.LazyDataModel;
@@ -19,6 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+@Data
 @Named
 @ViewScoped
 public class AdListBackingBean implements Serializable {
@@ -26,17 +28,17 @@ public class AdListBackingBean implements Serializable {
     @Inject
     private AdListController adListController;
 
-    @Getter
-    @Setter
-    private LazyDataModel lazyDataModel;
+    @Inject
+    private AdFacade adFacade;
 
-    @Getter
-    @Setter
+    private LazyDataModel lazyDataModel;
     private List<Ad> ads;
+    private Ad modalAd;
 
     @PostConstruct
     public void init() {
         lazyDataModel = new LazyModel();
+        ads = adFacade.findAll();
     }
 
 
