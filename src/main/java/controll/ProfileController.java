@@ -26,6 +26,32 @@ public class ProfileController implements Serializable {
 
     public void applyChanges() {
         User u = pbb.getUser();
+        if(u.getName().length() != 0){
+            String[] tmp = u.getName().split(" ");
+            for(int i = 0; i < tmp.length; i++){
+                tmp[i] = toPascal(tmp[i]);
+            }
+            StringBuilder sb = new StringBuilder();
+            for(String s : tmp){
+                sb.append(s);
+                sb.append(" ");
+            }
+            sb.deleteCharAt(sb.length()-1);
+            u.setName(sb.toString());
+        }
+
         userFacade.createOrUpdate(u);
     }
+
+    private String toPascal(String s){
+        StringBuilder sb = new StringBuilder();
+        char[] a = s.toCharArray();
+        sb.append(Character.toString(a[0]).toUpperCase());
+        for(int i = 1; i < a.length; i++){
+            sb.append(Character.toString(a[i]).toLowerCase());
+        }
+        return sb.toString();
+    }
+
+
 }
