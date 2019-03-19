@@ -7,13 +7,27 @@
                 xmlns:o="http://omnifaces.org/ui"
                 xmlns:p="http://primefaces.org/ui">
 
-
-    <ui:define name="content">
+    <ui:define name="subheader">
         <h:outputStylesheet name="register.css" library="css"/>
+    </ui:define>
+    <ui:define name="content">
         <b:container>
             <h1 class="register-h1">ChalmersBooks</h1>
             <h:form styleClass="register-form" prependId="false">
                 <h2 class="register-h2">Register</h2>
+                <b:message for="CID-inputtext" showIcon="false"/>
+                <p class="role-type-p">What's your role at Chalmers?</p>
+                <b:row styleClass="radiobutton-row" prependId="false">
+                    <b:radiobutton styleClass="email-radiobutton"
+                                   id="roles-radiobutton"
+                                   prependId="false"
+                                   update="CID-inputtext"
+                                   required="true"
+                                   requiredMessage="Choose a role"
+                                   value="#{registerBackingBean.emailType}">
+                        <f:selectItems value="#{registerBackingBean.emails}"/>
+                    </b:radiobutton>
+                </b:row>
                 <b:inputText id="CID-inputtext"
                              placeholder="CID"
                              fieldSize="lg"
@@ -28,19 +42,6 @@
                     </f:facet>
                     <f:ajax/>
                 </b:inputText>
-                <b:message for="CID-inputtext" showIcon="false"/>
-                <p class="role-type-p">What's your role at Chalmers?</p>
-                <b:row styleClass="radiobutton-row" prependId="false">
-                    <b:radiobutton styleClass="email-radiobutton"
-                                   id="roles-radiobutton"
-                                   prependId="false"
-                                   update="CID-inputtext"
-                                   required="true"
-                                   requiredMessage="Choose a role"
-                                   value="#{registerBackingBean.emailType}">
-                        <f:selectItems value="#{registerBackingBean.emails}"/>
-                    </b:radiobutton>
-                </b:row>
                 <b:message for="roles-radiobutton" showIcon="false"/>
                 <b:inputSecret id="register-password"
                                placeholder="Password"
