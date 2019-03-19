@@ -5,8 +5,6 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
-
-
     <ui:define name="content">
         <h:outputStylesheet name="login.css" library="css"/>
         <b:container>
@@ -57,7 +55,34 @@
                                  action="#{loginController.register}">
                     <f:ajax/><!-- Using this row to cancle form execution-->
                 </b:commandButton>
+                <b:commandLink onclick="$('.formValidationModalClass').modal('show')" value="Forgot password"/>
+                <b:growl id="growl"/>
             </h:form>
         </b:container>
+
+        <b:modal title="Forgot Password" styleClass="formValidationModalClass">
+            <b:form>
+                <p>Please enter your email</p>
+                <b:inputText value="#{loginBackingBean.forgottenEmail}"
+                             label="Email"
+                             required="true"
+                             requiredMessage="Please enter your email"
+                             large-screen="two-thirds">
+                </b:inputText>
+                <b:row>
+                    <b:column>
+                        <b:button largeScreen="half" value="Cancel"
+                                  dismiss="modal" onclick="return false;"/>
+                        <b:commandButton largeScreen="half" update="@form"
+                                         dismiss="modal"
+                                         value="Request new password" look="success"
+                                         oncomplete="{ $('.formValidationModalClass').modal('hide') } "
+                                         onclick="return true;"
+                                         action="#{loginController.lostPassword}"/>
+                    </b:column>
+                </b:row>
+                <b:fetchBeanInfos/>
+            </b:form>
+        </b:modal>
     </ui:define>
 </ui:composition>

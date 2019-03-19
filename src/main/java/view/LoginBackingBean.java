@@ -16,6 +16,7 @@ public class LoginBackingBean implements Serializable {
     private String email;
     @NotNull
     private String password;
+    private String forgottenEmail;
 
 
 }

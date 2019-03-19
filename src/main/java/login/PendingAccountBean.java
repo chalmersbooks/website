@@ -6,6 +6,7 @@ import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.lang3.RandomStringUtils;
 import service.UserFacade;
+import utils.RandomStringGenerator;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -49,26 +50,11 @@ public class PendingAccountBean implements Serializable {
     }
 
     private String createRegistrationHash() {
-        String randomStr = makeRandomString();
+        String randomStr = RandomStringGenerator.generateRandomString(15);
         if (isAlreadyUsed(randomStr)) {
             return createRegistrationHash();
         }
         return randomStr;
-    }
-
-    private String makeRandomString() {
-        int randomStrLength = 15;
-        char[] possibleCharacters = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                "abcdefghijklmnopqrstuvwxyz" +
-                "0123456789").toCharArray();
-        return RandomStringUtils.random(
-                randomStrLength,
-                0,
-                possibleCharacters.length - 1,
-                false,
-                false,
-                possibleCharacters,
-                new SecureRandom());
     }
 
     private boolean isAlreadyUsed(String randomStr) {
