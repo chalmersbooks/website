@@ -90,19 +90,21 @@
             </p:confirmDialog>
 
             <p:dialog widgetVar="editDialog" modal="true" header="#{adListBackingBean.modalAd.book.name}" dynamic="true"
-                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false" id="edit">
+                      showEffect="fade" hideEffect="fade" closeOnEscape="false" closable="false" resizable="false" id="edit">
                 <p:outputPanel id="editDetail">
                     <p:panelGrid columns="2">
 
                         <h:outputText value="Price:"/>
-                        <h:inputText value="#{adListBackingBean.modalAd.price}"/>
+                        <h:inputText value="#{adListBackingBean.modalAd.price}" styleClass="price"/>
 
                     </p:panelGrid>
 
                     <p:commandButton value="Save" type="button" oncomplete="PF('editDialog').hide()">
                         <f:ajax listener="#{adListController.apply}" render="@form" execute="@form"/>
                     </p:commandButton>
-                    <p:commandButton value="Cancel" type="button" onclick="PF('editDialog').hide()"/>
+                    <p:commandButton value="Cancel" type="button" onclick="PF('editDialog').hide()">
+                        <f:ajax render="@form" execute="@form"/>
+                    </p:commandButton>
 
                 </p:outputPanel>
             </p:dialog>

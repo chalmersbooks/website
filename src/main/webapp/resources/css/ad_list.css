@@ -4,7 +4,7 @@
 }
 
 * {
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; !important;
     font-weight: lighter;
 }
 
@@ -46,6 +46,12 @@
 
 .badge{
     margin: 2px;
+}
+
+#patentDetailsList input[type="submit"],
+#patentDetailsList input[type="text"],
+#patentDetailsList textarea{
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; !important;
 }
 
 #ads {
