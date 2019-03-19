@@ -29,11 +29,14 @@ public class AdListController implements Serializable {
     @Inject
     private UserFacade userFacade;
 
-    private Ad ad;
+    public void filter(){
+        adListBackingBean.filter();
+    }
 
 
-    public void setAd(Ad ad){
+    public void setAd(Ad ad) {
         System.out.println(ad.getUserId());
+        adListBackingBean.setModalAd(ad);
         User u = userFacade.getUserById(ad.getUserId());
         adListBackingBean.setUser(u);
     }

@@ -31,4 +31,8 @@ public abstract class Facade<T> {
         getEntityManager().merge(entity);
     }
 
+    public void delete(T entity){
+        getEntityManager().remove(entity);
+    }
+
 }

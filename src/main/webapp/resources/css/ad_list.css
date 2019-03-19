@@ -19,6 +19,12 @@
     border-bottom-color: var(--input-border-color, #A8A8A8);
 }
 
+.searchField{
+    width: 17em;
+    height: 42px;
+}
+
+
 .detail {
     width: 85%;
     padding-left: 25px;
@@ -27,6 +33,7 @@
 
 .desc {
     padding-left: 25px;
+    font-weight: bold;
 }
 .head{
     alignment: left;
@@ -34,6 +41,10 @@
     font-weight: lighter;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 30px;
+}
+
+.badge{
+    margin: 2px;
 }
 
 #ads {

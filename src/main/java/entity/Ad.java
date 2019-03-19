@@ -14,7 +14,9 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.userId = :name"),
-        @NamedQuery(name = "Ad.delete", query = "DELETE FROM Ad ad WHERE ad.id = :id")
+        @NamedQuery(name = "Ad.delete", query = "DELETE FROM Ad ad WHERE ad.id = :id"),
+        @NamedQuery(name = "Ad.findContainingSearchTerm", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.book.name LIKE CONCAT('%', :searchTerm, '%')")
 })
 public class Ad {
 

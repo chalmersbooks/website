@@ -11,10 +11,14 @@
     </ui:define>
     <ui:define name="content">
         <b:jumbotron>
-            <h1>ChalmersBooks</h1>
-            <p>This website is a part of Webapplication course and will be released asap.</p>
-            <p><a class="btn btn-primary btn-lg" href="https://github.com/chalmersbooks/">Learn more</a></p>
-            <p>SEARCH WILL BE ADDED HERE</p>
+            <h:form>
+                <p:autoComplete value="#{adListBackingBean.searchTerm}" completeMethod="#{adListBackingBean.completeText}"
+                                minQueryLength="3" queryDelay="500" maxResults="10" cache="true" inputStyleClass="searchField"/>
+                <b:commandButton action="#{adListController.filter}">
+                    <i class="fa fa-search fa-2x"/>
+                    <f:ajax render=":form" execute="@form"/>
+                </b:commandButton>
+            </h:form>
         </b:jumbotron>
         <h:form id="form">
             <!-- TODO add lazydatamodel when available. -->
@@ -26,7 +30,7 @@
                 </f:facet>
 
                 <p:dataViewGridItem>
-                    <p:panel header="#{ad.book.name}" style="text-align:center">
+                    <p:panel header="#{ad.book.name}">
                         <h:panelGrid columns="1">
                             <p:graphicImage name="images/book.png" width="60px" height="auto"/>
 
@@ -38,7 +42,7 @@
                             <p:commandLink update=":form:adDetail" oncomplete="PF('adDialog').show()"
                                            title="View Detail">
                                 <i class="fa fa-search"/>
-                                <f:setPropertyActionListener value="#{ad}" target="#{adListBackingBean.modalAd}"/>
+                                <f:setPropertyActionListener value="#{ad}" target="#{adListController.ad}"/>
                             </p:commandLink>
                         </h:panelGrid>
                     </p:panel>
@@ -52,46 +56,48 @@
                         <p:outputPanel>
 
                             <ui:repeat value="#{ad.courseCodes}" var="codes">
-                                <b:badge value="#{codes.courseCode}" style="margin:2;"/>
+                                <b:badge value="#{codes.courseCode}" styleClass="badge"/>
                             </ui:repeat>
 
                             <h:panelGrid columns="2" cellpadding="5" columnClasses="non, desc">
 
                                 <h:outputText value="Title:"/>
-                                <h:outputText value="#{ad.book.name}" style="font-weight: bold"/>
+                                <h:outputText value="#{ad.book.name}"/>
 
                                 <h:outputText value="Price:"/>
-                                <h:outputText value="#{ad.price}kr" style="font-weight: bold"/>
+                                <h:outputText value="#{ad.price}kr"/>
 
                                 <h:outputText value="Date:"/>
-                                <h:outputText value="#{ad.formatedDate}" style="font-weight: bold"/>
+                                <h:outputText value="#{ad.formatedDate}"/>
                             </h:panelGrid>
                         </p:outputPanel>
 
-                        <p:commandLink update=":form:adDetail" oncomplete="PF('adDialog').show()" title="View Detail">
+                        <p:commandLink update=":form:dlg :form:adDetail" oncomplete="PF('adDialog').show()"
+                                       title="View Detail">
                             <i class="fa fa-search"/>
-                            <f:setPropertyActionListener value="#{ad}" target="#{adListController.ad}"/>
+
+                            <f:ajax listener="#{adListController.setAd(ad)}"/>
                         </p:commandLink>
                     </h:panelGrid>
                 </p:dataViewListItem>
             </p:dataView>
 
-            <p:dialog header="#{adListController.ad.book.name}" widgetVar="adDialog" modal="true"
-                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false">
-                <p:outputPanel id="adDetail" style="text-align:center; color: black">
-                    <p:panelGrid columns="2" columnClasses="label,value">
+            <p:dialog widgetVar="adDialog" modal="true" header="#{adListBackingBean.modalAd.book.name}" dynamic="true"
+                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false" id="dlg">
+                <p:outputPanel id="adDetail">
+                    <p:panelGrid columns="2">
 
-                        <h:outputText value="Seller" style="color: black"/>
+                        <h:outputText value="Seller"/>
                         <h:outputText value="#{adListBackingBean.user.name}"/>
 
-                        <h:outputText value="e-mail:" style="color: black"/>
+                        <h:outputText value="e-mail:"/>
                         <h:outputText value="#{adListBackingBean.user.email}"/>
 
-                        <h:outputText value="Phone" style="color: black"/>
+                        <h:outputText value="Phone"/>
                         <h:outputText value="$#{adListBackingBean.user.phoneNumber}"/>
 
-                        <h:outputText value="Price:" style="color: black"/>
-                        <h:outputText value="#{adListController.ad.price}"/>
+                        <h:outputText value="Price:"/>
+                        <h:outputText value="#{adListBackingBean.modalAd.price}"/>
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>

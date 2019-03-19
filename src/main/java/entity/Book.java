@@ -6,7 +6,13 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@NamedQuery(name = "Book.findById", query = "SELECT book FROM Book book WHERE book.isbn = :isbn")
+@NamedQueries({
+        @NamedQuery(name = "Book.findById", query = "SELECT book FROM Book book WHERE book.isbn = :isbn"),
+        @NamedQuery(name = "Book.findByName", query = "SELECT book FROM Book book WHERE book.name = :name"),
+        @NamedQuery(name = "Book.findBySearchTerm", query = "SELECT book.name FROM Book book WHERE " +
+                "book.name LIKE CONCAT('%', :searchTerm, '%')")
+})
+
 public class Book {
 
     @Id
