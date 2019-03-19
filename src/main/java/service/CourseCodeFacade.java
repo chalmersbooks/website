@@ -48,6 +48,11 @@ public class CourseCodeFacade extends Facade<CourseCode> {
                 .getResultList();
     }
 
+    public List<String> findBySearchTerm(String searchTerm){
+        return em.createNamedQuery("CourseCode.findBySearchTerm", String.class)
+                .setParameter("searchTerm",searchTerm).getResultList();
+    }
+
     private boolean containsBook(CourseCode cc, String isbn) {
         for (Book book : cc.getBooks()) {
             if (book.getIsbn().equals(isbn)) {

@@ -19,7 +19,9 @@ import java.util.List;
         @NamedQuery(name = "CourseCode.findByBook", query = "SELECT cc FROM CourseCode cc WHERE " +
                 "cc.books IN (SELECT book FROM Book book WHERE book.isbn = :isbn)"),
         @NamedQuery(name = "CourseCode.findByIds", query = "SELECT cc FROM CourseCode cc WHERE " +
-                "cc.courseCode IN :listOfCodes")
+                "cc.courseCode IN :listOfCodes"),
+        @NamedQuery(name = "CourseCode.findBySearchTerm", query = "SELECT cc.courseCode FROM CourseCode cc WHERE " +
+                "cc.courseCode LIKE CONCAT('%', :searchTerm, '%')")
 })
 public class CourseCode {
 

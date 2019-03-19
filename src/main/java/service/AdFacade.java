@@ -35,7 +35,8 @@ public class AdFacade extends Facade<Ad> {
         return em.createQuery(cq).setFirstResult(first).setMaxResults(pageSize).getResultList();
     }
 
-    public void delete(Ad ad){
-        em.createNamedQuery("Ad.delete", Ad.class).setParameter("id", ad.getId());
+    public List<Ad> findContainingSearchTerm(String searchTerm){
+        return em.createNamedQuery("Ad.findContainingSearchTerm",Ad.class)
+                .setParameter("searchTerm", searchTerm).getResultList();
     }
 }

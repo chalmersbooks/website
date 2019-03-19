@@ -19,6 +19,12 @@
     border-bottom-color: var(--input-border-color, #A8A8A8);
 }
 
+.searchField{
+    width: 17em;
+    height: 42px;
+}
+
+
 .detail {
     width: 85%;
     padding-left: 25px;

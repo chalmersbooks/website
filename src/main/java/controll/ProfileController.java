@@ -26,10 +26,6 @@ public class ProfileController implements Serializable {
     @Inject
     private AdFacade adFacade;
 
-    @Getter
-    @Setter
-    private Ad ad;
-
 
     public boolean changePassword() {
         return pbb.getUserComponent().changePassword(pbb.getOldPassword(), pbb.getNewPassword());
@@ -64,7 +60,7 @@ public class ProfileController implements Serializable {
         return sb.toString();
     }
 
-    public void delete(){
+    public void delete(Ad ad){
         User u = pbb.getUser();
         u.getAds().remove(ad);
         userFacade.createOrUpdate(u);

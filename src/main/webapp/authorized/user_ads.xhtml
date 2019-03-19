@@ -56,10 +56,10 @@
                             </h:panelGrid>
                         </p:outputPanel>
 
-                        <p:commandLink  action="#{profileController.delete()}" title="Delete ad">
+                        <p:commandLink action="#{profileController.delete(ad)}" title="Delete ad">
                             <i class="fa fa-trash"/>
                             <p:confirm header="Delete ad" message="Are you sure?" icon="fa fa-exclamation-triangle"/>
-                            <f:setPropertyActionListener value="#{ad}" target="#{profileController.ad}"/>
+                            <f:ajax render="@form"/>
                         </p:commandLink>
 
                     </h:panelGrid>
