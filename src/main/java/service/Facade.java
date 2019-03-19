@@ -30,9 +30,4 @@ public abstract class Facade<T> {
     public void createOrUpdate(T entity) {
         getEntityManager().merge(entity);
     }
-
-    public void delete(T entity){
-        getEntityManager().remove(entity);
-    }
-
 }

@@ -13,10 +13,13 @@ import java.util.List;
 @Data
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Ad.findByName", query = "SELECT ad FROM Ad ad WHERE ad.userId = :name"),
+        @NamedQuery(name = "Ad.findById", query = "SELECT ad FROM Ad ad WHERE ad.id = :id"),
+        @NamedQuery(name = "Ad.findByUserId", query = "SELECT ad FROM Ad ad WHERE ad.userId = :userId"),
         @NamedQuery(name = "Ad.delete", query = "DELETE FROM Ad ad WHERE ad.id = :id"),
-        @NamedQuery(name = "Ad.findContainingSearchTerm", query = "SELECT ad FROM Ad ad WHERE " +
-                "ad.book.name LIKE CONCAT('%', :searchTerm, '%')")
+        @NamedQuery(name = "Ad.findBookBySearchTerm", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.book.name LIKE CONCAT('%', :searchTerm, '%')"),
+        @NamedQuery(name = "Ad.findCourseCodeBySearchTerm", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.courseCodes IN(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%'))")
 })
 public class Ad {
 

@@ -39,10 +39,10 @@
                             <h:outputText value="#{ad.formatedDate}"/>
 
 
-                            <p:commandLink update=":form:adDetail" oncomplete="PF('adDialog').show()"
+                            <p:commandLink update=":form:dlg :form:adDetail" oncomplete="PF('adDialog').show()"
                                            title="View Detail">
                                 <i class="fa fa-search"/>
-                                <f:setPropertyActionListener value="#{ad}" target="#{adListController.ad}"/>
+                                <f:ajax listener="#{adListController.setAd(ad)}"/>
                             </p:commandLink>
                         </h:panelGrid>
                     </p:panel>
@@ -94,10 +94,10 @@
                         <h:outputText value="#{adListBackingBean.user.email}"/>
 
                         <h:outputText value="Phone"/>
-                        <h:outputText value="$#{adListBackingBean.user.phoneNumber}"/>
+                        <h:outputText value="#{adListBackingBean.user.phoneNumber}"/>
 
                         <h:outputText value="Price:"/>
-                        <h:outputText value="#{adListBackingBean.modalAd.price}"/>
+                        <h:outputText value="#{adListBackingBean.modalAd.price}kr"/>
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>

@@ -2,8 +2,6 @@ package controll;
 
 import entity.Ad;
 import entity.User;
-import lombok.Getter;
-import lombok.Setter;
 import service.AdFacade;
 import service.UserFacade;
 import view.ProfileBackingBean;

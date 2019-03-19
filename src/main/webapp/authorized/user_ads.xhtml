@@ -17,7 +17,7 @@
                 </f:facet>
 
                 <p:dataViewGridItem>
-                    <p:panel header="#{ad.id}" style="text-align:center">
+                    <p:panel header="#{ad.book.name}" style="text-align:center">
                         <h:panelGrid columns="1">
 
 
@@ -26,12 +26,25 @@
 
                             <h:outputText value="#{ad.price}kr"/>
                             <h:outputText value="#{ad.formatedDate}"/>
+                            <h:panelGrid columns="2">
+                                <p:commandLink title="Delete ad">
+                                    <i class="fa fa-trash"/>
+                                    <p:confirm header="Delete ad" message="Are you sure?"
+                                               icon="fa fa-exclamation-triangle"/>
+                                    <f:ajax render="@form" listener="#{profileController.delete(ad)}" execute="@form"/>
+                                </p:commandLink>
+                                <p:commandLink title="Edit ad" oncomplete="PF('editDialog').show()"
+                                               update=":form:edit :form:editDetail">
+                                    <i class="fa fa-pencil"/>
+                                    <f:ajax listener="#{adListController.setAd(ad)}"/>
+                                </p:commandLink>
+                            </h:panelGrid>
                         </h:panelGrid>
                     </p:panel>
                 </p:dataViewGridItem>
 
                 <p:dataViewListItem>
-                    <h:panelGrid columns="3" columnClasses="logo,detail">
+                    <h:panelGrid columns="4" columnClasses="logo,detail">
 
 
                         <p:graphicImage name="images/book.png" width="120px"/>
@@ -56,10 +69,15 @@
                             </h:panelGrid>
                         </p:outputPanel>
 
-                        <p:commandLink action="#{profileController.delete(ad)}" title="Delete ad">
+                        <p:commandLink title="Delete ad">
                             <i class="fa fa-trash"/>
                             <p:confirm header="Delete ad" message="Are you sure?" icon="fa fa-exclamation-triangle"/>
-                            <f:ajax render="@form"/>
+                            <f:ajax render="@form" listener="#{profileController.delete(ad)}" execute="@form"/>
+                        </p:commandLink>
+                        <p:commandLink title="Edit ad" oncomplete="PF('editDialog').show()"
+                                       update=":form:edit :form:editDetail">
+                            <i class="fa fa-pencil"/>
+                            <f:ajax listener="#{adListController.setAd(ad)}"/>
                         </p:commandLink>
 
                     </h:panelGrid>
@@ -67,9 +85,27 @@
             </p:dataView>
 
             <p:confirmDialog global="true" showEffect="fade">
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times"/>
             </p:confirmDialog>
+
+            <p:dialog widgetVar="editDialog" modal="true" header="#{adListBackingBean.modalAd.book.name}" dynamic="true"
+                      showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false" id="edit">
+                <p:outputPanel id="editDetail">
+                    <p:panelGrid columns="2">
+
+                        <h:outputText value="Price:"/>
+                        <h:inputText value="#{adListBackingBean.modalAd.price}"/>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Save" type="button" oncomplete="PF('editDialog').hide()">
+                        <f:ajax listener="#{adListController.apply}" render="@form" execute="@form"/>
+                    </p:commandButton>
+                    <p:commandButton value="Cancel" type="button" onclick="PF('editDialog').hide()"/>
+
+                </p:outputPanel>
+            </p:dialog>
 
         </h:form>
     </ui:define>

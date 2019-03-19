@@ -1,29 +1,21 @@
 package view;
 
-import controll.AdListController;
 import entity.Ad;
 import entity.CourseCode;
 import entity.User;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import model.bean.UserComponent;
 import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortOrder;
 import service.AdFacade;
 import service.BookFacade;
 import service.CourseCodeFacade;
 
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Named
@@ -53,7 +45,10 @@ public class AdListBackingBean implements Serializable {
     }
 
     public void filter(){
-        ads = adFacade.findContainingSearchTerm(searchTerm);
+        if(searchTerm == null || searchTerm.length() == 0)
+            ads = adFacade.findAll();
+        else
+            ads = adFacade.findBySearchTerm(searchTerm);
     }
 
     public List<String> completeText(String searchTerm){

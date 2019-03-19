@@ -6,7 +6,6 @@ import model.bean.UserComponent;
 import entity.User;
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 import service.AdFacade;
 
