@@ -33,6 +33,7 @@
 
 .desc {
     padding-left: 25px;
+    font-weight: bold;
 }
 .head{
     alignment: left;
@@ -40,6 +41,10 @@
     font-weight: lighter;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 30px;
+}
+
+.badge{
+    margin: 2px;
 }
 
 #ads {

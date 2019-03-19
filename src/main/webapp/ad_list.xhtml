@@ -29,7 +29,7 @@
                 </f:facet>
 
                 <p:dataViewGridItem>
-                    <p:panel header="#{ad.book.name}" style="text-align:center">
+                    <p:panel header="#{ad.book.name}">
                         <h:panelGrid columns="1">
                             <p:graphicImage name="images/book.png" width="60px" height="auto"/>
 
@@ -55,19 +55,19 @@
                         <p:outputPanel>
 
                             <ui:repeat value="#{ad.courseCodes}" var="codes">
-                                <b:badge value="#{codes.courseCode}" style="margin:2;"/>
+                                <b:badge value="#{codes.courseCode}" styleClass="badge"/>
                             </ui:repeat>
 
                             <h:panelGrid columns="2" cellpadding="5" columnClasses="non, desc">
 
                                 <h:outputText value="Title:"/>
-                                <h:outputText value="#{ad.book.name}" style="font-weight: bold"/>
+                                <h:outputText value="#{ad.book.name}"/>
 
                                 <h:outputText value="Price:"/>
-                                <h:outputText value="#{ad.price}kr" style="font-weight: bold"/>
+                                <h:outputText value="#{ad.price}kr"/>
 
                                 <h:outputText value="Date:"/>
-                                <h:outputText value="#{ad.formatedDate}" style="font-weight: bold"/>
+                                <h:outputText value="#{ad.formatedDate}"/>
                             </h:panelGrid>
                         </p:outputPanel>
 
@@ -83,19 +83,19 @@
 
             <p:dialog widgetVar="adDialog" modal="true" header="#{adListBackingBean.modalAd.book.name}" dynamic="true"
                       showEffect="fade" hideEffect="fade" closeOnEscape="true" resizable="false" id="dlg">
-                <p:outputPanel id="adDetail" style="text-align:center; color: black">
-                    <p:panelGrid columns="2" columnClasses="label,value">
+                <p:outputPanel id="adDetail">
+                    <p:panelGrid columns="2">
 
-                        <h:outputText value="Seller" style="color: black"/>
+                        <h:outputText value="Seller"/>
                         <h:outputText value="#{adListBackingBean.user.name}"/>
 
-                        <h:outputText value="e-mail:" style="color: black"/>
+                        <h:outputText value="e-mail:"/>
                         <h:outputText value="#{adListBackingBean.user.email}"/>
 
-                        <h:outputText value="Phone" style="color: black"/>
+                        <h:outputText value="Phone"/>
                         <h:outputText value="$#{adListBackingBean.user.phoneNumber}"/>
 
-                        <h:outputText value="Price:" style="color: black"/>
+                        <h:outputText value="Price:"/>
                         <h:outputText value="#{adListBackingBean.modalAd.price}"/>
                     </p:panelGrid>
                 </p:outputPanel>
