@@ -1,10 +1,9 @@
 package controll;
 
 import entity.Ad;
-import entity.User;
-import model.bean.AdComponent;
-import model.bean.AdException;
-import model.bean.UserComponent;
+import model.component.AdComponent;
+import model.component.AdException;
+import model.component.UserComponent;
 import org.omnifaces.util.Messages;
 import service.AdFacade;
 

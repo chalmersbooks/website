@@ -1,7 +1,7 @@
 package view;
 
 import lombok.extern.java.Log;
-import model.bean.UserComponent;
+import model.component.UserComponent;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

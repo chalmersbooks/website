@@ -77,5 +77,14 @@ public class ProfileController implements Serializable {
         adFacade.delete(ad);
     }
 
+    public void editAd(){
+        Ad ad = pbb.getCurrentAd();
+        adFacade.createOrUpdate(ad);
+    }
+
+    public void setAd(Ad ad){
+        pbb.setCurrentAd(ad);
+    }
+
 
 }

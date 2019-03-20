@@ -1,4 +1,4 @@
-package model.bean;
+package model.component;
 
 import entity.Ad;
 import javax.enterprise.context.Dependent;

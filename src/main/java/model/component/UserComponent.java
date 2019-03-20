@@ -1,4 +1,4 @@
-package model.bean;
+package model.component;
 
 import entity.Ad;
 import entity.User;

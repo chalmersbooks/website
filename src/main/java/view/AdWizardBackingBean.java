@@ -6,13 +6,11 @@ import model.MakingAd;
 import entity.Ad;
 import entity.Book;
 import entity.CourseCode;
-import entity.User;
 import lombok.extern.java.Log;
-import model.bean.BookComponent;
-import model.bean.CourseCodeComponent;
-import model.bean.UserComponent;
+import model.component.BookComponent;
+import model.component.CourseCodeComponent;
+import model.component.UserComponent;
 import org.omnifaces.util.Ajax;
-import service.Validator;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
