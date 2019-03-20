@@ -1,7 +1,7 @@
 package random;
 
 import entity.User;
-import login.PendingAccountBean;
+import authorization.PendingAccountBean;
 import lombok.extern.java.Log;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package controll;
 
 import entity.User;
-import login.PendingAccountBean;
+import authorization.PendingAccountBean;
 import lombok.extern.java.Log;
 import model.component.UserComponent;
 import org.omnifaces.util.Messages;

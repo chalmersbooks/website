@@ -82,7 +82,7 @@ Temporary Items
 
 # Custom
 .idea/*
-**/login.properties
+**/authorization.properties
 
 # Sensitive or high-churn files
 .idea/**/dataSources/

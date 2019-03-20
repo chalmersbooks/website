@@ -25,6 +25,10 @@
     height: 42px;
 }
 
+.ui-panelgrid-cell {
+    border: none !important;
+}
+
 
 .detail {
     width: 85%;

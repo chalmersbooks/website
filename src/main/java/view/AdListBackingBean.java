@@ -36,6 +36,7 @@ public class AdListBackingBean implements Serializable {
     private User user;
     private String searchTerm;
     private List<CourseCode> allCourseCodes;
+    private String sortOn;
 
     @PostConstruct
     public void init() {
@@ -54,10 +55,5 @@ public class AdListBackingBean implements Serializable {
         List<String> books = bookFacade.findBySearchTerm(searchTerm);
         courseCodes.addAll(books);
         return courseCodes;
-    }
-
-    // For testing purposes
-    public List<CourseCode> getAllCourseCodes(){
-        return courseCodeFacade.findAll();
     }
 }

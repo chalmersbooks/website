@@ -15,12 +15,10 @@ public abstract class AdController implements Serializable {
 
     @Inject
     private UserComponent userComponent;
-
     @Inject
     private AdFacade getAdFacade;
 
     protected abstract Ad getAd();
-
     protected abstract AdComponent getAdComponent();
 
     public String save() {
@@ -28,6 +26,7 @@ public abstract class AdController implements Serializable {
             Ad ad = getAd();
             getAdComponent().isCompleteAd(ad);
             getAdFacade.create(ad);
+            addAdToUser(ad);
             Messages.addGlobal(Messages.createInfo("Add created"));
             return "saved";
         } catch (AdException | PersistenceException exception) {

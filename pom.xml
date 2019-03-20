@@ -69,7 +69,7 @@
         <dependency>
             <groupId>com.github.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>master-6_1-g50f14aa-2589</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>

@@ -11,14 +11,43 @@
     </ui:define>
     <ui:define name="content">
         <b:jumbotron>
-            <h:form>
-                <p:autoComplete value="#{adListBackingBean.searchTerm}" completeMethod="#{adListBackingBean.completeText}"
-                                minQueryLength="3" queryDelay="500" maxResults="10" cache="true" inputStyleClass="searchField"/>
-                <b:commandButton action="#{adListController.filter}">
-                    <i class="fa fa-search fa-2x"/>
-                    <f:ajax render=":form" execute="@form"/>
-                </b:commandButton>
-            </h:form>
+            <b:form horizontal="true">
+                <p:panel header="Search and sort">
+                    <p:panelGrid style="border: none;">
+                        <p:column colspan="5">
+                            <p:autoComplete value="#{adListBackingBean.searchTerm}"
+                                            completeMethod="#{adListBackingBean.completeText}"
+                                            minQueryLength="3" queryDelay="500" maxResults="10" cache="true"
+                                            inputStyleClass="searchField"/>
+                        </p:column>
+                        <p:column colspan="1">
+                            <b:commandButton action="#{adListController.filter}">
+                                <i class="fa fa-search fa-2x"/>
+                                <f:ajax render=":form" execute="@form"/>
+                            </b:commandButton>
+                        </p:column>
+                        <p:column colspan="4">
+                            <b:selectOneMenu value="#{adListBackingBean.sortOn}" label="Sort on:">
+                                <f:selectItem itemLabel="Show all"
+                                              itemValue="0"/>
+                                <f:selectItem itemLabel="Price asc"
+                                              itemValue="1"/>
+                                <f:selectItem itemLabel="Price desc"
+                                              itemValue="2"/>
+                                <f:selectItem itemLabel="Date asc"
+                                              itemValue="3"/>
+                                <f:selectItem itemLabel="Date desc"
+                                              itemValue="4"/>
+                            </b:selectOneMenu>
+                        </p:column>
+                        <p:column colspan="1">
+                            <b:commandButton value="Sort" action="#{adListController.sort}">
+                                <f:ajax execute="@form" render=":form"/>
+                            </b:commandButton>
+                        </p:column>
+                    </p:panelGrid>
+                </p:panel>
+            </b:form>
         </b:jumbotron>
         <h:form id="form">
             <!-- TODO add lazydatamodel when available. -->
