@@ -13,6 +13,8 @@
             <h1 class="sign-in-h1">ChalmersBooks</h1>
             <h:form styleClass="sign-in-form" prependId="false">
                 <h2 class="sign-in-h2">Sign in</h2>
+                <b:message for="email"
+                           showIcon="false"/>
                 <b:inputText id="email"
                              placeholder="Email address"
                              fieldSize="lg"
@@ -23,7 +25,7 @@
                         <b:icon name="user"/>
                     </f:facet>
                 </b:inputText>
-                <b:message for="email"
+                <b:message for="login-password"
                            showIcon="false"/>
                 <b:inputSecret id="login-password"
                                placeholder="Password"
@@ -35,8 +37,6 @@
                         <b:iconAwesome name="key"/>
                     </f:facet>
                 </b:inputSecret>
-                <b:message for="login-password"
-                           showIcon="false"/>
                 <b:messages class="wrong-message"
                             globalOnly="true"
                             showDetail="true"

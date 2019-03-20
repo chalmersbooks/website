@@ -5,106 +5,122 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
+    <ui:define name="subheader">
+        <h:outputStylesheet library="css" name="add_wizard.css"/>
+    </ui:define>
     <ui:define name="content">
-        <style type="text/css">
-            .label {
-                width: 20%;
-                padding: 4px;
-            }
-
-            .value {
-                width: 80%;
-                padding: 4px;
-            }
-
-            .full {
-                width: 100%;
-                padding: 4px;
-            }
-
-            .grid {
-                width: 100%;
-            }
-
-            .error {
-                color: red;
-            }
-
-            .outputLabel {
-                font-weight: bold;
-            }
-
-            .grid {
-                width: 33%;
-                padding: 4px;
-            }
-        </style>
-
-
-        <h:form>
+        <h:form styleClass="wizard-form">
 
             <p:growl id="growl" sticky="true" showDetail="true"/>
 
             <p:wizard flowListener="#{adWizardController.onFlowProcess}">
                 <p:tab id="course" title="Course">
-                    <p:panel header="What course(course Code) do the book belong to?">
-                        <p:messages/>
-                        <p:inputText value="#{adWizardBean.ad.courseCode}" required="true" label="Course Code">
+                    <p:panel header="In what course did you use your book?">
+                        <b:message for="courseCodeField"
+                                   showIcon="false"/>
+                        <b:inputText id="courseCodeField"
+                                     value="#{adWizardBean.ad.courseCode}"
+                                     required="true"
+                                     label="Course Code"
+                                     requiredMessage="You need to enter course code">
                             <o:validator validatorId="javax.faces.RegularExpression"
                                          pattern="[A-Za-z]{3}[0-9]{3}"
                                          message="Course code not correct format"/>
-                        </p:inputText>
+                        </b:inputText>
 
                     </p:panel>
                 </p:tab>
 
                 <p:tab id="book" title="Book">
-                    <p:panel header="Book">
-                        <p:messages/>
-                        <p>Found books</p>
-                        <h:panelGrid columns="1" id="BooksButtons">
+                    <p:panel header="What book are you selling?">
+                        <b:messages showIcon="false"/>
+                        <h:panelGrid columns="1" id="BooksButtons"
+                                     rendered="#{adWizardBean.booksBelongingToCourseCode.size() > 0}">
+                            <h4>Books found from course code</h4>
                             <b:radiobutton value="#{adWizardBean.markedBookId}"
-                                           required="false" update="BookForm">
-                                <f:ajax execute="BooksButtons" listener="#{adWizardBean.fillFormWithMarkedBook}"/>
+                                           required="false"
+                                           update="BookForm">
+                                <f:ajax execute="BooksButtons"
+                                        listener="#{adWizardBean.fillFormWithMarkedBook}"/>
                                 <f:selectItems value="#{adWizardBean.booksBelongingToCourseCode}"/>
                             </b:radiobutton>
                         </h:panelGrid>
-                        <h:panelGrid columns="2" id="BookForm">
+
+                        <h:panelGrid columns="2" id="BookForm" styleClass="inputForm">
                             <h:outputText value="Name: "/>
-                            <p:inputText value="#{adWizardBean.ad.book.name}" required="true"/>
+                            <p:inputText value="#{adWizardBean.ad.book.name}"
+                                         required="true"
+                                         requiredMessage="Book name required"
+                                         styleClass="bookInput"/>
+
                             <h:outputText value="Volume: "/>
-                            <p:inputText value="#{adWizardBean.ad.book.edition}" required="true"/>
+                            <p:inputText value="#{adWizardBean.ad.book.edition}"
+                                         required="true"
+                                         requiredMessage="What edition?"
+                                         styleClass="bookInput"/>
+
                             <h:outputText value="Author(s): "/>
-                            <p:inputText value="#{adWizardBean.ad.book.authors}" required="true"/>
+                            <p:inputText value="#{adWizardBean.ad.book.authors}"
+                                         required="true"
+                                         requiredMessage="Book author(s) required"
+                                         styleClass="bookInput"/>
+
                             <h:outputText id="isbn" value="ISBN: "/>
-                            <p:inputText value="#{adWizardBean.ad.book.isbn}" required="true"/>
+                            <p:inputText value="#{adWizardBean.ad.book.isbn}"
+                                         required="true"
+                                         requiredMessage="ISBN required"
+                                         styleClass="bookInput"/>
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
 
                 <p:tab id="information" title="Information">
                     <p:panel header="Information">
-                        <p:messages/>
-                        <h:panelGrid columns="2">
-                            <h:outputText value="Price: "/>
-                            <b:inputText value="#{adWizardBean.ad.price}" required="true"/>
-                            <h:outputText value="Course Codes "/>
-                            <p:chips value="#{adWizardBean.ad.showableCourseCodes}" required="true"/>
-                            <p:row/>
-                            <h:outputText value="Name: "/>
-                            <h:outputText value="#{adWizardBean.ad.book.name}"/>
-                            <h:outputText value="Volume: "/>
-                            <h:outputText value="#{adWizardBean.ad.book.edition}"/>
-                            <h:outputText value="Author(s): "/>
-                            <h:outputText value="#{adWizardBean.ad.book.authors}"/>
-                            <h:outputText value="ISBN: "/>
-                            <h:outputText value="#{adWizardBean.ad.book.isbn}"/>
+                        <h:panelGrid columns="1" styleClass="inputForm">
+                            <h:outputText value="Course Codes:"/>
+                            <p:chips value="#{adWizardBean.ad.showableCourseCodes}"
+                                     required="true"
+                                     placeholder="Press enter"/>
                         </h:panelGrid>
-                        <p:separator/>
-                        <p>Image coming later!</p>
-                        <p:commandButton value="Create Ad" action="#{adWizardController.save}" update="growl"
-                                         process="@form"/>
+                        <br/>
+                        <h:panelGrid columns="2" styleClass="inputForm">
+                            <h:outputText value="Name: "/>
+                            <h:outputText value="#{adWizardBean.ad.book.name}"
+                                          required="true"
+                                          requiredMessage="Book name required"
+                                          styleClass="bookInput"/>
+
+                            <h:outputText value="Volume: "/>
+                            <h:outputText value="#{adWizardBean.ad.book.edition}"
+                                          required="true"
+                                          requiredMessage="What edition?"
+                                          styleClass="bookInput"/>
+
+                            <h:outputText value="Author(s): "/>
+                            <h:outputText value="#{adWizardBean.ad.book.authors}"
+                                          required="true"
+                                          requiredMessage="Book author(s) required"
+                                          styleClass="bookInput"/>
+
+                            <h:outputText value="ISBN: "/>
+                            <h:outputText value="#{adWizardBean.ad.book.isbn}"
+                                          required="true"
+                                          requiredMessage="ISBN required"
+                                          styleClass="bookInput"/>
+
+                            <b:message for="price-field" showIcon="false"/>
+                            <h:outputText id="price-field" value="Price: "/>
+                            <p:inputText value="#{adWizardBean.ad.price}"
+                                         requiredMessage="You need a price higher then 0"
+                                         required="true"/>
+                        </h:panelGrid>
                     </p:panel>
+
+                    <b:commandButton value="Create Ad" action="#{adWizardController.save}"
+                                     update="growl"
+                                     styleClass="wizard-success-button"
+                                     process="@form"
+                                     look="success"/>
                 </p:tab>
             </p:wizard>
         </h:form>
