@@ -3,9 +3,8 @@ package controll;
 import entity.Ad;
 import lombok.Getter;
 import lombok.extern.java.Log;
-import model.bean.AdComponent;
+import model.component.AdComponent;
 import org.primefaces.event.FlowEvent;
-import service.AdFacade;
 import view.AdWizardBackingBean;
 
 import javax.faces.view.ViewScoped;

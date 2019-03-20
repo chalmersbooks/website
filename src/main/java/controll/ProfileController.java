@@ -26,7 +26,14 @@ public class ProfileController implements Serializable {
 
 
     public boolean changePassword() {
-        return pbb.getUserComponent().changePassword(pbb.getOldPassword(), pbb.getNewPassword());
+        if(pbb.getUserComponent().changePassword(pbb.getOldPassword(), pbb.getNewPassword())){
+            reset();
+            return true;
+        }
+        else{
+            reset();
+            return false;
+        }
     }
 
     public void applyChanges() {
@@ -48,6 +55,11 @@ public class ProfileController implements Serializable {
         userFacade.createOrUpdate(u);
     }
 
+    public void reset(){
+        pbb.setNewPassword(null);
+        pbb.setOldPassword(null);
+    }
+
     private String toPascal(String s){
         StringBuilder sb = new StringBuilder();
         char[] a = s.toCharArray();
@@ -63,6 +75,15 @@ public class ProfileController implements Serializable {
         u.getAds().remove(ad);
         userFacade.createOrUpdate(u);
         adFacade.delete(ad);
+    }
+
+    public void editAd(){
+        Ad ad = pbb.getCurrentAd();
+        adFacade.createOrUpdate(ad);
+    }
+
+    public void setAd(Ad ad){
+        pbb.setCurrentAd(ad);
     }
 
 

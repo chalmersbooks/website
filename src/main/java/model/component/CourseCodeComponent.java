@@ -1,4 +1,4 @@
-package model.bean;
+package model.component;
 
 import entity.Book;
 import entity.CourseCode;
@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Dependent

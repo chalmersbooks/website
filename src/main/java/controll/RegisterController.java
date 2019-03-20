@@ -3,7 +3,7 @@ package controll;
 import entity.User;
 import login.PendingAccountBean;
 import lombok.extern.java.Log;
-import model.bean.UserComponent;
+import model.component.UserComponent;
 import org.omnifaces.util.Messages;
 import service.UserFacade;
 import utils.EmailClient;

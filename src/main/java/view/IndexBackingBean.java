@@ -19,7 +19,7 @@ import java.util.List;
 public class IndexBackingBean implements Serializable {
 
     /**
-     * This bean is only for testing purposes
+     * This component is only for testing purposes
      */
 
     @EJB

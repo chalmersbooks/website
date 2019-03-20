@@ -10,13 +10,14 @@
                 <b:listLinks>
                     <b:button onclick="$('.passModal').modal('show')" value="Change Password"/>
                     <b:modal id="passModal" title="Change Password" styleClass="passModal"
-                             closable="false"
+                             closable="true"
                              closeOnEscape="true">
                         <b:form id="passForm">
                             <div>
                                 <b:row>
                                     <b:inputSecret id="old-password"
                                                    placeholder="Old password *"
+                                                   label="Old password"
                                                    fieldSize="lg"
                                                    required="true"
                                                    requiredMessage="Enter password"
@@ -26,6 +27,7 @@
                                 <b:row>
                                     <b:inputSecret id="new-password"
                                                    placeholder="New password *"
+                                                   label="New password"
                                                    fieldSize="lg"
                                                    required="true"
                                                    requiredMessage="Enter password"
@@ -36,6 +38,7 @@
                                 <b:row>
                                     <b:inputSecret id="repeat-password"
                                                    placeholder="Repeat password *"
+                                                   label="Repeat password"
                                                    fieldSize="lg"
                                                    required="true"
                                                    requiredMessage="Enter password">
@@ -44,15 +47,16 @@
                                     <o:validateEqual id="equal"
                                                      components="new-password repeat-password"
                                                      message="Passwords are not equal"
-                                                     showMessageFor="repeat-password"/>
+                                                     showMessageFor="new-password repeat-password"/>
                                 </b:row>
                                 <b:row>
                                     <b:column>
-                                        <b:button value="Cancel"
-                                                  dismiss="modal"/>
+                                        <b:commandButton value="Cancel"
+                                                         action="#{profileController.reset}"
+                                                         dismiss="modal"/>
                                         <b:commandButton value="Update password" look="success"
-                                                         update="passForm"
-                                                         action="#{profileController.changePassword}">
+                                                         update="passForm">
+                                            <f:ajax render="@form" execute="@form" listener="#{profileController.changePassword}" />
                                         </b:commandButton>
                                     </b:column>
                                 </b:row>
@@ -96,9 +100,9 @@
                                 <b:button value="Cancel"
                                           dismiss="modal"/>
                                 <b:commandButton largeScreen="half"
-                                                 dismiss="modal"
-                                                 value="Confirm changes"
-                                                 action="#{profileController.applyChanges}"/>
+                                                 value="Confirm changes">
+                                    <f:ajax render="@form" execute="@form" listener="#{profileController.applyChanges}"/>
+                                </b:commandButton>
                             </b:row>
                         </b:form>
                     </b:modal>
