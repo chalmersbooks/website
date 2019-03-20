@@ -1,4 +1,4 @@
-package login;
+package authorization;
 
 import entity.User;
 import service.UserFacade;

@@ -1,4 +1,4 @@
-package login;
+package authorization;
 
 import lombok.extern.java.Log;
 
@@ -22,13 +22,13 @@ public class SecurityFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         if (securityContext.getCallerPrincipal() == null && !isLoginPage(req)) {
-            res.sendRedirect(req.getContextPath().concat("/login.xhtml"));
+            res.sendRedirect(req.getContextPath().concat("/authorization.xhtml"));
         } else {
             chain.doFilter(req, res);
         }
     }
 
     private boolean isLoginPage(HttpServletRequest request) {
-        return request.getRequestURI().endsWith("login.xhtml");
+        return request.getRequestURI().endsWith("authorization.xhtml");
     }
 }

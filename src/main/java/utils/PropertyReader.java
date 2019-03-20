@@ -14,11 +14,11 @@ import java.util.logging.Level;
 @ApplicationScoped
 public class PropertyReader {
 
-    private static final String PROPERTY_FILE = "/resources/login.properties";
+    private static final String PROPERTY_FILE = "/resources/authorization.properties";
 
     /**
      * These values are used for email client to connect to gmail account.
-     * They are read from resources/login.properties
+     * They are read from resources/authorization.properties
      */
     private String email;
     private String password;
@@ -26,11 +26,11 @@ public class PropertyReader {
     @PostConstruct
     public void init() {
         try {
-            ResourceBundle bundle = ResourceBundle.getBundle("login");
+            ResourceBundle bundle = ResourceBundle.getBundle("authorization");
             email = bundle.getString("gmail.username");
             password = bundle.getString("gmail.password");
         } catch (MissingResourceException e) {
-            log.log(Level.SEVERE, "login.properties must exist with gmail.username and gmail.password data.");
+            log.log(Level.SEVERE, "authorization.properties must exist with gmail.username and gmail.password data.");
         }
     }
 }

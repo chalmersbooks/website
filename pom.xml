@@ -8,7 +8,7 @@
     <groupId>com.group13</groupId>
     <artifactId>chalmersbooks</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>ChalmersBooks Webapp</name>
     <!-- FIXME change it to the project's website -->
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>com.github.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>master-6_1-g50f14aa-2589</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>

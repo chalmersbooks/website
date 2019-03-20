@@ -1,8 +1,6 @@
 package entity;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.text.DateFormat;
@@ -19,11 +17,25 @@ import java.util.List;
         @NamedQuery(name = "Ad.findBookBySearchTerm", query = "SELECT ad FROM Ad ad WHERE " +
                 "ad.book.name LIKE CONCAT('%', :searchTerm, '%')"),
         @NamedQuery(name = "Ad.findCourseCodeBySearchTerm", query = "SELECT ad FROM Ad ad WHERE " +
-                "ad.courseCodes IN(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%'))")
+                "ad.courseCodes IN(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%'))"),
+        @NamedQuery(name= "Ad.findAndSortByPriceDesc", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.book.name LIKE CONCAT('%', :searchTerm, '%') OR ad.courseCodes IN" +
+                "(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%')) " +
+                "ORDER BY ad.price DESC"),
+        @NamedQuery(name= "Ad.findAndSortByPriceAsc", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.book.name LIKE CONCAT('%', :searchTerm, '%') OR ad.courseCodes IN" +
+                "(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%')) " +
+                "ORDER BY ad.price ASC"),
+        @NamedQuery(name= "Ad.findAndSortByDateDesc", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.book.name LIKE CONCAT('%', :searchTerm, '%') OR ad.courseCodes IN" +
+                "(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%')) " +
+                "ORDER BY ad.date DESC"),
+        @NamedQuery(name= "Ad.findAndSortByDateAsc", query = "SELECT ad FROM Ad ad WHERE " +
+                "ad.book.name LIKE CONCAT('%', :searchTerm, '%') OR ad.courseCodes IN" +
+                "(SELECT cc FROM CourseCode cc WHERE cc.courseCode LIKE CONCAT('%', :searchTerm, '%')) " +
+                "ORDER BY ad.date ASC")
 })
 public class Ad {
-
-    // TODO: Replace AdBuilder with builder from this...
 
     @Id
     @GeneratedValue
