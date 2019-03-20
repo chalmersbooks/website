@@ -26,7 +26,7 @@ public class PropertyReader {
     @PostConstruct
     public void init() {
         try {
-            ResourceBundle bundle = ResourceBundle.getBundle("authorization");
+            ResourceBundle bundle = ResourceBundle.getBundle("login");
             email = bundle.getString("gmail.username");
             password = bundle.getString("gmail.password");
         } catch (MissingResourceException e) {

@@ -21,7 +21,7 @@ public class RegistrationValidationFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException {
         String registrationHash = parseRegistrationHash(req.getRequestURI());
         pendingAccountBean.activate(registrationHash);
-        res.sendRedirect(req.getContextPath().concat("/authorization.xhtml"));
+        res.sendRedirect(req.getContextPath().concat("/login.xhtml"));
 
         // TODO: redirect to confirmation page to show your account is complete.
     }

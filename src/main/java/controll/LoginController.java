@@ -67,7 +67,7 @@ public class LoginController implements Serializable {
     public String lostPassword() {
         // TODO: Fix message
         Messages.addGlobalInfo("New password sent.");
-        User user = userFacade.getUserById(backingBean.getEmail());
+        User user = userFacade.getUserById(backingBean.getForgottenEmail());
         if (isValidUser(user)) {
             this.user = user;
             changePasswordOnUser();

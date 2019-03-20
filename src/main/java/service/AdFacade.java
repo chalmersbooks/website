@@ -33,12 +33,7 @@ public class AdFacade extends Facade<Ad> {
     }
 
     public List<Ad> findBySearchTerm(String searchTerm) {
-        List<Ad> byCourseCode = em.createNamedQuery("Ad.findCourseCodeBySearchTerm", Ad.class)
-                .setParameter("searchTerm", searchTerm).getResultList();
-        List<Ad> byBook = em.createNamedQuery("Ad.findBookBySearchTerm", Ad.class)
-                .setParameter("searchTerm", searchTerm).getResultList();
-        byCourseCode.addAll(byBook);
-        return byCourseCode;
+        return findAndSortByDate(Order.DESC, searchTerm);
     }
 
     public void delete(Ad ad) {

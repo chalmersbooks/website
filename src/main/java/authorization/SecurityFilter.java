@@ -22,13 +22,13 @@ public class SecurityFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         if (securityContext.getCallerPrincipal() == null && !isLoginPage(req)) {
-            res.sendRedirect(req.getContextPath().concat("/authorization.xhtml"));
+            res.sendRedirect(req.getContextPath().concat("/login.xhtml"));
         } else {
             chain.doFilter(req, res);
         }
     }
 
     private boolean isLoginPage(HttpServletRequest request) {
-        return request.getRequestURI().endsWith("authorization.xhtml");
+        return request.getRequestURI().endsWith("login.xhtml");
     }
 }

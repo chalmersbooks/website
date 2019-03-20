@@ -23,7 +23,7 @@
                                       action="#{templateController.logout}" update="menu"
                                       outcome="#{request.requestURI}">
                     </b:navCommandLink>
-                    <b:navLink rendered="#{!templateBackingBean.loggedIn}" value="Login" outcome="/authorization.xhtml"/>
+                    <b:navLink rendered="#{!templateBackingBean.loggedIn}" value="Login" outcome="/login.xhtml"/>
                 </b:navbarLinks>
             </b:navBar>
         </b:form>
