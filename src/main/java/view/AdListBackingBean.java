@@ -31,7 +31,7 @@ public class AdListBackingBean implements Serializable {
     @Inject
     private CourseCodeFacade courseCodeFacade;
 
-    private LazyDataModel lazyDataModel;
+    //private LazyDataModel lazyDataModel;
     private List<Ad> ads;
     private Ad modalAd;
     private User user;

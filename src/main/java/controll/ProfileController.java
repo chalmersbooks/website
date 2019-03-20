@@ -26,7 +26,14 @@ public class ProfileController implements Serializable {
 
 
     public boolean changePassword() {
-        return pbb.getUserComponent().changePassword(pbb.getOldPassword(), pbb.getNewPassword());
+        if(pbb.getUserComponent().changePassword(pbb.getOldPassword(), pbb.getNewPassword())){
+            reset();
+            return true;
+        }
+        else{
+            reset();
+            return false;
+        }
     }
 
     public void applyChanges() {
@@ -46,6 +53,11 @@ public class ProfileController implements Serializable {
         }
 
         userFacade.createOrUpdate(u);
+    }
+
+    public void reset(){
+        pbb.setNewPassword(null);
+        pbb.setOldPassword(null);
     }
 
     private String toPascal(String s){
