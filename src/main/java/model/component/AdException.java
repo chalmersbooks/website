@@ -1,4 +1,4 @@
-package model.bean;
+package model.component;
 
 public class AdException extends Exception {
 

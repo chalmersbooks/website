@@ -2,7 +2,7 @@ package controll;
 
 import entity.User;
 import lombok.extern.java.Log;
-import model.bean.UserComponent;
+import model.component.UserComponent;
 import net.bootsfaces.utils.FacesMessages;
 import org.omnifaces.util.Messages;
 import service.UserFacade;

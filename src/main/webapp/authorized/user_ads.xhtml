@@ -36,7 +36,7 @@
                                 <p:commandLink title="Edit ad" oncomplete="PF('editDialog').show()"
                                                update=":form:edit :form:editDetail">
                                     <i class="fa fa-pencil"/>
-                                    <f:ajax listener="#{adListController.setAd(ad)}"/>
+                                    <f:ajax listener="#{profileController.setAd(ad)}"/>
                                 </p:commandLink>
                             </h:panelGrid>
                         </h:panelGrid>
@@ -77,7 +77,7 @@
                         <p:commandLink title="Edit ad" oncomplete="PF('editDialog').show()"
                                        update=":form:edit :form:editDetail">
                             <i class="fa fa-pencil"/>
-                            <f:ajax listener="#{adListController.setAd(ad)}"/>
+                            <f:ajax listener="#{profileController.setAd(ad)}"/>
                         </p:commandLink>
 
                     </h:panelGrid>
@@ -89,18 +89,18 @@
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times"/>
             </p:confirmDialog>
 
-            <p:dialog widgetVar="editDialog" modal="true" header="#{adListBackingBean.modalAd.book.name}" dynamic="true"
+            <p:dialog widgetVar="editDialog" modal="true" header="#{profileBackingBean.currentAd.book.name}" dynamic="true"
                       showEffect="fade" hideEffect="fade" closeOnEscape="false" closable="false" resizable="false" id="edit">
                 <p:outputPanel id="editDetail">
                     <p:panelGrid columns="2">
 
                         <h:outputText value="Price:"/>
-                        <h:inputText value="#{adListBackingBean.modalAd.price}" styleClass="price"/>
+                        <h:inputText value="#{profileBackingBean.currentAd.price}" styleClass="price"/>
 
                     </p:panelGrid>
 
                     <p:commandButton value="Save" type="button" oncomplete="PF('editDialog').hide()">
-                        <f:ajax listener="#{adListController.apply}" render="@form" execute="@form"/>
+                        <f:ajax listener="#{profileController.editAd}" render="@form" execute="@form"/>
                     </p:commandButton>
                     <p:commandButton value="Cancel" type="button" onclick="PF('editDialog').hide()">
                         <f:ajax render="@form" execute="@form"/>

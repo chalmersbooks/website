@@ -1,10 +1,9 @@
 package controll;
 
 import entity.Ad;
-import entity.User;
-import model.bean.AdComponent;
-import model.bean.AdException;
-import model.bean.UserComponent;
+import model.component.AdComponent;
+import model.component.AdException;
+import model.component.UserComponent;
 import org.omnifaces.util.Messages;
 import service.AdFacade;
 
@@ -16,12 +15,10 @@ public abstract class AdController implements Serializable {
 
     @Inject
     private UserComponent userComponent;
-
     @Inject
     private AdFacade getAdFacade;
 
     protected abstract Ad getAd();
-
     protected abstract AdComponent getAdComponent();
 
     public String save() {
@@ -29,6 +26,7 @@ public abstract class AdController implements Serializable {
             Ad ad = getAd();
             getAdComponent().isCompleteAd(ad);
             getAdFacade.create(ad);
+            addAdToUser(ad);
             Messages.addGlobal(Messages.createInfo("Add created"));
             return "saved";
         } catch (AdException | PersistenceException exception) {

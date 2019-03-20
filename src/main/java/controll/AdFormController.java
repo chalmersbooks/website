@@ -2,8 +2,7 @@ package controll;
 
 import entity.Ad;
 import lombok.Getter;
-import model.bean.AdComponent;
-import service.AdFacade;
+import model.component.AdComponent;
 import view.AdFormBackingBean;
 
 import javax.faces.view.ViewScoped;

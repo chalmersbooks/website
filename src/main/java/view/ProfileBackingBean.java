@@ -2,7 +2,7 @@ package view;
 
 import entity.Ad;
 import model.PasswordConstraints;
-import model.bean.UserComponent;
+import model.component.UserComponent;
 import entity.User;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -27,13 +27,11 @@ public class ProfileBackingBean implements Serializable {
     @Setter(AccessLevel.NONE)
     private UserComponent userComponent;
 
-    @Inject
-    private AdFacade adFacade;
-
     private String oldPassword;
     private String newPassword;
     private User user;
     private List<Ad> ads;
+    private Ad currentAd;
     private boolean disabled;
 
 

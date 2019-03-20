@@ -1,4 +1,4 @@
-package model.bean;
+package model.component;
 
 import entity.Book;
 import service.BookFacade;
