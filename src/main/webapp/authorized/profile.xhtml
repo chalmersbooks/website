@@ -51,9 +51,10 @@
                                 </b:row>
                                 <b:row>
                                     <b:column>
-                                        <b:commandButton value="Cancel"
-                                                         action="#{profileController.reset}"
-                                                         dismiss="modal"/>
+                                        <b:button value="Cancel"
+                                                  onclick="return false;"
+                                                  dismiss="modal">
+                                        </b:button>
                                         <b:commandButton value="Update password" look="success"
                                                          update="passForm">
                                             <f:ajax render="@form" execute="@form" listener="#{profileController.changePassword}" />
@@ -98,8 +99,11 @@
                             </b:row>
                             <b:row>
                                 <b:button value="Cancel"
-                                          dismiss="modal"/>
+                                          onclick="return false;"
+                                          dismiss="modal">
+                                </b:button>
                                 <b:commandButton largeScreen="half"
+                                                 ajax="true"
                                                  value="Confirm changes">
                                     <f:ajax render="@form" execute="@form" listener="#{profileController.applyChanges}"/>
                                 </b:commandButton>
